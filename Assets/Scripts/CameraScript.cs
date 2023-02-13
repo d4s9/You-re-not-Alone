@@ -18,7 +18,7 @@ public class CameraScript : MonoBehaviour
     void Update()
     {
         this.gameObject.transform.rotation = Quaternion.Euler(65f , player.transform.eulerAngles.y, 0);
-        this.gameObject.transform.position = player.transform.position + new Vector3(2 * Mathf.Sin(this.gameObject.transform.eulerAngles.y), 8f, -2 * Mathf.Cos(this.gameObject.transform.eulerAngles.y));
+        this.gameObject.transform.position = player.transform.position + new Vector3(-2 * Mathf.Abs(Mathf.Sin(this.gameObject.transform.eulerAngles.y)), 8f, -2 *Mathf.Abs(Mathf.Cos(this.gameObject.transform.eulerAngles.y)));
         Debug.Log(Mathf.Sin(this.gameObject.transform.eulerAngles.y));
     }
 }
