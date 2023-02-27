@@ -7,18 +7,16 @@ public class PlayerScript : MonoBehaviour
 {
     private float _smoothCoef = 0.2f;
     private Quaternion _lookAtRotation;
+    private float _playerSpeed = 5.0f;
 
     void Start()
     {
-        
     }
 
     void Update()
     {
         PlayerRotation();
-        
-        
-
+        PlayerMouvement();
     }
     
     private void FixedUpdate()
@@ -40,5 +38,12 @@ public class PlayerScript : MonoBehaviour
             _lookAtRotation = Quaternion.LookRotation(lookAtPostion - transform.position, Vector3.up);
         }
 
+    }
+    private void PlayerMouvement()
+    {
+        if (Input.GetKey(KeyCode.W))
+        {
+            this.transform.position += (transform.forward * Time.deltaTime * _playerSpeed);
+        }
     }
 }
