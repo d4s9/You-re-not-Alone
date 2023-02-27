@@ -573,8 +573,8 @@ ModelImporter:
       scale: {x: 1, y: 1, z: 1}
     - name: hand_l
       parentName: lowerarm_l
-      position: {x: -0.269752, y: 0.000006280141, z: 0.000002152985}
-      rotation: {x: -0.96783584, y: 0.19338799, z: 0.0939031, w: 0.1306795}
+      position: {x: -0.26975206, y: 0.0000062368345, z: 0.000002357876}
+      rotation: {x: -0.3105117, y: 0.16970317, z: -0.13197598, w: 0.9259404}
       scale: {x: 1, y: 1, z: 1}
     - name: index_01_l
       parentName: hand_l
@@ -594,12 +594,12 @@ ModelImporter:
     - name: middle_01_l
       parentName: hand_l
       position: {x: -0.122443, y: 0.012936, z: 0.005712}
-      rotation: {x: 0.008598371, y: 0.019734293, z: -0.116767816, w: 0.992926}
+      rotation: {x: 0.00859837, y: 0.019734293, z: -0.11676779, w: 0.992926}
       scale: {x: 1, y: 1, z: 1}
     - name: middle_02_l
       parentName: middle_01_l
       position: {x: -0.046403997, y: 0, z: 0}
-      rotation: {x: -0.018737175, y: -0.00084337534, z: -0.015172041, w: 0.99970907}
+      rotation: {x: -0.01873717, y: -0.00084337534, z: -0.015172037, w: 0.99970907}
       scale: {x: 1, y: 1, z: 1}
     - name: middle_03_l
       parentName: middle_02_l

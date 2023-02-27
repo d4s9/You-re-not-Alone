@@ -12,6 +12,8 @@ namespace WarriorAnimsFREE
 		/// Motion > Root Motion Node, then use that motion to move the Warrior if the controller is
 		/// set to useRootMotion.
 		/// </summary>
+		/// 
+		/*
 		void OnAnimatorMove()
 		{
 			if(warriorController.useRootMotion) {
@@ -19,5 +21,6 @@ namespace WarriorAnimsFREE
 				transform.parent.position += animator.deltaPosition;
 			}
 		}
+		*/
 	}
 }
