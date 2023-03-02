@@ -21,7 +21,8 @@ namespace WarriorAnimsFREE
 		// Inputs.
 		[HideInInspector] public bool inputAttack;
 		[HideInInspector] public bool inputJump;
-		[HideInInspector] public float inputVertical = 0;
+        [HideInInspector] public bool inputSlowWalk;
+        [HideInInspector] public float inputVertical = 0;
 		[HideInInspector] public float inputHorizontal = 0;
 
 		[HideInInspector] public Vector3 moveInput;
@@ -120,6 +121,7 @@ namespace WarriorAnimsFREE
 					if (warriorInputController != null) {
 						inputAttack = warriorInputController.inputAttack;
 						inputJump = warriorInputController.inputJump;
+						inputSlowWalk = warriorInputController.inputSlowWalk;
 						moveInput = warriorInputController.moveInput;
 					}
 
@@ -128,7 +130,8 @@ namespace WarriorAnimsFREE
 					if (warriorInputSystemController != null) {
 						inputAttack = warriorInputSystemController.inputAttack;
 						inputJump = warriorInputSystemController.inputJump;
-						moveInput = warriorInputSystemController.moveInput;
+                        inputSlowWalk = warriorInputController.inputSlowWalk;
+                        moveInput = warriorInputSystemController.moveInput;
 					}
 				}
 			}
@@ -212,6 +215,12 @@ namespace WarriorAnimsFREE
 			SetAnimatorInt("Action", 1);
 			SetAnimatorTrigger(AnimatorTrigger.AttackTrigger);
 			Lock(true, true, true, 0, warriorTiming.TimingLock(warrior, "attack1"));
+		}
+
+		public void SlowWalk()
+		{
+			if (inputSlowWalk) { SetAnimatorBool("Slow Walk", true); }
+			
 		}
 
 		#endregion

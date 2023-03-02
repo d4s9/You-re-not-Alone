@@ -10,7 +10,8 @@ namespace WarriorAnimsFREE
 		// Placeholder inputs.
 		[HideInInspector] public bool inputAttack;
 		[HideInInspector] public bool inputJump;
-		[HideInInspector] public float inputHorizontal = 0;
+        [HideInInspector] public bool inputSlowWalk;
+        [HideInInspector] public float inputHorizontal = 0;
 		[HideInInspector] public float inputVertical = 0;
 
 		[HideInInspector] public Vector3 moveInput;

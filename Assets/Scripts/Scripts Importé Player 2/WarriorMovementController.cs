@@ -6,8 +6,9 @@ namespace WarriorAnimsFREE
 	{
 		[Header("Components")]
 		private WarriorController warriorController;
+        [HideInInspector] public WarriorInputController warriorInputController;
 
-		[Header("Movement")]
+        [Header("Movement")]
 		public float movementAcceleration = 90.0f;
 		public float runSpeed = 6f;
 		private readonly float rotationSpeed = 40f;
@@ -52,11 +53,21 @@ namespace WarriorAnimsFREE
 
 			// If alive and is moving, set animator.
 			if (warriorController.canMove) {
-				if (currentVelocity.magnitude > 0 && warriorController.HasMoveInput()) {
+				if (currentVelocity.magnitude > 0 && warriorController.HasMoveInput())
+				{
 					warriorController.isMoving = true;
 					warriorController.SetAnimatorBool("Moving", true);
 					warriorController.SetAnimatorFloat("Velocity", currentVelocity.magnitude);
-				} else {
+				}
+				else if (currentVelocity.magnitude > 0 && warriorController.HasMoveInput() && warriorInputController.inputSlowWalk == true)
+				{
+					warriorController.isMoving = true;
+					warriorController.SetAnimatorBool("Moving", true);
+					warriorController.SetAnimatorBool("Slow Walk", true);
+					warriorController.SetAnimatorFloat("Velocity", currentVelocity.magnitude);
+				}
+				else
+				{
 					warriorController.isMoving = false;
 					warriorController.SetAnimatorBool("Moving", false);
 					warriorController.SetAnimatorFloat("Velocity", 0);
