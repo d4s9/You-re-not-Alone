@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+include ObjInventaire;
 
-public class Inventaire1 : MonoBehaviour
+public class Inventaire : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
