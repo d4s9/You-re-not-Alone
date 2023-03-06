@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-include ObjInventaire;
 
 public class Inventaire : MonoBehaviour
 {
