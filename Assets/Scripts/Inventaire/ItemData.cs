@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName ="Nouvel objet", menuName ="Inventaire/Créer un objet")]
-public class Objet : ScriptableObject
+public class ItemData : ScriptableObject
 {
  public string nom;
-    public string description;
-    public Sprite icon;
-
+ public Sprite visuel;
+ public GameObject prefab;
 }
 
