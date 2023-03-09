@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a23078518d71764b97749be04a73129, type: 3}
   m_Name: Bois
   m_EditorClassIdentifier: 
-  nom: 
-  visuel: {fileID: 0}
-  prefab: {fileID: 0}
+  nom: Bois
+  visuel: {fileID: 21300000, guid: e0eac6b76fdd842e88a7f8c75ecffaf4, type: 3}
+  prefab: {fileID: 1192808036474676, guid: 45bffbe2c6ba4bb47811799a99e9c87f, type: 3}
