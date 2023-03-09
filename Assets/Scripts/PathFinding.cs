@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -54,6 +56,8 @@ public class PathFinding : MonoBehaviour
 
     PathMarker goalCell;
     PathMarker startCell;
+    PathMarker lastCell;
+
 
     bool done;
 
@@ -76,7 +80,7 @@ public class PathFinding : MonoBehaviour
         }
         else
         {
-            for(int i = 1; i < 4; i++)
+            for(int i = 0; i < 8; i++)
             {
                 switch (i)
                 {
@@ -92,22 +96,85 @@ public class PathFinding : MonoBehaviour
                     case 3:
                         dir = new Vector3(0, 0, -1);
                         break;
+                    case 4:
+                        dir = new Vector3(1, 0, 1);
+                        break;
+                    case 5:
+                        dir = new Vector3(1, 0, -1);
+                        break;
+                    case 6:
+                        dir = new Vector3(-1, 0, 1);
+                        break;
+                    case 7:
+                        dir = new Vector3(-1, 0, -1);
+                        break;
                 }
                 Vector3 neighbourCellLoc = thisCell.location + dir;
  
                 Collider[] hitColliders = Physics.OverlapBox(neighbourCellLoc, _pathCells.transform.localScale/2, Quaternion.identity);
                 if(hitColliders.Length != 0 )
                 {
-                    continue;
+                    foreach(Collider c in hitColliders)
+                    {
+                       // Debug.Log(c);
+                        if (c == _end.gameObject.GetComponent<BoxCollider>())
+                        {
+                            Debug.Log("Player Reached");
+                            done= true;
+                        }
+                    }
+                    if(!done)
+                    {
+                       // Debug.Log("Hit");
+                        continue;
+                    }        
                 }
+                else if (IsClosed(neighbourCellLoc) == false)
+                {
+                    float g = thisCell.G + 1.0f;
+                    float h = Vector3.Distance(neighbourCellLoc, goalCell.location);
+                    float f = g + h;
+
+                    PathMarker neighbourCell = new PathMarker(neighbourCellLoc, h, g, f, Instantiate(_pathCells, neighbourCellLoc, Quaternion.identity), thisCell);
+                    openList.Add(neighbourCell);
+                }
+                
 
             }
+ 
+
+            openList = openList.OrderBy(p => p.F).ToList<PathMarker>();
+            PathMarker pm = (PathMarker) openList.ElementAt(0);
+            closedList.Add(pm);
+            TextMesh[] values = pm.marker.GetComponentsInChildren<TextMesh>();
+            values[2].text = "G " + pm.G.ToString("0.00");
+            values[1].text = pm.H.ToString("0.00");
+            values[0].text = pm.F.ToString("0.00");
+
+
+            openList.RemoveAt(0);
+            pm.marker.GetComponent<Renderer>().material = _closedMat;
+            lastCell = pm;
         }
+    }
+
+    public bool IsClosed(Vector3 markerLoc)
+    {
+        foreach(PathMarker pathMarker in closedList)
+        {
+            Collider[] hitColliders = Physics.OverlapBox(markerLoc, _pathCells.transform.localScale / 2, Quaternion.identity);
+
+            if(hitColliders.Length == 1 && hitColliders[0] == pathMarker.marker)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     void Start()
     {
-      
+         
     }
 
     void Update()
@@ -115,6 +182,18 @@ public class PathFinding : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.P))
         {
             BeginSearch();
+        }
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            if(closedList.Count > 0)
+            {
+                Search(lastCell);
+            }
+            else
+            {
+                Search(startCell);
+            }
+            
         }
     }
 
