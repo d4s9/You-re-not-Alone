@@ -6,7 +6,7 @@ public class PickupItem : MonoBehaviour
 {
 
     private float pickupRange = 2.6f;
-    public PickupBehaviour playerPickupBehaviour;
+   [SerializeField] public PickupBehaviour playerPickupBehaviour;
 
     void Update()
     {

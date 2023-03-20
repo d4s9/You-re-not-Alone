@@ -5,7 +5,7 @@ using UnityEngine;
 public class PickupBehaviour : MonoBehaviour
 {
 
-     private Inventaire inventaire;
+   private Inventaire inventaire;
 
 
     public void DoPickup(Item item)
