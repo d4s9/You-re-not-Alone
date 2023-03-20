@@ -206,9 +206,9 @@ GameObject:
   - component: {fileID: 7259143652432076908}
   - component: {fileID: 4763578186474525581}
   - component: {fileID: 5326855689230806999}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Cell
-  m_TagString: Untagged
+  m_TagString: marker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

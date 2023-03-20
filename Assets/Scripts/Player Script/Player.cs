@@ -4,6 +4,15 @@ using System.IO.IsolatedStorage;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+//chose a faire
+//implémenter la décélération adaptive au sprint
+
+
+
+
+
+
+
 public class Player : MonoBehaviour
 {
     // DECLARE REFERENCE VARIABLES
@@ -26,6 +35,7 @@ public class Player : MonoBehaviour
     Vector3 currentRunMovement;
     bool isMovementPressed;
     bool isRunPressed;
+
     //JUMPING VARIABLES
     [SerializeField] bool isJumpingPressed = false;
     float initialJumpVelocity;
@@ -38,27 +48,29 @@ public class Player : MonoBehaviour
     float groundedGravity = -.05f;
     float gravity = -9.8f;
 
-    //Acceleration
+    //Acceleration et movement avec animations
     float velocityZ = 0.0f;
     float velocityX = 0.0f;
-    [SerializeField] public float acceleration = 0.1f;
-    [SerializeField] float deceleration = 0.5f;
+    [SerializeField] public float acceleration;
+    [SerializeField] float deceleration;
+    [SerializeField] float decelerationMax;
+    [SerializeField] float decelerationMin;
     [SerializeField] private float maxVelocity = 1.0f;
     private float minMaxWalkingVelocity = 0.5f;
     private float minMaxRunVelocity = 2.0f;
+    [SerializeField] float currentMaxVelocity;
 
-    [SerializeField]
-    private bool RotateTowardMouse;
+    //Rotation
+    [SerializeField] private bool RotateTowardMouse;
 
-    [SerializeField]
-    private float MovementSpeed;
+    //Movement sans animation
+    [SerializeField] private float MovementSpeed;
     [SerializeField] private float RunSpeed;
-    [SerializeField]
-    private float RotationSpeed;
+    [SerializeField] private float RotationSpeed;
 
+    //Camera
     [SerializeField]
     private Camera Camera;
-
     private float _smoothCoef = 0.2f;
     private Quaternion _lookAtRotation;
 
@@ -70,6 +82,7 @@ public class Player : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
 
+        //Hash
         isWalkingHash = Animator.StringToHash("isWalking");
         isRunningHash = Animator.StringToHash("isRunning");
         isJumpingHash = Animator.StringToHash("isJumping");
@@ -98,7 +111,8 @@ public class Player : MonoBehaviour
         initialJumpVelocity = (2 * maxJumpHeight) / timeToApex;
     }
 
-
+    //###########################################################################################
+    //handle all callback
     private void onRun(InputAction.CallbackContext context)
     {
         isRunPressed = context.ReadValueAsButton();
@@ -119,6 +133,9 @@ public class Player : MonoBehaviour
     {
         isJumpingPressed= context.ReadValueAsButton();
     }
+
+    //###########################################################################################
+
     // Update is called once per frame
     void Update()
     {
@@ -149,88 +166,64 @@ public class Player : MonoBehaviour
         transform.rotation = rotation;
     }
 
+    //########################################################################################################################################################
+    //Handle all animation
+
     private void handleBlendTree()
     {
-
-        //How to animate characters in unity 3d 19:36
-
-
-
         //input will be true if the player is pressing on the passed in key parameter
         // get key input from player
-        bool forwardPressed = Input.GetKey("w");
-        bool leftPressed = Input.GetKey("a");
-        bool rightPressed = Input.GetKey("d");
-        bool backPressed = Input.GetKey("s");
-        bool runPressed = Input.GetKey("left shift");
+        bool forwardPressed = Input.GetKey(KeyCode.W);
+        bool leftPressed = Input.GetKey(KeyCode.A);
+        bool rightPressed = Input.GetKey(KeyCode.D);
+        bool backPressed = Input.GetKey(KeyCode.S);
+        bool runPressed = Input.GetKey(KeyCode.LeftShift);
 
         // set current maxVelocity
-        float currentMaxVelocity = runPressed ? minMaxRunVelocity : minMaxWalkingVelocity;
+        currentMaxVelocity = runPressed ? minMaxRunVelocity : minMaxWalkingVelocity;
 
-        // if player presses forward, increase velocity in z direction
-        if (forwardPressed && velocityZ < currentMaxVelocity)
+        //handle changes in velocity
+        changeVelocity(forwardPressed, leftPressed, rightPressed, backPressed, runPressed, currentMaxVelocity);
+        //handle the lock or resest
+        lockOrResetVelocity(forwardPressed, leftPressed, rightPressed, backPressed, runPressed, currentMaxVelocity);
+
+        // set the parameters to our local variable values
+        animator.SetFloat(velocityZHash, velocityZ);
+        animator.SetFloat(velocityXHash, velocityX);
+
+    }
+
+    // handles reset and locking of velocity
+    private void lockOrResetVelocity(bool forwardPressed, bool leftPressed, bool rightPressed, bool backPressed, bool runPressed, float currentMaxVelocity)
+    {
+        // handle the reset function
+        handleReset(forwardPressed, leftPressed, rightPressed, backPressed);
+
+        // handdle the lock function
+        handleLock(forwardPressed, leftPressed, rightPressed, backPressed, runPressed, currentMaxVelocity);
+
+    }
+    private void handleReset(bool forwardPressed, bool leftPressed, bool rightPressed, bool backPressed)
+    {
+        
+        // reset velocityZ
+        if (!backPressed && !forwardPressed && velocityZ != 0.0f && (velocityZ > -0.05f && velocityZ < 0.05f))
         {
-            velocityZ += Time.deltaTime * acceleration;
+            velocityZ = 0.0f;
         }
 
-        // increase velocity in left direction
-        if (leftPressed && velocityX > -currentMaxVelocity)
-        {
-            velocityX -= Time.deltaTime * acceleration;
-        }
-
-        //increase velocity in right direction
-        if (rightPressed && velocityX < currentMaxVelocity) 
-        { 
-            velocityX += Time.deltaTime * acceleration;
-        }
-
-        //increase velocity in back direction
-        if (backPressed && velocityZ > -currentMaxVelocity)
-        {
-            velocityZ -= Time.deltaTime * acceleration;
-        }
-
-        // decrease velocityZ
-        if (!forwardPressed && velocityZ > 0.0f)
-        {
-            velocityZ -= Time.deltaTime * deceleration;
-        }
-
-        // increase velocityX if left is not pressed and velocityX < 0
-        if (!leftPressed && velocityX < 0.0f)
-        {
-            velocityX += Time.deltaTime * deceleration;
-        }
-
-        // increase velocityZ if back is not pressed and velocityZ < 0
-        if (!backPressed && velocityZ < 0.0f)
-        {
-            velocityZ += Time.deltaTime * deceleration;
-        }
-
-        // decrease velocityZ if forward is not pressed and velocityZ > 0
-        if (!backPressed && velocityZ > 0.0f)
-        {
-            velocityZ -= Time.deltaTime * deceleration;
-        }
-
-        // decrease velocityX if right is not pressed and velocityX > 0
-        if (!rightPressed && velocityX > 0.0f)
-        {
-            velocityX -= Time.deltaTime * deceleration;
-        }
 
         // reset velocityX
         if (!leftPressed && !rightPressed && velocityX != 0.0f && (velocityX > -0.05f && velocityX < 0.05f))
         {
             velocityX = 0.0f;
         }
-        
+    }
 
-
+    private void handleLock(bool forwardPressed, bool leftPressed, bool rightPressed, bool backPressed, bool runPressed, float currentMaxVelocity)
+    {
         // lock forward
-        if (forwardPressed && runPressed && velocityZ > currentMaxVelocity) 
+        if (forwardPressed && runPressed && velocityZ > currentMaxVelocity)
         {
             velocityZ = currentMaxVelocity;
         }
@@ -272,7 +265,6 @@ public class Player : MonoBehaviour
         }
 
 
-
         // lock right
         if (rightPressed && runPressed && velocityX > currentMaxVelocity)
         {
@@ -310,25 +302,93 @@ public class Player : MonoBehaviour
                 velocityX = -currentMaxVelocity;
             }
         }
+        // round to the currentMaXVelocity if within offset
         else if (leftPressed && velocityX > -currentMaxVelocity && velocityX < (-currentMaxVelocity + 0.05f))
         {
             velocityX = -currentMaxVelocity;
         }
-
-
-
-        // reset velocityZ
-        if (!backPressed && !forwardPressed && velocityZ != 0.0f && (velocityZ > -0.05f && velocityZ < 0.05f))
-        {
-            velocityX = 0.0f;
-        }
-
-        // set the parameters to our local variable values
-        animator.SetFloat("Velocity Z", velocityZ);
-        animator.SetFloat("Velocity X", velocityX);
-
     }
 
+    // handles acceleration and deceleration
+    private void changeVelocity(bool forwardPressed, bool leftPressed, bool rightPressed, bool backPressed, bool runPressed, float currentMaxVelocity)
+    {
+        //handle acceleration function
+        handleAcceleration(forwardPressed, leftPressed, rightPressed, backPressed, currentMaxVelocity);
+
+        // handle deceleration function
+        handleDeceleration(forwardPressed, leftPressed, rightPressed, backPressed, runPressed);
+
+    }
+    private void handleAcceleration(bool forwardPressed, bool leftPressed, bool rightPressed, bool backPressed, float currentMaxVelocity)
+    {
+        // if player presses forward, increase velocity in z direction
+        if (forwardPressed && velocityZ < currentMaxVelocity)
+        {
+            velocityZ += Time.deltaTime * acceleration;
+            Debug.Log("W");
+        }
+
+        // increase velocity in left direction
+        if (leftPressed && velocityX > -currentMaxVelocity)
+        {
+            velocityX -= Time.deltaTime * acceleration;
+            Debug.Log("A");
+        }
+
+        //increase velocity in right direction
+        if (rightPressed && velocityX < currentMaxVelocity)
+        {
+            velocityX += Time.deltaTime * acceleration;
+            Debug.Log("D");
+        }
+
+        //increase velocity in back direction
+        if (backPressed && velocityZ > -currentMaxVelocity)
+        {
+            velocityZ -= Time.deltaTime * acceleration;
+            Debug.Log("S");
+        }
+    }
+    private void handleDeceleration(bool forwardPressed, bool leftPressed, bool rightPressed, bool backPressed, bool runPressed)
+    {
+        // set the deceleration for if run is pressed or not
+        //if he walk
+        if (!runPressed && (velocityZ > 0.05f || velocityX > 0.05f))
+        {
+            deceleration = decelerationMin;
+        }
+        //if he run
+        if (runPressed && (velocityZ > 0.05f || velocityX > 0.05f))
+        {
+            deceleration = decelerationMax;
+        }
+
+        // increase velocityX if left is not pressed and velocityX < 0
+        if (!leftPressed && velocityX < 0.0f)
+        {
+            velocityX += Time.deltaTime * deceleration;
+        }
+
+        // increase velocityZ if back is not pressed and velocityZ < 0
+        if (!backPressed && velocityZ < 0.0f)
+        {
+            velocityZ += Time.deltaTime * deceleration;
+        }
+
+        // decrease velocityZ if forward is not pressed and velocityZ > 0
+        if (!forwardPressed && velocityZ > 0.0f)
+        {
+            velocityZ -= Time.deltaTime * deceleration;
+        }
+
+        // decrease velocityX if right is not pressed and velocityX > 0
+        if (!rightPressed && velocityX > 0.0f)
+        {
+            velocityX -= Time.deltaTime * deceleration;
+        }
+    }
+
+    //########################################################################################################################################################
     private void handleJump()
     {
         if (!isJumping && characterController.isGrounded && isJumpingPressed)

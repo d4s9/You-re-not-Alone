@@ -481,8 +481,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 845917414}
-  m_LocalRotation: {x: 0.29861945, y: 0.14241356, z: -0.045116812, w: 0.9426077}
-  m_LocalPosition: {x: -5.0912905, y: 7.47, z: -9.705757}
+  m_LocalRotation: {x: 0.61541224, y: -0.000000013562163, z: 0.000000010589016, w: 0.78820544}
+  m_LocalPosition: {x: -2.09, y: 8.315, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -749,7 +749,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1330258359}
-  m_LocalRotation: {x: 0.29861945, y: 0.14241356, z: -0.045116812, w: 0.9426077}
+  m_LocalRotation: {x: 0.29861948, y: 0.14241354, z: -0.04511681, w: 0.94260776}
   m_LocalPosition: {x: -5.0912905, y: 7.47, z: -9.705757}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -917,7 +917,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1420176409}
-  m_LocalRotation: {x: 0.61541224, y: -0.000000013562164, z: 0.000000010589018, w: 0.78820544}
+  m_LocalRotation: {x: 0.61541224, y: -0.000000013562163, z: 0.000000010589016, w: 0.78820544}
   m_LocalPosition: {x: -2.09, y: 8.315, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1191,15 +1191,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 144569051522497554, guid: 2b0ad39ea4f61104ea0f06b4c148e437, type: 3}
       propertyPath: acceleration
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 144569051522497554, guid: 2b0ad39ea4f61104ea0f06b4c148e437, type: 3}
       propertyPath: deceleration
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 144569051522497554, guid: 2b0ad39ea4f61104ea0f06b4c148e437, type: 3}
       propertyPath: maxJumpHeight
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 144569051522497554, guid: 2b0ad39ea4f61104ea0f06b4c148e437, type: 3}
+      propertyPath: decelerationMax
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 144569051522497554, guid: 2b0ad39ea4f61104ea0f06b4c148e437, type: 3}
+      propertyPath: decelerationMin
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 144569051522497554, guid: 2b0ad39ea4f61104ea0f06b4c148e437, type: 3}
       propertyPath: initialJumpVelocity
