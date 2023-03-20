@@ -770,7 +770,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 554107522}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.19842, y: 6.16, z: 6.3}
+  m_LocalPosition: {x: 13.9, y: 6.16, z: 3.27}
   m_LocalScale: {x: 13.852, y: 12.046351, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -810,6 +810,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1247049996}
+  ennemyDetectionDistance: 0
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  angleVision: 0
 --- !u!65 &593040298
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1260,7 +1265,7 @@ GameObject:
   - component: {fileID: 1247049997}
   - component: {fileID: 1247049998}
   - component: {fileID: 1247050000}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1578,7 +1583,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1499427821}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -23.688915, y: 0.75, z: 4.0819488}
+  m_LocalPosition: {x: 33.21, y: 0.75, z: -8.94}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1598,6 +1603,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1247049996}
+  ennemyDetectionDistance: 20
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 4096
+  angleVision: 45
 --- !u!1 &1506816101
 GameObject:
   m_ObjectHideFlags: 0
@@ -1631,6 +1641,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1247049996}
+  ennemyDetectionDistance: 0
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  angleVision: 0
 --- !u!65 &1506816103
 BoxCollider:
   m_ObjectHideFlags: 0

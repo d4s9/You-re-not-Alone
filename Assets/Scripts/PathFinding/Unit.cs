@@ -1,22 +1,49 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class Unit : MonoBehaviour
 {
-    public Transform target;
+    [SerializeField] private Transform target;
+    [SerializeField] private float ennemyDetectionDistance;
+    [SerializeField] private LayerMask playerLayer;
+    [SerializeField] private float angleVision;
     float speed = 3;
     Vector3[] path;
     int targetIndex;
 
     void Start()
     {
-        PathRequaestManager.RequestPath(new PathRequest(transform.position, target.position, OnPathFound));
+     
     }
     private void Update()
     {
-        PathRequaestManager.RequestPath(new PathRequest(transform.position, target.position, OnPathFound));
-        Debug.Log(1f / Time.deltaTime);
+        PlayerDetection();
+    }
+
+    public void PlayerDetection()
+    {      
+        Vector3 heading = target.position - this.transform.position;
+        float distance = heading.magnitude;
+        Vector3 direction = heading / distance;
+
+        Vector3 center = this.transform.position + this.transform.forward * (ennemyDetectionDistance/2);
+        if(Physics.CheckBox(center, Vector3.one * (ennemyDetectionDistance/2), this.transform.rotation, playerLayer))
+        {
+            Collider playerCollider = target.GetComponent<Collider>();
+            RaycastHit hit;
+            if (Physics.Raycast(this.transform.position, this.transform.TransformDirection(direction), out hit, distance))
+            {
+                if (hit.collider == playerCollider)
+                {
+                    if (Vector3.Angle(direction, transform.forward) < angleVision)
+                    {
+                        PathRequaestManager.RequestPath(new PathRequest(transform.position, target.position, OnPathFound));
+                    }
+                }                           
+            }
+        }
     }
 
     public void OnPathFound(Vector3[] newPath, bool pathSuccessful)
