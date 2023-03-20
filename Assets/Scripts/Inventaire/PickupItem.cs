@@ -5,8 +5,8 @@ using UnityEngine;
 public class PickupItem : MonoBehaviour
 {
 
-    private float pickupRange = 20000.6f;
-    public Inventaire inventaire;
+    private float pickupRange = 2.6f;
+    public PickupBehaviour playerPickupBehaviour;
 
     void Update()
     {
@@ -19,8 +19,7 @@ public class PickupItem : MonoBehaviour
                 Debug.Log("Il y a un objet");
                 if(Input.GetKeyDown(KeyCode.E))
                 {
-                    inventaire.contenu.Add(hit.transform.gameObject.GetComponent<Item>().item);
-                    Destroy(hit.transform.gameObject);
+                    playerPickupBehaviour.DoPickup(hit.transform.gameObject.GetComponent<Item>());
                 }
             }
             
