@@ -25,6 +25,7 @@ public class Player : MonoBehaviour
     int isWalkingHash;
     int isRunningHash;
     int isJumpingHash;
+    int isAttacking;
     int velocityZHash;
     int velocityXHash;
 
@@ -86,6 +87,7 @@ public class Player : MonoBehaviour
         isWalkingHash = Animator.StringToHash("isWalking");
         isRunningHash = Animator.StringToHash("isRunning");
         isJumpingHash = Animator.StringToHash("isJumping");
+        isAttackingHash = Animator.StringToHash("isAttacking");
         velocityZHash = Animator.StringToHash("Velocity Z");
         velocityXHash = Animator.StringToHash("Velocity X");
 
@@ -448,6 +450,7 @@ public class Player : MonoBehaviour
         bool isWalking = animator.GetBool(isWalkingHash);
         bool isRunning = animator.GetBool(isRunningHash);
         bool isJumping = animator.GetBool(isJumpingHash);
+        bool isAttacking = animator.GetBool(isAttackingHash);
 
         // start walking if movement pressed is true and not already walking
         if (isMovementPressed && !isWalking)
