@@ -24,20 +24,19 @@ public class Unit : MonoBehaviour
 
     public void PlayerDetection()
     {      
-        Vector3 heading = target.position - this.transform.position;
-        float distance = heading.magnitude;
-        Vector3 direction = heading / distance;
-
         Vector3 center = this.transform.position + this.transform.forward * (ennemyDetectionDistance/2);
         if(Physics.CheckBox(center, Vector3.one * (ennemyDetectionDistance/2), this.transform.rotation, playerLayer))
-        {
+        {       
+            Vector3 heading = target.position - this.transform.position;
+            float distance = heading.magnitude;
+            Vector3 direction = heading / distance;
             Collider playerCollider = target.GetComponent<Collider>();
             RaycastHit hit;
-            if (Physics.Raycast(this.transform.position, this.transform.TransformDirection(direction), out hit, distance))
-            {
+            if (Physics.Raycast(this.transform.position, heading, out hit, distance))
+            {                
                 if (hit.collider == playerCollider)
-                {
-                    if (Vector3.Angle(direction, transform.forward) < angleVision)
+                {                 
+                    if (Vector3.Angle(direction, transform.forward) <= angleVision)
                     {
                         PathRequaestManager.RequestPath(new PathRequest(transform.position, target.position, OnPathFound));
                     }
@@ -58,6 +57,8 @@ public class Unit : MonoBehaviour
 
     IEnumerator FollowPath()
     {
+        float _smoothCoef = 0.02f;
+        Quaternion rotation = this.transform.rotation;
         Vector3 currentWaypoint = path[0];
         while (true)
         {
@@ -68,9 +69,12 @@ public class Unit : MonoBehaviour
                 {
                     yield break;
                 }
-                currentWaypoint = path[targetIndex];
+                currentWaypoint = path[targetIndex];               
             }
-            transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed*Time.deltaTime);
+            
+            rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.LookRotation(currentWaypoint - transform.position, Vector3.up), _smoothCoef);
+            transform.rotation = rotation;
+            transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed * Time.deltaTime);
             yield return null;
         }
     }
