@@ -5,8 +5,8 @@ using UnityEngine;
 public class PickupItem : MonoBehaviour
 {
 
-    private float pickupRange = 2.6f;
-   [SerializeField] public PickupBehaviour playerPickupBehaviour;
+    private float pickupRange = 20.6f;
+     public PickupBehaviour playerPickupBehaviour;
 
     void Update()
     {

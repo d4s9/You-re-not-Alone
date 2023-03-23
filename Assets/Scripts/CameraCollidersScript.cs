@@ -20,6 +20,7 @@ public class CameraCollidersScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log(other.gameObject);
         if(other.gameObject == _player)
         {
             _cameraScript.OnCollisionEntering(gameObject, _colliderVCam);

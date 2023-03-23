@@ -21,10 +21,12 @@ public class Player : MonoBehaviour
     CharacterController characterController;
     Animator animator;
 
+
     //Variables to store optimized setter/getter parameter IDs
     int isWalkingHash;
     int isRunningHash;
     int isJumpingHash;
+    int isAttackingHash;
     int velocityZHash;
     int velocityXHash;
 
@@ -35,6 +37,7 @@ public class Player : MonoBehaviour
     Vector3 currentRunMovement;
     bool isMovementPressed;
     bool isRunPressed;
+    bool isAttackingPressed;
 
     //JUMPING VARIABLES
     [SerializeField] bool isJumpingPressed = false;
@@ -42,7 +45,10 @@ public class Player : MonoBehaviour
     float maxJumpHeight = 1.0f;
     float maxJumpTime = 0.75f;
     bool isJumping = false;
-    
+
+    // VARIABLES FOR THE ATTACK
+    [SerializeField] private float cooldown = 1f; //seconds
+    [SerializeField] private float lastAttack = -9999f;
 
     // VARIABLES FOR THE GRAVITY
     float groundedGravity = -.05f;
@@ -74,6 +80,7 @@ public class Player : MonoBehaviour
     private float _smoothCoef = 0.2f;
     private Quaternion _lookAtRotation;
 
+    
 
     private void Awake()
     {
@@ -86,6 +93,7 @@ public class Player : MonoBehaviour
         isWalkingHash = Animator.StringToHash("isWalking");
         isRunningHash = Animator.StringToHash("isRunning");
         isJumpingHash = Animator.StringToHash("isJumping");
+        isAttackingHash = Animator.StringToHash("isAttacking");
         velocityZHash = Animator.StringToHash("Velocity Z");
         velocityXHash = Animator.StringToHash("Velocity X");
 
@@ -99,6 +107,9 @@ public class Player : MonoBehaviour
         playerInput.CharacterControls.Jump.started += onJump;
         playerInput.CharacterControls.Jump.canceled += onJump;
         playerInput.CharacterControls.Jump.performed += onJump;
+        playerInput.CharacterControls.Attack.started += onAttack;
+        playerInput.CharacterControls.Attack.canceled += onAttack;
+        playerInput.CharacterControls.Attack.performed += onAttack;
 
         setupJumpVariables();
 
@@ -134,6 +145,10 @@ public class Player : MonoBehaviour
         isJumpingPressed= context.ReadValueAsButton();
     }
 
+    private void onAttack(InputAction.CallbackContext context)
+    {
+        isAttackingPressed = context.ReadValueAsButton();
+    }
     //###########################################################################################
 
     // Update is called once per frame
@@ -448,6 +463,7 @@ public class Player : MonoBehaviour
         bool isWalking = animator.GetBool(isWalkingHash);
         bool isRunning = animator.GetBool(isRunningHash);
         bool isJumping = animator.GetBool(isJumpingHash);
+        bool isAttacking = animator.GetBool(isAttackingHash);
 
         // start walking if movement pressed is true and not already walking
         if (isMovementPressed && !isWalking)
@@ -468,6 +484,21 @@ public class Player : MonoBehaviour
         else if ((!isMovementPressed || !isRunPressed) && isRunning)
         {
             animator.SetBool(isRunningHash, false);
+        }
+        // attack if mouse left is true
+        if (isAttackingPressed && !isAttacking)
+        {
+            if(Time.time >= lastAttack + cooldown)
+            {
+                animator.SetBool(isAttackingHash, true);
+                lastAttack = Time.time;
+            }
+            
+        }
+        // attack if mouse left is false
+        if (!isAttackingPressed && isAttacking)
+        {
+            animator.SetBool(isAttackingHash, false);
         }
         //Problème du saut toujours pas trouvé
         /*
