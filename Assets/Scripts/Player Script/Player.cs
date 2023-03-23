@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
     int isWalkingHash;
     int isRunningHash;
     int isJumpingHash;
-    int isAttacking;
+    int isAttackingHash;
     int velocityZHash;
     int velocityXHash;
 
@@ -36,6 +36,7 @@ public class Player : MonoBehaviour
     Vector3 currentRunMovement;
     bool isMovementPressed;
     bool isRunPressed;
+    bool isAttackingPressed;
 
     //JUMPING VARIABLES
     [SerializeField] bool isJumpingPressed = false;
@@ -101,6 +102,9 @@ public class Player : MonoBehaviour
         playerInput.CharacterControls.Jump.started += onJump;
         playerInput.CharacterControls.Jump.canceled += onJump;
         playerInput.CharacterControls.Jump.performed += onJump;
+        playerInput.CharacterControls.Attack.started += onAttack;
+        playerInput.CharacterControls.Attack.canceled += onAttack;
+        playerInput.CharacterControls.Attack.performed += onAttack;
 
         setupJumpVariables();
 
@@ -136,6 +140,10 @@ public class Player : MonoBehaviour
         isJumpingPressed= context.ReadValueAsButton();
     }
 
+    private void onAttack(InputAction.CallbackContext context)
+    {
+        isAttackingPressed = context.ReadValueAsButton();
+    }
     //###########################################################################################
 
     // Update is called once per frame
@@ -471,6 +479,16 @@ public class Player : MonoBehaviour
         else if ((!isMovementPressed || !isRunPressed) && isRunning)
         {
             animator.SetBool(isRunningHash, false);
+        }
+        // attack if mouse left is true
+        if (isAttackingPressed && !isAttacking)
+        {
+            animator.SetBool(isAttackingHash, true);
+        }
+        // attack if mouse left is false
+        if (!isAttackingPressed && isAttacking)
+        {
+            animator.SetBool(isAttackingHash, false);
         }
         //Problème du saut toujours pas trouvé
         /*
