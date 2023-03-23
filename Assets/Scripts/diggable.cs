@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,12 +6,14 @@ using UnityEngine;
 public class diggable : MonoBehaviour
 {
     //objet retrouver dans le corps creusé.
-    [SerializeField] GameObject loot;
+    public GameObject loot;
     //nombre de pelletage pour déterrer l'objet.
-    [SerializeField] int row = 1;
+    [SerializeField] int nb = 1;
+    
     int i;//comptage de pelletage
 
     //créer une list pour les model de troue.
+    public Mesh[] holePhase;
 
     // Start is called before the first frame update
     void Start()
@@ -19,9 +22,15 @@ public class diggable : MonoBehaviour
     }
 
     //change le modele du troue.
-    void hole_phase()
+    void hole_phase(int m_i)
     {
+        //le meshfilter est changé.
+        gameObject.GetComponent<MeshFilter>().mesh = holePhase[m_i];
+    }
 
+    void spawn()
+    {
+        Instantiate(loot, transform.position, transform.rotation);
     }
 
     //detecter si le joueur creuse sur le gameobject.
@@ -33,19 +42,25 @@ public class diggable : MonoBehaviour
         //monter le compteur pour raprocher du nombre de pelletage necessaire.
         i++;
         //changer le modele du troue pour un troue plus profont. **** créer une fonction pour le changement de modele du troue.
-        hole_phase();
+        hole_phase(i);
 
         //si atteint le nb de pelletage necessaire.
-        if (i == row)
+        if (i == nb)
         {
             //spawner le loot.
-            Instantiate(loot, transform.position, transform.rotation);
+            spawn();
         }
     }
 
-    // Update is called once per frame
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "shovel")
+        {
+            dig_detect();
+        }
+    }
+
     void Update()
     {
-        
     }
 }
