@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Unit : MonoBehaviour
 {
@@ -9,14 +10,10 @@ public class Unit : MonoBehaviour
     [SerializeField] private float ennemyDetectionDistance;
     [SerializeField] private LayerMask playerLayer;
     [SerializeField] private float angleVision;
-    float speed = 3;
+    [SerializeField] private float speed = 3;
     Vector3[] path;
     int targetIndex;
 
-    void Start()
-    {
-     
-    }
     private void Update()
     {
         PlayerDetection();
@@ -24,21 +21,20 @@ public class Unit : MonoBehaviour
 
     public void PlayerDetection()
     {      
-        Vector3 heading = target.position - this.transform.position;
-        float distance = heading.magnitude;
-        Vector3 direction = heading / distance;
-
         Vector3 center = this.transform.position + this.transform.forward * (ennemyDetectionDistance/2);
         if(Physics.CheckBox(center, Vector3.one * (ennemyDetectionDistance/2), this.transform.rotation, playerLayer))
         {
+            Vector3 heading = new Vector3(target.position.x - this.transform.position.x, 0, target.position.z - this.transform.position.z);
+            float distance = heading.magnitude;
+            Vector3 direction = heading / distance;
             Collider playerCollider = target.GetComponent<Collider>();
             RaycastHit hit;
-            if (Physics.Raycast(this.transform.position, this.transform.TransformDirection(direction), out hit, distance))
-            {
+            if (Physics.Raycast(this.transform.position, heading, out hit, distance))
+            {                
                 if (hit.collider == playerCollider)
-                {
-                    if (Vector3.Angle(direction, transform.forward) < angleVision)
-                    {
+                {                 
+                    if (Vector3.Angle(direction, transform.forward) <= angleVision)
+                    {                      
                         PathRequaestManager.RequestPath(new PathRequest(transform.position, target.position, OnPathFound));
                     }
                 }                           
@@ -58,6 +54,8 @@ public class Unit : MonoBehaviour
 
     IEnumerator FollowPath()
     {
+        float _smoothCoef = 0.02f;
+        Quaternion rotation = this.transform.rotation;
         Vector3 currentWaypoint = path[0];
         while (true)
         {
@@ -68,9 +66,12 @@ public class Unit : MonoBehaviour
                 {
                     yield break;
                 }
-                currentWaypoint = path[targetIndex];
+                currentWaypoint = path[targetIndex];               
             }
-            transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed*Time.deltaTime);
+            //Arrêter l'ennemi quand il touche au joueur et le faire attaquer
+            rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.LookRotation(currentWaypoint - transform.position, Vector3.up), _smoothCoef);
+            transform.rotation = rotation;
+            transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed * Time.deltaTime);
             yield return null;
         }
     }

@@ -94,6 +94,7 @@ public class FindPath : MonoBehaviour
             {
                 waypoints.Add(path[i].worldPosition);
             }
+           
             dirHold = dirNew;
         }
         return waypoints.ToArray();
