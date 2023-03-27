@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2773428240999918609}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: prefab_polytope_snow_fern01
-  m_TagString: Untagged
+  m_TagString: Objet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26,6 +26,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7916006195823525881}
   m_Father: {fileID: 0}
@@ -42,6 +43,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: model_polytope_snow_fern01
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 1317859d74979da4ab6aa4ff59fca6ba, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 1317859d74979da4ab6aa4ff59fca6ba, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1317859d74979da4ab6aa4ff59fca6ba, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -55,6 +64,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1317859d74979da4ab6aa4ff59fca6ba, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 1317859d74979da4ab6aa4ff59fca6ba, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
       objectReference: {fileID: 0}
@@ -65,14 +78,6 @@ PrefabInstance:
     - target: {fileID: 400000, guid: 1317859d74979da4ab6aa4ff59fca6ba, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 1317859d74979da4ab6aa4ff59fca6ba, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 1317859d74979da4ab6aa4ff59fca6ba, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1317859d74979da4ab6aa4ff59fca6ba, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -90,7 +95,6 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: 1317859d74979da4ab6aa4ff59fca6ba, type: 3}
 --- !u!4 &7916006195823525881 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 400000, guid: 1317859d74979da4ab6aa4ff59fca6ba,
-    type: 3}
+  m_CorrespondingSourceObject: {fileID: 400000, guid: 1317859d74979da4ab6aa4ff59fca6ba, type: 3}
   m_PrefabInstance: {fileID: 7916006195823650169}
   m_PrefabAsset: {fileID: 0}

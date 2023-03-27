@@ -12,6 +12,13 @@ public class PickupBehaviour : MonoBehaviour
     {
         inventaire.AddItem(item.itemData);
         Destroy(item.gameObject);
+
+        if(inventaire.IsFull())
+        {
+          Debug.Log("L'inventaire est plein");
+          
+          return;
+        }
     }
 
 
