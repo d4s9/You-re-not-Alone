@@ -62,6 +62,33 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MeleeSwitch"",
+                    ""type"": ""Button"",
+                    ""id"": ""6269f7d8-7ca2-4ad6-9bc7-ad7be9003ecc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RifleSwitch"",
+                    ""type"": ""Button"",
+                    ""id"": ""286f7436-85f6-4610-bd38-6be160aeb843"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Diggin"",
+                    ""type"": ""Button"",
+                    ""id"": ""dc36e07c-183f-46c8-8049-45817de82e33"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -152,6 +179,50 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""action"": ""Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ba3eb937-36c1-453f-8ffa-14208fcfb035"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MeleeSwitch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a71a4edc-dfa3-4e67-99da-f81f84f3d31e"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MeleeSwitch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""76453529-05aa-4129-b2a5-7d7a7036975c"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RifleSwitch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""acb2cadb-e78b-4c91-8d14-1a57aeb2bf9a"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Diggin"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -164,6 +235,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_CharacterControls_Jump = m_CharacterControls.FindAction("Jump", throwIfNotFound: true);
         m_CharacterControls_Run = m_CharacterControls.FindAction("Run", throwIfNotFound: true);
         m_CharacterControls_Attack = m_CharacterControls.FindAction("Attack", throwIfNotFound: true);
+        m_CharacterControls_MeleeSwitch = m_CharacterControls.FindAction("MeleeSwitch", throwIfNotFound: true);
+        m_CharacterControls_RifleSwitch = m_CharacterControls.FindAction("RifleSwitch", throwIfNotFound: true);
+        m_CharacterControls_Diggin = m_CharacterControls.FindAction("Diggin", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -227,6 +301,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_CharacterControls_Jump;
     private readonly InputAction m_CharacterControls_Run;
     private readonly InputAction m_CharacterControls_Attack;
+    private readonly InputAction m_CharacterControls_MeleeSwitch;
+    private readonly InputAction m_CharacterControls_RifleSwitch;
+    private readonly InputAction m_CharacterControls_Diggin;
     public struct CharacterControlsActions
     {
         private @PlayerInput m_Wrapper;
@@ -235,6 +312,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_CharacterControls_Jump;
         public InputAction @Run => m_Wrapper.m_CharacterControls_Run;
         public InputAction @Attack => m_Wrapper.m_CharacterControls_Attack;
+        public InputAction @MeleeSwitch => m_Wrapper.m_CharacterControls_MeleeSwitch;
+        public InputAction @RifleSwitch => m_Wrapper.m_CharacterControls_RifleSwitch;
+        public InputAction @Diggin => m_Wrapper.m_CharacterControls_Diggin;
         public InputActionMap Get() { return m_Wrapper.m_CharacterControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -256,6 +336,15 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Attack.started -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnAttack;
                 @Attack.performed -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnAttack;
                 @Attack.canceled -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnAttack;
+                @MeleeSwitch.started -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnMeleeSwitch;
+                @MeleeSwitch.performed -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnMeleeSwitch;
+                @MeleeSwitch.canceled -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnMeleeSwitch;
+                @RifleSwitch.started -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnRifleSwitch;
+                @RifleSwitch.performed -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnRifleSwitch;
+                @RifleSwitch.canceled -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnRifleSwitch;
+                @Diggin.started -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnDiggin;
+                @Diggin.performed -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnDiggin;
+                @Diggin.canceled -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnDiggin;
             }
             m_Wrapper.m_CharacterControlsActionsCallbackInterface = instance;
             if (instance != null)
@@ -272,6 +361,15 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Attack.started += instance.OnAttack;
                 @Attack.performed += instance.OnAttack;
                 @Attack.canceled += instance.OnAttack;
+                @MeleeSwitch.started += instance.OnMeleeSwitch;
+                @MeleeSwitch.performed += instance.OnMeleeSwitch;
+                @MeleeSwitch.canceled += instance.OnMeleeSwitch;
+                @RifleSwitch.started += instance.OnRifleSwitch;
+                @RifleSwitch.performed += instance.OnRifleSwitch;
+                @RifleSwitch.canceled += instance.OnRifleSwitch;
+                @Diggin.started += instance.OnDiggin;
+                @Diggin.performed += instance.OnDiggin;
+                @Diggin.canceled += instance.OnDiggin;
             }
         }
     }
@@ -282,5 +380,8 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
+        void OnMeleeSwitch(InputAction.CallbackContext context);
+        void OnRifleSwitch(InputAction.CallbackContext context);
+        void OnDiggin(InputAction.CallbackContext context);
     }
 }
