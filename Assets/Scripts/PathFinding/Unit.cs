@@ -1,21 +1,28 @@
+using Cinemachine.Utility;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public class Unit : MonoBehaviour
 {
-    [SerializeField] private Transform target;
+    [SerializeField] private GameObject target;
     [SerializeField] private float ennemyDetectionDistance;
     [SerializeField] private LayerMask playerLayer;
     [SerializeField] private float angleVision;
     [SerializeField] private float speed = 3;
-    
+
+    Animator animator;
     private bool _following = false;
     Vector3[] path;
     int targetIndex;
 
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
     private void Update()
     {
         PlayerDetection();
@@ -24,7 +31,7 @@ public class Unit : MonoBehaviour
     public void PlayerDetection()
     {
         Vector3 center = this.transform.position + this.transform.forward * (ennemyDetectionDistance / 2);
-        Vector3 heading = new Vector3(target.position.x - this.transform.position.x, 0, target.position.z - this.transform.position.z);
+        Vector3 heading = new Vector3(target.transform.position.x - this.transform.position.x, 0, target.transform.position.z - this.transform.position.z);
         float distance = heading.magnitude;
         Vector3 direction = heading / distance;
         CharacterController playerCharCont = target.GetComponent<CharacterController>();
@@ -41,12 +48,13 @@ public class Unit : MonoBehaviour
                 if (Physics.CheckCapsule(p1, p2, ennemyCharCont.radius + 0.1f, playerLayer))
                 {
                     _following = false;
+                    animator.SetBool("isWalking", false);
                     //Attack
                     Debug.Log("Hit");
                 }
                 else
                 {
-                    PathRequaestManager.RequestPath(new PathRequest(transform.position, target.position, OnPathFound));
+                    PathRequaestManager.RequestPath(new PathRequest(transform.position, target.transform.position, OnPathFound));
                 }
             }
         }
@@ -61,17 +69,24 @@ public class Unit : MonoBehaviour
                     {                                            
                         if(Physics.CheckCapsule(p1, p2, ennemyCharCont.radius + 0.1f, playerLayer)){
                             _following = false;
-                            //Attack
+                            Attack(target);
                             Debug.Log("Hit");
                         } else
                         {
                             _following = true;
-                            PathRequaestManager.RequestPath(new PathRequest(transform.position, target.position, OnPathFound));
+                            PathRequaestManager.RequestPath(new PathRequest(transform.position, target.transform.position, OnPathFound));
                         }
                     }
                 }                           
             }
         }
+    }
+
+    public void Attack(GameObject p_target)
+    {
+    
+        //Remove health from player
+        
     }
 
     public void OnPathFound(Vector3[] newPath, bool pathSuccessful)
@@ -86,6 +101,7 @@ public class Unit : MonoBehaviour
 
     IEnumerator FollowPath()
     {
+        animator.SetBool("isWalking", true);
         CharacterController ennemyCharCont = this.gameObject.GetComponent<CharacterController>();
         float _smoothCoef = 0.02f;
         Quaternion rotation = this.transform.rotation;
@@ -101,9 +117,10 @@ public class Unit : MonoBehaviour
                     yield break;
                 }
                 currentWaypoint = path[targetIndex];               
-            }          
-            //Fix rotation whenever it stops moving (leans backwards)
-            rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.LookRotation(currentWaypoint - this.transform.position, Vector3.up), _smoothCoef);
+            }
+
+            Quaternion _lookatRotation = Quaternion.LookRotation(new Vector3(currentWaypoint.x - this.transform.position.x, 0, currentWaypoint.z - this.transform.position.z), Vector3.up);
+            rotation = Quaternion.Slerp(this.transform.rotation, _lookatRotation, _smoothCoef);
             transform.rotation = rotation;
             Vector3 move = new Vector3(currentWaypoint.x - this.transform.position.x, 0, currentWaypoint.z - this.transform.position.z).normalized;
             ennemyCharCont.Move(move * Time.deltaTime * speed);
