@@ -6,8 +6,13 @@ public class PickupBehaviour : MonoBehaviour
 {
 
   [SerializeField] private Inventaire inventaire;
+    [SerializeField] private GameObject inventairePleinTxt;
 
 
+    public void Start()
+    {
+        inventairePleinTxt.SetActive(false);
+    }
     public void DoPickup(Item item)
     {
         inventaire.AddItem(item.itemData);
@@ -15,9 +20,11 @@ public class PickupBehaviour : MonoBehaviour
 
         if(inventaire.IsFull())
         {
-          Debug.Log("L'inventaire est plein");
-          
-          return;
+            inventairePleinTxt.SetActive(true);
+        }
+        else
+        {
+            inventairePleinTxt.SetActive(false);
         }
     }
 

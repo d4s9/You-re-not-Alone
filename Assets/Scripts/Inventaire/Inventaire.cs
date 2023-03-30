@@ -13,6 +13,7 @@ public class Inventaire : MonoBehaviour
 
     private void Start()
     {
+        inventoryPanel.SetActive(false);
         RefreshContent();
     }
     private void Update()
