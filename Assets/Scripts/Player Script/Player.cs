@@ -53,6 +53,7 @@ public class Player : MonoBehaviour
 
     // VARIABLES FOR THE ATTACK
     [SerializeField] private float cooldown = 1f; //seconds
+    [SerializeField] private float cooldownAR = 0.1f;
     [SerializeField] private float lastAttack = -9999f;
 
     // VARIABLES FOR THE GRAVITY
@@ -292,7 +293,7 @@ public class Player : MonoBehaviour
         //#####
         //Attack
         // attack if mouse left is true
-        if (isAttackingPressed && !isAttacking)
+        if (isAttackingPressed && !isAttacking && (isRifle == false))
         {
             if (Time.time >= lastAttack + cooldown)
             {
@@ -301,8 +302,16 @@ public class Player : MonoBehaviour
             }
 
         }
-        // attack if mouse left is false
-        if (!isAttackingPressed && isAttacking)
+        else if (isAttackingPressed && !isAttacking && (isRifle == true))
+        {
+            if (Time.time >= lastAttack + cooldownAR)
+            {
+                animator.SetBool(isAttackingHash, true);
+                lastAttack = Time.time;
+            }
+        }
+            // attack if mouse left is false
+            if (!isAttackingPressed && isAttacking)
         {
             animator.SetBool(isAttackingHash, false);
         }
