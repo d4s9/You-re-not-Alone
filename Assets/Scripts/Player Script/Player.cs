@@ -4,53 +4,65 @@ using System.IO.IsolatedStorage;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-//chose a faire
-//implémenter la décélération adaptive au sprint
 
-
-
-
-
-
-
+/// A faire
+// Limiter vitesse de déplacement lors des attaques
+//Melee
+//rifle
+//Vérifier le cooldown sur les attaques
+/// 
 public class Player : MonoBehaviour
 {
     // DECLARE REFERENCE VARIABLES
     private InputHandler _input;
     private PlayerInput playerInput;
-    CharacterController characterController;
-    Animator animator;
+    private CharacterController characterController;
+    private Animator animator;
+
 
     //Variables to store optimized setter/getter parameter IDs
-    int isWalkingHash;
-    int isRunningHash;
-    int isJumpingHash;
-    int velocityZHash;
-    int velocityXHash;
+    private int isWalkingHash;
+    private int isRunningHash;
+    private int isJumpingHash;
+    private int isAttackingHash;
+    private int velocityZHash;
+    private int velocityXHash;
+    private int isMeleeHash;
+    private int isRifleHash;
+    private int isDigginHash;
+
 
 
     // VARIABLES TO STORE PLAYER INPUT VALUES
-    Vector2 currentMovementInput;
-    Vector3 currentMovement;
-    Vector3 currentRunMovement;
-    bool isMovementPressed;
-    bool isRunPressed;
+    private Vector2 currentMovementInput;
+    private Vector3 currentMovement;
+    private Vector3 currentRunMovement;
+    private bool isMovementPressed;
+    private bool isRunPressed;
+    private bool isAttackingPressed;
+    private bool isMeleePressed;
+    private bool isRiflePressed;
+    private bool isDigginPressed;
 
     //JUMPING VARIABLES
     [SerializeField] bool isJumpingPressed = false;
-    float initialJumpVelocity;
-    float maxJumpHeight = 1.0f;
-    float maxJumpTime = 0.75f;
-    bool isJumping = false;
-    
+    private float initialJumpVelocity;
+    private float maxJumpHeight = 1.0f;
+    private float maxJumpTime = 0.75f;
+    private bool isJumping = false;
+
+    // VARIABLES FOR THE ATTACK
+    [SerializeField] private float cooldown = 1f; //seconds
+    [SerializeField] private float cooldownAR = 0.1f;
+    [SerializeField] private float lastAttack = -9999f;
 
     // VARIABLES FOR THE GRAVITY
-    float groundedGravity = -.05f;
-    float gravity = -9.8f;
+    private float groundedGravity = -.05f;
+    private float gravity = -9.8f;
 
     //Acceleration et movement avec animations
-    float velocityZ = 0.0f;
-    float velocityX = 0.0f;
+    private float velocityZ = 0.0f;
+    private float velocityX = 0.0f;
     [SerializeField] public float acceleration;
     [SerializeField] float deceleration;
     [SerializeField] float decelerationMax;
@@ -74,6 +86,7 @@ public class Player : MonoBehaviour
     private float _smoothCoef = 0.2f;
     private Quaternion _lookAtRotation;
 
+    
 
     private void Awake()
     {
@@ -82,28 +95,63 @@ public class Player : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
 
-        //Hash
-        isWalkingHash = Animator.StringToHash("isWalking");
-        isRunningHash = Animator.StringToHash("isRunning");
-        isJumpingHash = Animator.StringToHash("isJumping");
-        velocityZHash = Animator.StringToHash("Velocity Z");
-        velocityXHash = Animator.StringToHash("Velocity X");
-
-        // set the player input callbacks
-        playerInput.CharacterControls.Move.started += onMovementInput;
-        playerInput.CharacterControls.Move.canceled += onMovementInput;
-        playerInput.CharacterControls.Move.performed += onMovementInput;
-        playerInput.CharacterControls.Run.started += onRun;
-        playerInput.CharacterControls.Run.canceled+= onRun;
-        playerInput.CharacterControls.Run.performed += onRun;
-        playerInput.CharacterControls.Jump.started += onJump;
-        playerInput.CharacterControls.Jump.canceled += onJump;
-        playerInput.CharacterControls.Jump.performed += onJump;
+        //S'occupe du StringToHash
+        hash();
+        //S'occupe des inputCallbacks du PLayerInput (Input Action Asset)
+        inputCallback();
 
         setupJumpVariables();
 
     }
+    //#########################################################################################
+    //HASH AND SWITCH
+    private void hash()
+    {
+        //Hash
+        isWalkingHash = Animator.StringToHash("isWalking");
+        isRunningHash = Animator.StringToHash("isRunning");
+        isJumpingHash = Animator.StringToHash("isJumping");
+        isAttackingHash = Animator.StringToHash("isAttacking");
+        velocityZHash = Animator.StringToHash("Velocity Z");
+        velocityXHash = Animator.StringToHash("Velocity X");
+        isMeleeHash = Animator.StringToHash("isMelee");
+        isRifleHash = Animator.StringToHash("isRifle");
+        isDigginHash = Animator.StringToHash("isDiggin");
+    }
 
+    private void inputCallback()
+    {
+        // set the player input callbacks
+        // Movement Input
+        playerInput.CharacterControls.Move.started += onMovementInput;
+        playerInput.CharacterControls.Move.canceled += onMovementInput;
+        playerInput.CharacterControls.Move.performed += onMovementInput;
+        //Run INPUT
+        playerInput.CharacterControls.Run.started += onRun;
+        playerInput.CharacterControls.Run.canceled += onRun;
+        playerInput.CharacterControls.Run.performed += onRun;
+        //JUMP INPUT
+        playerInput.CharacterControls.Jump.started += onJump;
+        playerInput.CharacterControls.Jump.canceled += onJump;
+        playerInput.CharacterControls.Jump.performed += onJump;
+        //ATTACK INPUT
+        playerInput.CharacterControls.Attack.started += onAttack;
+        playerInput.CharacterControls.Attack.canceled += onAttack;
+        playerInput.CharacterControls.Attack.performed += onAttack;
+        //MELEE SWITCH
+        playerInput.CharacterControls.MeleeSwitch.started += onMeleeSwitch;
+        playerInput.CharacterControls.MeleeSwitch.canceled += onMeleeSwitch;
+        playerInput.CharacterControls.MeleeSwitch.performed += onMeleeSwitch;
+        //RIFLE SWITCH
+        playerInput.CharacterControls.RifleSwitch.started += onRifleSwitch;
+        playerInput.CharacterControls.RifleSwitch.canceled += onRifleSwitch;
+        playerInput.CharacterControls.RifleSwitch.performed += onRifleSwitch;
+        //DIGGIN INPUT
+        playerInput.CharacterControls.Diggin.started += onDiggin;
+        playerInput.CharacterControls.Diggin.canceled += onDiggin;
+        playerInput.CharacterControls.Diggin.performed += onDiggin;
+    }
+    //####################################################################################
     private void setupJumpVariables()
     {
         float timeToApex = maxJumpTime / 2;
@@ -134,6 +182,23 @@ public class Player : MonoBehaviour
         isJumpingPressed= context.ReadValueAsButton();
     }
 
+    private void onAttack(InputAction.CallbackContext context)
+    {
+        isAttackingPressed = context.ReadValueAsButton();
+    }
+
+    private void onMeleeSwitch(InputAction.CallbackContext context)
+    {
+        isMeleePressed= context.ReadValueAsButton();
+    }
+    private void onRifleSwitch(InputAction.CallbackContext context)
+    {
+        isRiflePressed = context.ReadValueAsButton();
+    }
+    private void onDiggin(InputAction.CallbackContext context)
+    {
+        isDigginPressed = context.ReadValueAsButton();
+    }
     //###########################################################################################
 
     // Update is called once per frame
@@ -192,7 +257,106 @@ public class Player : MonoBehaviour
         animator.SetFloat(velocityXHash, velocityX);
 
     }
+    private void handleAnimation()
+    {
+        //get parameter values from animator
+        bool isWalking = animator.GetBool(isWalkingHash);
+        bool isRunning = animator.GetBool(isRunningHash);
+        bool isJumping = animator.GetBool(isJumpingHash);
+        bool isAttacking = animator.GetBool(isAttackingHash);
+        bool isMelee = animator.GetBool(isMeleeHash);
+        bool isRifle = animator.GetBool(isRifleHash);
+        bool isDiggin = animator.GetBool(isDigginHash);
 
+        //####
+        //Mouvement
+        // start walking if movement pressed is true and not already walking
+        if (isMovementPressed && !isWalking)
+        {
+            animator.SetBool(isWalkingHash, true);
+        }
+        // start wlaking if isMovementPresssed is false and not alreadt walking
+        else if (!isMovementPressed && isWalking)
+        {
+            animator.SetBool(isWalkingHash, false);
+        }
+        // run if movement and run pressed are true and not currently running
+        if ((isMovementPressed && isRunPressed) && !isRunning)
+        {
+            animator.SetBool(isRunningHash, true);
+        }
+        // stop running if movement or run pressed are false and currently running
+        else if ((!isMovementPressed || !isRunPressed) && isRunning)
+        {
+            animator.SetBool(isRunningHash, false);
+        }
+        //#####
+        //Attack
+        // attack if mouse left is true
+        if (isAttackingPressed && !isAttacking && (isRifle == false))
+        {
+            if (Time.time >= lastAttack + cooldown)
+            {
+                animator.SetBool(isAttackingHash, true);
+                lastAttack = Time.time;
+            }
+
+        }
+        else if (isAttackingPressed && !isAttacking && (isRifle == true))
+        {
+            if (Time.time >= lastAttack + cooldownAR)
+            {
+                animator.SetBool(isAttackingHash, true);
+                lastAttack = Time.time;
+            }
+        }
+            // attack if mouse left is false
+            if (!isAttackingPressed && isAttacking)
+        {
+            animator.SetBool(isAttackingHash, false);
+        }
+        //#####
+        //Saut
+        //Problème du saut toujours pas trouvé
+        /*
+        if (isJumpingPressed)
+        {
+            animator.SetBool(isJumpingHash, true);
+        }
+        else if (!isJumpingPressed)
+        {
+            animator.SetBool(isJumpingHash, false);
+        }
+        */
+        //#####
+        //Blend Tree Setter
+        if ((isMelee == false) && (isRifle == false))
+        {
+            animator.SetBool(isMeleeHash, true);
+        }
+        if (isMeleePressed && (isRifle == true))
+        {
+            animator.SetBool(isRifleHash, false);
+            animator.SetBool(isMeleeHash, true);
+        }
+        if (isRiflePressed && (isMelee == true))
+        {
+            animator.SetBool(isMeleeHash, false);
+            animator.SetBool(isRifleHash, true);
+        }
+        //####
+        //Diggin
+        if(isDigginPressed && !isAttacking)
+        {
+            animator.SetBool(isDigginHash, true);
+        }
+        if (!isDigginPressed)
+        {
+            animator.SetBool(isDigginHash, false);
+        }
+    }
+
+    //########################################################################################################################################################
     // handles reset and locking of velocity
     private void lockOrResetVelocity(bool forwardPressed, bool leftPressed, bool rightPressed, bool backPressed, bool runPressed, float currentMaxVelocity)
     {
@@ -442,45 +606,7 @@ public class Player : MonoBehaviour
         }
 
     }
-    private void handleAnimation()
-    {
-        //get parameter values from animator
-        bool isWalking = animator.GetBool(isWalkingHash);
-        bool isRunning = animator.GetBool(isRunningHash);
-        bool isJumping = animator.GetBool(isJumpingHash);
-
-        // start walking if movement pressed is true and not already walking
-        if (isMovementPressed && !isWalking)
-        {
-            animator.SetBool(isWalkingHash, true);
-        }
-        // start wlaking if isMovementPresssed is false and not alreadt walking
-        else if (!isMovementPressed && isWalking)
-        {
-            animator.SetBool(isWalkingHash, false);
-        }
-        // run if movement and run pressed are true and not currently running
-        if ((isMovementPressed && isRunPressed) && !isRunning)
-        {
-            animator.SetBool(isRunningHash, true);
-        }
-        // stop running if movement or run pressed are false and currently running
-        else if ((!isMovementPressed || !isRunPressed) && isRunning)
-        {
-            animator.SetBool(isRunningHash, false);
-        }
-        //Problème du saut toujours pas trouvé
-        /*
-        if (isJumpingPressed)
-        {
-            animator.SetBool(isJumpingHash, true);
-        }
-        else if (!isJumpingPressed)
-        {
-            animator.SetBool(isJumpingHash, false);
-        }
-        */
-    }
+    
     private void handleRun()
     {
         if(isRunPressed)
