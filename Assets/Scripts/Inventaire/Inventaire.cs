@@ -37,7 +37,7 @@ public class Inventaire : MonoBehaviour
     }
     public bool IsFull()
     {
-        return InventorySize == contenu.Count;
+        return InventorySize < contenu.Count;
     }
 
 }
