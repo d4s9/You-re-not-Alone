@@ -107,8 +107,10 @@ public class Unit : MonoBehaviour
 
     public void OnPathFound(Vector3[] newPath, bool pathSuccessful)
     {
+        Debug.Log("Found Player");
         if (pathSuccessful)
         {
+            Debug.Log("Found Path");
             path = newPath;
             StopCoroutine("FollowPath");
             StartCoroutine("FollowPath");
