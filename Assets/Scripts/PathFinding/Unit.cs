@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Threading;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UIElements;
 
 public class Unit : MonoBehaviour
@@ -13,6 +14,7 @@ public class Unit : MonoBehaviour
     [SerializeField] private LayerMask playerLayer;
     [SerializeField] private float angleVision;
     [SerializeField] private float speed = 3;
+    [SerializeField] private AnimationClip zombAtt;
 
     Animator animator;
     private bool _following = false;
@@ -25,7 +27,11 @@ public class Unit : MonoBehaviour
     }
     private void Update()
     {
-        PlayerDetection();
+        if (!animator.GetCurrentAnimatorClipInfo(0).Equals(zombAtt))
+        {
+            PlayerDetection();
+        }
+        
     }
 
     public void PlayerDetection()
@@ -40,17 +46,16 @@ public class Unit : MonoBehaviour
 
         Vector3 p1 = transform.position + ennemyCharCont.center + Vector3.up * -ennemyCharCont.height * 0.5f;
         Vector3 p2 = p1 + Vector3.up * ennemyCharCont.height;
-        
+       
         if (_following)
-        {     
+        {   
             if(Physics.CheckBox(this.transform.position, Vector3.one * ennemyDetectionDistance/2, this.transform.rotation, playerLayer))
             {
-                if (Physics.CheckCapsule(p1, p2, ennemyCharCont.radius + 0.1f, playerLayer))
+                if (Physics.CheckCapsule(p1, p2, ennemyCharCont.radius + 0.2f, playerLayer))
                 {
                     _following = false;
                     animator.SetBool("isWalking", false);
-                    //Attack
-                    Debug.Log("Hit");
+                    Attack(target);
                 }
                 else
                 {
@@ -67,10 +72,9 @@ public class Unit : MonoBehaviour
                 {
                     if (Vector3.Angle(direction, transform.forward) <= angleVision)
                     {                                            
-                        if(Physics.CheckCapsule(p1, p2, ennemyCharCont.radius + 0.1f, playerLayer)){
-                            _following = false;
+                        if(Physics.CheckCapsule(p1, p2, ennemyCharCont.radius + 0.2f, playerLayer)){
+                            animator.SetBool("isWalking", false);
                             Attack(target);
-                            Debug.Log("Hit");
                         } else
                         {
                             _following = true;
@@ -81,12 +85,24 @@ public class Unit : MonoBehaviour
             }
         }
     }
+    
+    //Attack zombie / zombie health / fix player mouvement
 
     public void Attack(GameObject p_target)
     {
-    
-        //Remove health from player
+
+        animator.SetBool("isAttack", true);
+        StartCoroutine("waitAttack");
         
+        
+        //Remove health from player
+
+    }
+
+    IEnumerator waitAttack()
+    {
+        yield return new WaitForSeconds((animator.GetCurrentAnimatorStateInfo(0).length/1.5f) - 0.5f);
+        animator.SetBool("isAttack", false);
     }
 
     public void OnPathFound(Vector3[] newPath, bool pathSuccessful)
@@ -101,6 +117,7 @@ public class Unit : MonoBehaviour
 
     IEnumerator FollowPath()
     {
+        
         animator.SetBool("isWalking", true);
         CharacterController ennemyCharCont = this.gameObject.GetComponent<CharacterController>();
         float _smoothCoef = 0.02f;
@@ -114,6 +131,7 @@ public class Unit : MonoBehaviour
                 if(targetIndex >= path.Length)
                 {
                     _following = false;
+                    animator.SetBool("isWalking", false);
                     yield break;
                 }
                 currentWaypoint = path[targetIndex];               

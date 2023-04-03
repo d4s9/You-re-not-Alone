@@ -16,7 +16,6 @@ public class PickupItem : MonoBehaviour
     void Update()
     {
         RaycastHit hit;
-        Debug.DrawRay(player.transform.position, player.transform.forward,Color.red,5);
         if(Physics.Raycast(player.transform.position,player.transform.forward,out hit,pickupRange, layerMask))
         {
             if(hit.transform.CompareTag("Objet"))

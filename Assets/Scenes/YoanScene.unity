@@ -1388,6 +1388,7 @@ MonoBehaviour:
     m_Bits: 4096
   angleVision: 45
   speed: 3
+  zombAtt: {fileID: 0}
 --- !u!1 &1506816101
 GameObject:
   m_ObjectHideFlags: 0
@@ -1996,6 +1997,34 @@ PrefabInstance:
       propertyPath: m_Targets.Array.data[0].target
       value: 
       objectReference: {fileID: 8393226692299388831}
+    - target: {fileID: 769601792904414976, guid: 5297063463b55cd4386cad23afc80172, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.4715066
+      objectReference: {fileID: 0}
+    - target: {fileID: 769601792904414976, guid: 5297063463b55cd4386cad23afc80172, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 7.47
+      objectReference: {fileID: 0}
+    - target: {fileID: 769601792904414976, guid: 5297063463b55cd4386cad23afc80172, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -16.566422
+      objectReference: {fileID: 0}
+    - target: {fileID: 769601792904414976, guid: 5297063463b55cd4386cad23afc80172, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.81571066
+      objectReference: {fileID: 0}
+    - target: {fileID: 769601792904414976, guid: 5297063463b55cd4386cad23afc80172, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.18795991
+      objectReference: {fileID: 0}
+    - target: {fileID: 769601792904414976, guid: 5297063463b55cd4386cad23afc80172, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.53310186
+      objectReference: {fileID: 0}
+    - target: {fileID: 769601792904414976, guid: 5297063463b55cd4386cad23afc80172, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.12283983
+      objectReference: {fileID: 0}
     - target: {fileID: 769601792904414979, guid: 5297063463b55cd4386cad23afc80172, type: 3}
       propertyPath: _player
       value: 
@@ -2004,6 +2033,14 @@ PrefabInstance:
       propertyPath: _cameraList.Array.data[1]
       value: 
       objectReference: {fileID: 802144339}
+    - target: {fileID: 769601793226195858, guid: 5297063463b55cd4386cad23afc80172, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.000000024449538
+      objectReference: {fileID: 0}
+    - target: {fileID: 769601793226195858, guid: 5297063463b55cd4386cad23afc80172, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.000000019089624
+      objectReference: {fileID: 0}
     - target: {fileID: 2879345511353795491, guid: 5297063463b55cd4386cad23afc80172, type: 3}
       propertyPath: m_RootOrder
       value: 16
@@ -4580,7 +4617,7 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 2
   m_Height: 2
-  m_Radius: 0.5
+  m_Radius: 0.4
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
@@ -4648,6 +4685,7 @@ MonoBehaviour:
     m_Bits: 4096
   angleVision: 45
   speed: 3
+  zombAtt: {fileID: -203655887218126122, guid: f9d9720cdd55213469ddf1495ccc7623, type: 3}
 --- !u!137 &7706234626296122896
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
