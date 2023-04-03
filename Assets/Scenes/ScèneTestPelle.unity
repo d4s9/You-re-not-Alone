@@ -35536,7 +35536,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 845917414}
-  m_LocalRotation: {x: 0.61541224, y: -0.000000024449536, z: 0.000000019089622, w: 0.78820544}
+  m_LocalRotation: {x: 0.61541224, y: 0.000000024449538, z: -0.000000019089624, w: 0.78820544}
   m_LocalPosition: {x: -173.5, y: 24.703, z: -120.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -61993,7 +61993,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1420176409}
-  m_LocalRotation: {x: 0.61541224, y: -0.000000024449536, z: 0.000000019089622, w: 0.78820544}
+  m_LocalRotation: {x: 0.61541224, y: 0.000000024449538, z: -0.000000019089624, w: 0.78820544}
   m_LocalPosition: {x: -173.5, y: 24.703, z: -120.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -73389,6 +73389,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a225ac85784f1ea438c9c63ede784e18, type: 3}
+--- !u!1 &1675394716 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 1d14697c8f1235a438bd77c62dcccdf8, type: 3}
+  m_PrefabInstance: {fileID: 1112248407}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1675394719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1675394716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b56d9c4397eee4468bd5616f35be90f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 6959747847671023303}
+  ennemyDetectionDistance: 20
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 4096
+  angleVision: 45
+  speed: 3
+  zombAtt: {fileID: -203655887218126122, guid: f9d9720cdd55213469ddf1495ccc7623, type: 3}
 --- !u!4 &1675486453 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5652176577170618097, guid: 4da8dd4611e4e58479b43d8c466d018e, type: 3}
