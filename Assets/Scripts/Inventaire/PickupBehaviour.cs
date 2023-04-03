@@ -13,7 +13,7 @@ public class PickupBehaviour : MonoBehaviour
     {
         inventairePleinTxt.SetActive(false);
     }
-    public void DoPickup(Item item)
+    public void DoPickup(Item item)  
     {
         inventaire.AddItem(item.itemData);
         Destroy(item.gameObject);
