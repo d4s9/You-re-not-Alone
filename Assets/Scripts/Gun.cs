@@ -6,13 +6,20 @@ public class Gun : MonoBehaviour
 {
     [SerializeField] GunData gunData;
 
+    float timeSinceLastShot;
+
     private void Start()
     {
         PlayerShoot.shootInput += shoot;
     }
 
-    public void shoot()
+    private bool CanShoot() => !gunData.reloading && timeSinceLastShot > 1f / (gunData.fireRate / 60f);
+
+    private void shoot()
     {
-        Debug.Log("Shot fired !");
+        if (gunData.currentAmmo > 0)
+        {
+
+        }
     }
 }
