@@ -7,47 +7,49 @@ public class enemie : MonoBehaviour
 {
 
     [SerializeField] int ptdevie = 1;
-    public Collider[] ragCol;
+    public Rigidbody[] ragRB;
+    public bool state;
 
     // Start is called before the first frame update
     void Start()
     {
-        //les colliders du ragdoll commencent désactivé.
-        for (int i = 0; i < ragCol.Length; i++)
-        {
-            ragCol[i].enabled = false;
-        }
+        ragRB = GetComponentsInChildren<Rigidbody>();
+        ragState(true);
     }
 
-    //activate ragdoll
-    void Ragdoll()
+    void ragState(bool m_state)
     {
-        if (ptdevie == 0)
+        foreach (var rigidbody in ragRB)
         {
-            //désactiver le collider de base en les animation pour laisser place au ragdoll.
-            gameObject.GetComponent<CapsuleCollider>().enabled = false;
-            gameObject.GetComponent<Animator>().enabled = false;
-
-            for (int i = 0; i < ragCol.Length; i++)
-            {
-                //ignorer la collision entre les collider du ragdoll et le collider principal.
-                Physics.IgnoreCollision(gameObject.GetComponent<CapsuleCollider>(), ragCol[i].GetComponent<Collider>());
-                //
-                ragCol[i].enabled = true;
-            }
-
-
-        }
-        else
-        {
-
+            rigidbody.isKinematic = m_state;
         }
     }
 
+    /*
+    void disableRagdoll()
+    {
+        foreach (var rigidbody in ragRB)
+        {
+            rigidbody.isKinematic = true;
+        }
+    }
 
-    // Update is called once per frame
+    void enableRagdoll()
+    {
+        foreach (var rigidbody in ragRB)
+        {
+            rigidbody.isKinematic = false;
+        }
+    }
+    */
+ 
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            gameObject.GetComponent<CharacterController>().enabled = false;
+            gameObject.GetComponent<Animator>().enabled = false;
+            ragState(false);
+        }
     }
 }
