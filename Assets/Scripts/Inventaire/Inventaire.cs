@@ -25,14 +25,23 @@ public class Inventaire : MonoBehaviour
     }
         public void AddItem(ItemData item)
     {
-        contenu.Add(item);
+        if(contenu.Count < 24)
+        {
+            contenu.Add(item); 
+        }
+        else
+        {
+
+        }
         RefreshContent();
     }
     private void RefreshContent()
     {
         for(int i = 0; i < contenu.Count;i++)
         {
-            inventorySlotsParent.GetChild(i).GetChild(0).GetComponent<Image>().sprite = contenu[i].visuel;
+            Slot currentSlot = inventorySlotsParent.GetChild(i).GetComponent<Slot>();
+            currentSlot.item = contenu[i];
+            currentSlot.itemVisual.sprite = contenu[i].visuel;
         }
     }
     public bool IsFull()
