@@ -1153,7 +1153,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 802144339}
-  m_LocalRotation: {x: 0.18795991, y: 0.5331019, z: -0.122839846, w: 0.81571066}
+  m_LocalRotation: {x: 0.18795991, y: 0.53310186, z: -0.12283983, w: 0.81571066}
   m_LocalPosition: {x: 2.4715066, y: 7.47, z: -16.566422}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1620,10 +1620,11 @@ MonoBehaviour:
   angleVision: 45
   speed: 3
   zombAtt: {fileID: 0}
-  _zombHealth: 0
-  ragdollPrefab: {fileID: 0}
-  ragdollLayer: 0
+  _maxZombHealth: 0
   ennemyLayer: 0
+  ragDollPrefab: {fileID: 0}
+  ragCol: []
+  _healthBar: {fileID: 0}
 --- !u!1 &1506816101
 GameObject:
   m_ObjectHideFlags: 0
@@ -2493,31 +2494,31 @@ PrefabInstance:
       objectReference: {fileID: 8393226692299388831}
     - target: {fileID: 769601792904414976, guid: 5297063463b55cd4386cad23afc80172, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.4715066
+      value: 15.4
       objectReference: {fileID: 0}
     - target: {fileID: 769601792904414976, guid: 5297063463b55cd4386cad23afc80172, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.47
+      value: 8.6
       objectReference: {fileID: 0}
     - target: {fileID: 769601792904414976, guid: 5297063463b55cd4386cad23afc80172, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -16.566422
+      value: -12.9
       objectReference: {fileID: 0}
     - target: {fileID: 769601792904414976, guid: 5297063463b55cd4386cad23afc80172, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.81571066
+      value: 0.78820544
       objectReference: {fileID: 0}
     - target: {fileID: 769601792904414976, guid: 5297063463b55cd4386cad23afc80172, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.18795991
+      value: 0.61541224
       objectReference: {fileID: 0}
     - target: {fileID: 769601792904414976, guid: 5297063463b55cd4386cad23afc80172, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.5331019
+      value: 0.000000019166697
       objectReference: {fileID: 0}
     - target: {fileID: 769601792904414976, guid: 5297063463b55cd4386cad23afc80172, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.122839846
+      value: -0.000000014964906
       objectReference: {fileID: 0}
     - target: {fileID: 769601792904414979, guid: 5297063463b55cd4386cad23afc80172, type: 3}
       propertyPath: _player
@@ -5256,10 +5257,11 @@ MonoBehaviour:
   angleVision: 45
   speed: 3
   zombAtt: {fileID: -203655887218126122, guid: f9d9720cdd55213469ddf1495ccc7623, type: 3}
-  _zombHealth: 100
-  ragdollPrefab: {fileID: 114749429671746458, guid: 3f7622d65cca0ce41b188c0651d1cc72, type: 3}
-  ragdollLayer: 24
+  _maxZombHealth: 0
   ennemyLayer: 25
+  ragDollPrefab: {fileID: 114749429671746458, guid: 3f7622d65cca0ce41b188c0651d1cc72, type: 3}
+  ragCol: []
+  _healthBar: {fileID: 642923736}
 --- !u!143 &5246978736635405454
 CharacterController:
   m_ObjectHideFlags: 0
@@ -6394,10 +6396,11 @@ MonoBehaviour:
   angleVision: 45
   speed: 3
   zombAtt: {fileID: -203655887218126122, guid: f9d9720cdd55213469ddf1495ccc7623, type: 3}
-  _zombHealth: 0
-  ragdollPrefab: {fileID: 0}
-  ragdollLayer: 0
+  _maxZombHealth: 0
   ennemyLayer: 0
+  ragDollPrefab: {fileID: 0}
+  ragCol: []
+  _healthBar: {fileID: 0}
 --- !u!137 &7706234626296122896
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
