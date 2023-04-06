@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a23078518d71764b97749be04a73129, type: 3}
   m_Name: Batterie
   m_EditorClassIdentifier: 
-  nom: 
-  visuel: {fileID: 0}
-  prefab: {fileID: 0}
+  nom: Batterie
+  description: "La batterie est un excellent cr\xE9ateur de flamme."
+  visuel: {fileID: 21300000, guid: f10931a090df33a40b01e68dd98dd2dd, type: 3}
+  prefab: {fileID: 2437125964617169581, guid: e6cd35e751626374380a4e4e8bfae789, type: 3}
