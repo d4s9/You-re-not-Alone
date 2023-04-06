@@ -27,8 +27,7 @@ public class Inventaire : MonoBehaviour
     {
         if(contenu.Count < 24)
         {
-            contenu.Add(item);
-
+            contenu.Add(item); 
         }
         else
         {
