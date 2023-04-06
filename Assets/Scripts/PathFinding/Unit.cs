@@ -111,7 +111,7 @@ public class Unit : MonoBehaviour
     public void TakeDamage(float damage)
     {
          _zombHealth -= damage;
-        _healthBar.GetComponent<Slider>().value = _zombHealth/_maxZombHealth;
+        _healthBar.GetComponent<UnityEngine.UIElements.Slider>().value = _zombHealth/_maxZombHealth;
         if(_zombHealth < 1)
         {
             Die();
@@ -120,7 +120,8 @@ public class Unit : MonoBehaviour
 
     private void Die()
     {
-        Debug.Log("Ragdoll");
+        Debug.Log(this.GetComponent<Collider>());
+
         //GameObject ragdoll = Instantiate(ragDollPrefab, this.transform.position, this.transform.rotation);
         //ragdoll.transform.localPosition = this.transform.localPosition;
         //ragdoll.transform.localEulerAngles = this.transform.localEulerAngles;
