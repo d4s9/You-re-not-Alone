@@ -15,6 +15,10 @@ public class Unit : MonoBehaviour
     [SerializeField] private float angleVision;
     [SerializeField] private float speed = 3;
     [SerializeField] private AnimationClip zombAtt;
+    [SerializeField] private float _zombHealth = default;
+    [SerializeField] private GameObject ragdollPrefab;
+    [SerializeField] private int ragdollLayer;
+    [SerializeField] private int ennemyLayer;
 
     Animator animator;
     private bool _following = false;
@@ -24,12 +28,16 @@ public class Unit : MonoBehaviour
     private void Start()
     {
         animator = GetComponent<Animator>();
+        Physics.IgnoreLayerCollision(ragdollLayer, ennemyLayer);
     }
     private void Update()
     {
-        if (!animator.GetCurrentAnimatorClipInfo(0).Equals(zombAtt))
+        if (this.gameObject.activeSelf)
         {
-            PlayerDetection();
+            if (!animator.GetCurrentAnimatorClipInfo(0).Equals(zombAtt))
+            {
+                PlayerDetection();
+            }
         }
         
     }
@@ -51,7 +59,7 @@ public class Unit : MonoBehaviour
         {   
             if(Physics.CheckBox(this.transform.position, Vector3.one * ennemyDetectionDistance/2, this.transform.rotation, playerLayer))
             {
-                if (Physics.CheckCapsule(p1, p2, ennemyCharCont.radius + 0.2f, playerLayer))
+                if (Physics.CheckCapsule(p1, p2, ennemyCharCont.radius * this.transform.localScale.x + 0.2f, playerLayer))
                 {
                     _following = false;
                     animator.SetBool("isWalking", false);
@@ -72,7 +80,7 @@ public class Unit : MonoBehaviour
                 {
                     if (Vector3.Angle(direction, transform.forward) <= angleVision)
                     {                                            
-                        if(Physics.CheckCapsule(p1, p2, ennemyCharCont.radius + 0.2f, playerLayer)){
+                        if(Physics.CheckCapsule(p1, p2, ennemyCharCont.radius * this.transform.localScale.x + 0.2f, playerLayer)){
                             animator.SetBool("isWalking", false);
                             Attack(target);
                         } else
@@ -86,7 +94,24 @@ public class Unit : MonoBehaviour
         }
     }
     
-    //Attack zombie / zombie health / fix player mouvement
+    public void TakeDamage(float damage)
+    {
+         _zombHealth -= damage;
+        if(_zombHealth < 1)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        GameObject ragdoll = Instantiate(ragdollPrefab, this.transform.position + new Vector3(0, 0.5f, 0), this.transform.rotation);
+        ragdoll.transform.localScale = this.transform.localScale;
+        Debug.Log("Ragdoll");
+        Destroy(this.gameObject);
+    }
+
+    //fix player mouvement
 
     public void Attack(GameObject p_target)
     {
@@ -103,6 +128,7 @@ public class Unit : MonoBehaviour
     {
         yield return new WaitForSeconds((animator.GetCurrentAnimatorStateInfo(0).length/1.5f) - 0.5f);
         animator.SetBool("isAttack", false);
+        TakeDamage(50);
     }
 
     public void OnPathFound(Vector3[] newPath, bool pathSuccessful)

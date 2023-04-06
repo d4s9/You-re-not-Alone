@@ -71,8 +71,8 @@ public class Grid : MonoBehaviour
 
     public Node NodeFromWorldPoint(Vector3 worldPos)
     {
-        float percentX = (worldPos.x + gridWorldSize.x / 2) / gridWorldSize.x;    
-        float percentY = (worldPos.z + gridWorldSize.y / 2) / gridWorldSize.y;
+        float percentX = (worldPos.x - this.transform.position.x + gridWorldSize.x / 2) / gridWorldSize.x;
+        float percentY = (worldPos.z - this.transform.position.z + gridWorldSize.y / 2) / gridWorldSize.y;
         percentX = Mathf.Clamp01(percentX);
         percentY = Mathf.Clamp01(percentY);
 
@@ -91,6 +91,11 @@ public class Grid : MonoBehaviour
             foreach (Node n in grid)
             {
                 Gizmos.color = (n.walkable) ? Color.green : Color.red;
+               
+                if(n == playerNode)
+                {
+                    Gizmos.color = Color.black;
+                }
                 Gizmos.DrawCube(n.worldPosition, Vector3.one * (nodeDiameter - 0.1f));
             }
         }
