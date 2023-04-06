@@ -15,7 +15,12 @@ public class Unit : MonoBehaviour
     [SerializeField] private float angleVision;
     [SerializeField] private float speed = 3;
     [SerializeField] private AnimationClip zombAtt;
-
+    [SerializeField] private float _maxZombHealth = default;
+    [SerializeField] private int ennemyLayer;
+    [SerializeField] private GameObject ragDollPrefab;
+    public Collider[] ragCol;
+    [SerializeField] private GameObject _healthBar;
+    private float _zombHealth;
     Animator animator;
     private bool _following = false;
     Vector3[] path;
@@ -23,14 +28,31 @@ public class Unit : MonoBehaviour
 
     private void Start()
     {
+        _zombHealth = _maxZombHealth;
         animator = GetComponent<Animator>();
+
+        //gameObject.GetComponent<CharacterController>().enabled = false;
+        //Physics.IgnoreLayerCollision(ragdollLayer, ennemyLayer);
+
+        //les colliders du ragdoll commencent désactivé.
+        /*
+        for (int i = 0; i < ragCol.Length; i++)
+        {
+            Physics.IgnoreCollision(ragCol[i], gameObject.GetComponent<CharacterController>());
+            ragCol[i].GetComponent<Collider>().enabled = false;
+            //ragCol[i].GetComponent<Rigidbody>().isKinematic = true;
+        }
+        */
     }
     private void Update()
     {
-        if (!animator.GetCurrentAnimatorClipInfo(0).Equals(zombAtt))
-        {
-            PlayerDetection();
-        }
+        //if (ragCol[0] == false)
+        //{
+            if (!animator.GetCurrentAnimatorClipInfo(0).Equals(zombAtt))
+            {
+                PlayerDetection();
+            }
+        //}
         
     }
 
@@ -51,7 +73,7 @@ public class Unit : MonoBehaviour
         {   
             if(Physics.CheckBox(this.transform.position, Vector3.one * ennemyDetectionDistance/2, this.transform.rotation, playerLayer))
             {
-                if (Physics.CheckCapsule(p1, p2, ennemyCharCont.radius + 0.2f, playerLayer))
+                if (Physics.CheckCapsule(p1, p2, ennemyCharCont.radius * this.transform.localScale.x + 0.2f, playerLayer))
                 {
                     _following = false;
                     animator.SetBool("isWalking", false);
@@ -72,7 +94,7 @@ public class Unit : MonoBehaviour
                 {
                     if (Vector3.Angle(direction, transform.forward) <= angleVision)
                     {                                            
-                        if(Physics.CheckCapsule(p1, p2, ennemyCharCont.radius + 0.2f, playerLayer)){
+                        if(Physics.CheckCapsule(p1, p2, ennemyCharCont.radius * this.transform.localScale.x + 0.2f, playerLayer)){
                             animator.SetBool("isWalking", false);
                             Attack(target);
                         } else
@@ -86,7 +108,39 @@ public class Unit : MonoBehaviour
         }
     }
     
-    //Attack zombie / zombie health / fix player mouvement
+    public void TakeDamage(float damage)
+    {
+         _zombHealth -= damage;
+        _healthBar.GetComponent<Slider>().value = _zombHealth/_maxZombHealth;
+        if(_zombHealth < 1)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        Debug.Log("Ragdoll");
+        //GameObject ragdoll = Instantiate(ragDollPrefab, this.transform.position, this.transform.rotation);
+        //ragdoll.transform.localPosition = this.transform.localPosition;
+        //ragdoll.transform.localEulerAngles = this.transform.localEulerAngles;
+        //ragdoll.transform.localRotation= this.transform.localRotation;
+       // ragdoll.transform.localScale = this.transform.localScale;
+        //Destroy(this.gameObject);
+        /*
+        //désactiver le collider de base en les animation pour laisser place au ragdoll.
+
+        gameObject.GetComponent<CharacterController>().enabled = false;
+        gameObject.GetComponent<Animator>().enabled = false;
+        for (int i = 0; i < ragCol.Length; i++)
+        {
+            //ignorer la collision entre les collider du ragdoll et le collider principal.
+            //Physics.IgnoreCollision(gameObject.GetComponent<CapsuleCollider>(), ragCol[i].GetComponent<Collider>());
+            ragCol[i].enabled = true;
+        }*/
+    }
+
+    //fix player mouvement
 
     public void Attack(GameObject p_target)
     {
@@ -103,14 +157,14 @@ public class Unit : MonoBehaviour
     {
         yield return new WaitForSeconds((animator.GetCurrentAnimatorStateInfo(0).length/1.5f) - 0.5f);
         animator.SetBool("isAttack", false);
+        TakeDamage(50);
     }
 
     public void OnPathFound(Vector3[] newPath, bool pathSuccessful)
     {
-        Debug.Log("Found Player");
+
         if (pathSuccessful)
         {
-            Debug.Log("Found Path");
             path = newPath;
             StopCoroutine("FollowPath");
             StartCoroutine("FollowPath");
