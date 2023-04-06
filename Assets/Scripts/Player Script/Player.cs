@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO.IsolatedStorage;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.XR;
 
 
 /// A faire
@@ -93,6 +94,9 @@ public class Player : MonoBehaviour
         _input = GetComponent<InputHandler>();
         playerInput = new PlayerInput();
         characterController = GetComponent<CharacterController>();
+        //Initialise la gravité
+        characterController.SimpleMove(Vector3.forward * 0);
+
         animator = GetComponent<Animator>();
 
         //S'occupe du StringToHash
