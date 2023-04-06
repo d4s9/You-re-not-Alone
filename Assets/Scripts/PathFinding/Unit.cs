@@ -16,9 +16,8 @@ public class Unit : MonoBehaviour
     [SerializeField] private float speed = 3;
     [SerializeField] private AnimationClip zombAtt;
     [SerializeField] private float _zombHealth = default;
-    [SerializeField] private GameObject ragdollPrefab;
-    [SerializeField] private int ragdollLayer;
     [SerializeField] private int ennemyLayer;
+    public Collider[] ragCol;
 
     Animator animator;
     private bool _following = false;
@@ -28,11 +27,21 @@ public class Unit : MonoBehaviour
     private void Start()
     {
         animator = GetComponent<Animator>();
-        Physics.IgnoreLayerCollision(ragdollLayer, ennemyLayer);
+
+        //gameObject.GetComponent<CharacterController>().enabled = false;
+        //Physics.IgnoreLayerCollision(ragdollLayer, ennemyLayer);
+
+        //les colliders du ragdoll commencent désactivé.
+        for (int i = 0; i < ragCol.Length; i++)
+        {
+            Physics.IgnoreCollision(ragCol[i], gameObject.GetComponent<CharacterController>());
+            ragCol[i].GetComponent<Collider>().enabled = false;
+            //ragCol[i].GetComponent<Rigidbody>().isKinematic = true;
+        }
     }
     private void Update()
     {
-        if (this.gameObject.activeSelf)
+        if (ragCol[0] == false)
         {
             if (!animator.GetCurrentAnimatorClipInfo(0).Equals(zombAtt))
             {
@@ -105,10 +114,18 @@ public class Unit : MonoBehaviour
 
     private void Die()
     {
-        GameObject ragdoll = Instantiate(ragdollPrefab, this.transform.position + new Vector3(0, 0.5f, 0), this.transform.rotation);
-        ragdoll.transform.localScale = this.transform.localScale;
         Debug.Log("Ragdoll");
-        Destroy(this.gameObject);
+        /*
+        //désactiver le collider de base en les animation pour laisser place au ragdoll.
+
+        gameObject.GetComponent<CharacterController>().enabled = false;
+        gameObject.GetComponent<Animator>().enabled = false;
+        for (int i = 0; i < ragCol.Length; i++)
+        {
+            //ignorer la collision entre les collider du ragdoll et le collider principal.
+            //Physics.IgnoreCollision(gameObject.GetComponent<CapsuleCollider>(), ragCol[i].GetComponent<Collider>());
+            ragCol[i].enabled = true;
+        }*/
     }
 
     //fix player mouvement
