@@ -16,6 +16,8 @@ public class Tooltip : MonoBehaviour
 
 
 
+
+
     public void SetText(string header , string content )
     {
 

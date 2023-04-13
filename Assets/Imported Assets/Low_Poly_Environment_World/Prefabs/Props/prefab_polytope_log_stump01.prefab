@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4464603738002430}
   - component: {fileID: 211835659080798531}
-  m_Layer: 0
+  - component: {fileID: 2122686105}
+  m_Layer: 6
   m_Name: prefab_polytope_log_stump01
-  m_TagString: Untagged
+  m_TagString: Objet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -27,6 +28,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4566946259626924}
   m_Father: {fileID: 0}
@@ -43,9 +45,22 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 25da31aab140353468390cf59d5abc32, type: 3}
+--- !u!114 &2122686105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1418187148846122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13b01bc08d5496642844cf9f2c70e44a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemData: {fileID: 11400000, guid: bc8cc067931c75342a01bc7ae04329e7, type: 2}
 --- !u!1 &1711546945224954
 GameObject:
   m_ObjectHideFlags: 0
@@ -57,7 +72,7 @@ GameObject:
   - component: {fileID: 4566946259626924}
   - component: {fileID: 33311135850668554}
   - component: {fileID: 23203296716526008}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: model_polytope_log_stump01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,8 +87,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1711546945224954}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -3.12, y: -0.74, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4464603738002430}
   m_RootOrder: 0
@@ -97,6 +113,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
