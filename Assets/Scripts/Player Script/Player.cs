@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO.IsolatedStorage;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.XR;
 
@@ -19,6 +20,7 @@ public class Player : MonoBehaviour
     private PlayerInput playerInput;
     private CharacterController characterController;
     private Animator animator;
+    private RigBuilder rigBuilder;
 
 
     //Variables to store optimized setter/getter parameter IDs
@@ -76,6 +78,7 @@ public class Player : MonoBehaviour
     //Rotation
     [SerializeField] private bool RotateTowardMouse;
 
+
     //Movement sans animation
     [SerializeField] private float MovementSpeed;
     [SerializeField] private float RunSpeed;
@@ -87,6 +90,11 @@ public class Player : MonoBehaviour
     private float _smoothCoef = 0.2f;
     private Quaternion _lookAtRotation;
 
+    //Arme
+    [SerializeField] private GameObject m4;
+    [SerializeField] private GameObject Pelle;
+    [SerializeField] private GameObject BaseballBat;
+
     
 
     private void Awake()
@@ -94,8 +102,13 @@ public class Player : MonoBehaviour
         _input = GetComponent<InputHandler>();
         playerInput = new PlayerInput();
         characterController = GetComponent<CharacterController>();
+        rigBuilder = GetComponent<RigBuilder>();
+
         //Initialise la gravité
         characterController.SimpleMove(Vector3.forward * 0);
+
+        
+
 
         animator = GetComponent<Animator>();
 
@@ -208,6 +221,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+
         PlayerRotation();
         handleAnimation();
         //handleRotation();
@@ -256,6 +271,8 @@ public class Player : MonoBehaviour
         //handle the lock or resest
         lockOrResetVelocity(forwardPressed, leftPressed, rightPressed, backPressed, runPressed, currentMaxVelocity);
 
+        
+        
         // set the parameters to our local variable values
         animator.SetFloat(velocityZHash, velocityZ);
         animator.SetFloat(velocityXHash, velocityX);
@@ -271,6 +288,17 @@ public class Player : MonoBehaviour
         bool isMelee = animator.GetBool(isMeleeHash);
         bool isRifle = animator.GetBool(isRifleHash);
         bool isDiggin = animator.GetBool(isDigginHash);
+
+        // get key input from player
+        bool Alpha1Pressed = Input.GetKey(KeyCode.Alpha1);
+        bool Alpha2Pressed = Input.GetKey(KeyCode.Alpha2);
+        bool Alpha3Pressed = Input.GetKey(KeyCode.Alpha3);
+        bool Alpha4Pressed = Input.GetKey(KeyCode.Alpha4);
+        bool Alpha5Pressed = Input.GetKey(KeyCode.Alpha5);
+        bool Alpha6Pressed = Input.GetKey(KeyCode.Alpha6);
+        bool Alpha7Pressed = Input.GetKey(KeyCode.Alpha7);
+        bool Alpha8Pressed = Input.GetKey(KeyCode.Alpha8);
+        bool Alpha9Pressed = Input.GetKey(KeyCode.Alpha9);
 
         //####
         //Mouvement
@@ -332,21 +360,42 @@ public class Player : MonoBehaviour
             animator.SetBool(isJumpingHash, false);
         }
         */
-        //#####
+        //#####                                                  C'est probablement ca que tu cherche Derek
         //Blend Tree Setter
         if ((isMelee == false) && (isRifle == false))
         {
             animator.SetBool(isMeleeHash, true);
+            Pelle.SetActive(false);
+            m4.SetActive(false);
+            BaseballBat.SetActive(true);
+            rigBuilder.enabled = false;
         }
-        if (isMeleePressed && (isRifle == true))
+        if (isMeleePressed)
         {
             animator.SetBool(isRifleHash, false);
             animator.SetBool(isMeleeHash, true);
+            if (Alpha1Pressed)
+            {
+                m4.SetActive(false);
+                Pelle.SetActive(true);
+                BaseballBat.SetActive(false);
+            }
+            else if (Alpha2Pressed)
+            {
+                m4.SetActive(false);
+                Pelle.SetActive(false);
+                BaseballBat.SetActive(true);
+            }
+            rigBuilder.enabled = false;
         }
         if (isRiflePressed && (isMelee == true))
         {
             animator.SetBool(isMeleeHash, false);
             animator.SetBool(isRifleHash, true);
+            BaseballBat.SetActive(false);
+            Pelle.SetActive(false);
+            m4.SetActive(true);
+            rigBuilder.enabled = true;
         }
         //####
         //Diggin
