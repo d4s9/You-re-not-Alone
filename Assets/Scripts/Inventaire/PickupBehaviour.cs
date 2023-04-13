@@ -9,21 +9,21 @@ public class PickupBehaviour : MonoBehaviour
     [SerializeField] private GameObject inventairePleinTxt;
 
 
+
     public void Start()
     {
         inventairePleinTxt.SetActive(false);
     }
     public void DoPickup(Item item)  
     {
-        inventaire.AddItem(item.itemData);
-        Destroy(item.gameObject);
-
         if(inventaire.IsFull())
         {
             inventairePleinTxt.SetActive(true);
         }
         else
         {
+            inventaire.AddItem(item.itemData);
+            Destroy(item.gameObject);
             inventairePleinTxt.SetActive(false);
         }
     }
