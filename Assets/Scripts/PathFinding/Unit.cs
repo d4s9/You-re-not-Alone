@@ -5,7 +5,7 @@ using System.Threading;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class Unit : MonoBehaviour
 {
@@ -18,19 +18,20 @@ public class Unit : MonoBehaviour
     [SerializeField] private float _maxZombHealth = default;
     [SerializeField] private int ennemyLayer;
     [SerializeField] private GameObject ragDollPrefab;
-    public Collider[] ragCol;
     [SerializeField] private GameObject _healthBar;
+    public Collider[] ragCol;
     private float _zombHealth;
+    private bool isDead = false;   
     Animator animator;
-    private bool _following = false;
+    private bool _following = false, groundEnnemy = false;
     Vector3[] path;
     int targetIndex;
 
     private void Start()
     {
         _zombHealth = _maxZombHealth;
+        _healthBar.GetComponent<Slider>().value = _zombHealth / _maxZombHealth;
         animator = GetComponent<Animator>();
-
         //gameObject.GetComponent<CharacterController>().enabled = false;
         //Physics.IgnoreLayerCollision(ragdollLayer, ennemyLayer);
 
@@ -44,15 +45,18 @@ public class Unit : MonoBehaviour
         }
         */
     }
+    
     private void Update()
     {
-        //if (ragCol[0] == false)
-        //{
+        this.GetComponent<CharacterController>().SimpleMove(Vector3.forward * 0);
+
+        if (isDead == false)
+        {
             if (!animator.GetCurrentAnimatorClipInfo(0).Equals(zombAtt))
             {
                 PlayerDetection();
             }
-        //}
+        }
         
     }
 
@@ -111,7 +115,7 @@ public class Unit : MonoBehaviour
     public void TakeDamage(float damage)
     {
          _zombHealth -= damage;
-        _healthBar.GetComponent<UnityEngine.UIElements.Slider>().value = _zombHealth/_maxZombHealth;
+        _healthBar.GetComponent<Slider>().value = _zombHealth/_maxZombHealth;
         if(_zombHealth < 1)
         {
             Die();
@@ -120,8 +124,8 @@ public class Unit : MonoBehaviour
 
     private void Die()
     {
-        Debug.Log(this.GetComponent<Collider>());
-
+       
+        isDead = true;
         //GameObject ragdoll = Instantiate(ragDollPrefab, this.transform.position, this.transform.rotation);
         //ragdoll.transform.localPosition = this.transform.localPosition;
         //ragdoll.transform.localEulerAngles = this.transform.localEulerAngles;
@@ -198,7 +202,7 @@ public class Unit : MonoBehaviour
             rotation = Quaternion.Slerp(this.transform.rotation, _lookatRotation, _smoothCoef);
             transform.rotation = rotation;
             Vector3 move = new Vector3(currentWaypoint.x - this.transform.position.x, 0, currentWaypoint.z - this.transform.position.z).normalized;
-            ennemyCharCont.Move(move * Time.deltaTime * speed);
+            ennemyCharCont.SimpleMove(move * Time.deltaTime * speed);
             yield return null;
         }
     }
