@@ -1,20 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Ragdoll : MonoBehaviour
 {
-    [SerializeField] private float _secondsDestroy = 4f; 
+    public Rigidbody[] ragRB;
 
+    // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine("RagdollDestroy");
+        ragRB = GetComponentsInChildren<Rigidbody>();
+        ragState(true);
     }
-    IEnumerator RagdollDestroy()
+
+    void ragState(bool m_state)
     {
-        yield return new WaitForSeconds(_secondsDestroy);
-        Destroy(this.gameObject);
+        foreach (var rigidbody in ragRB)
+        {
+            rigidbody.isKinematic = m_state;
+        }
     }
 
-
+    void Update()
+    {
+        if (GetComponent<Unit>().isDead == true)
+        {
+            gameObject.GetComponent<CharacterController>().enabled = false;
+            gameObject.GetComponent<Animator>().enabled = false;
+            ragState(false);
+        }
+    }
 }
