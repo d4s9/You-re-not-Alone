@@ -16,8 +16,6 @@ public class Unit : MonoBehaviour
     [SerializeField] private float speed = 3;
     [SerializeField] private AnimationClip zombAtt;
     [SerializeField] private float _maxZombHealth = default;
-    [SerializeField] private int ennemyLayer;
-    [SerializeField] private GameObject ragDollPrefab;
     [SerializeField] private GameObject _healthBar;
     public Collider[] ragCol;
     private float _zombHealth;
