@@ -331,6 +331,7 @@ public class Player : MonoBehaviour
             {
                 animator.SetBool(isAttackingHash, true);
                 lastAttack = Time.time;
+
             }
 
         }
@@ -399,7 +400,8 @@ public class Player : MonoBehaviour
         }
         //####
         //Diggin
-        if(isDigginPressed && !isAttacking)
+        //Regarde si la pelle est active, sinon le joueur peut pelleter avec toute les armes.
+        if(isDigginPressed && !isAttacking && Pelle.activeSelf == true)
         {
             animator.SetBool(isDigginHash, true);
         }

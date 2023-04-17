@@ -9,6 +9,7 @@ TagManager:
   - Objet
   - marker
   - Puzzle
+  - Weapon
   layers:
   - Default
   - TransparentFX
