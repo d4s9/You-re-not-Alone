@@ -5,15 +5,21 @@ using TMPro;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class GameEnding : MonoBehaviour
 {
 
     [SerializeField] private GameObject _topText;
-    [SerializeField] private GameObject _Grid;
+    [SerializeField] private GameObject _GridContent;
     [SerializeField] private int _leaderBoardLenght;
+    [SerializeField] private Button _timeBt;
+    [SerializeField] private Button _scoreBt;
+    [SerializeField] private TextMeshProUGUI _PlayerName;
+    [SerializeField] private TextMeshProUGUI _nameError;
 
+    Vector2 _startContentSize;
+    private string _playerNameStr = "YOU";
     private List<string> _names;
     private List<string> _valueStr;
     private List<int> _values = new List<int>();
@@ -22,13 +28,15 @@ public class GameEnding : MonoBehaviour
     private string[] _namesArr;
     private string[] _valueArr;
     private bool _isTime = true;
-    private string[] a = {"a", "b","c","d","e"};
-    private int[] b = {10,5,4,3,2};
-    private int[] c = { 11, 6, 3, 2, 1 };
+    private string[] a = {"a", "b","c","d","e", "a", "b", "c", "d", "e", "a", "b", "c", "d", "e", "a", "b", "c", "d", "e"};
+    private int[] b = {10,5,4,3,2, 10, 5, 4, 3, 2, 10, 5, 4, 3, 2, 10, 5, 4, 3, 2};
+    private int[] c = { 11, 6, 3, 2, 1, 11, 6, 3, 2, 1, 11, 6, 3, 2, 1, 11, 6, 3, 2, 1};
     GameObject[] _top;
     private int _currentPlace;
     void Start()
     {
+        _startContentSize = _GridContent.GetComponent<RectTransform>().sizeDelta;
+        _nameError.SetText("");
         /*
         PlayerPrefs.SetString("Top5Num", string.Join("###", a));
         string[] b = PlayerPrefs.GetString("Top5Num").Split(new[] { "###" }, System.StringSplitOptions.None);
@@ -38,6 +46,8 @@ public class GameEnding : MonoBehaviour
         */
         PlayerPrefs.SetString("Top5Names", string.Join("###", a));
         PlayerPrefs.SetString("Top5Times", string.Join("###", b));
+        _timeBt.interactable = false;
+        _scoreBt.interactable = true;
 
         CreateTop();
         CheckTop();
@@ -91,19 +101,18 @@ public class GameEnding : MonoBehaviour
                 }
                 else if((i + 1) != _values.Count)
                 {
-                    Debug.Log(i + 1);
                     _names[i + 1] = _names[i];
                     _values[i + 1] = _values[i];
                 }
             }
-            _names[_currentPlace] = "YOU";
+            _names[_currentPlace] = _playerNameStr;
             _values[_currentPlace] = Mathf.RoundToInt(currentValue);
         }
 
         if (_values.Count < _leaderBoardLenght && _currentPlace == -1)
         {
             _currentPlace = _values.Count;
-            _names.Add("YOU");
+            _names.Add(_playerNameStr);
             _values.Add(Mathf.RoundToInt(currentValue));
             
         }
@@ -115,7 +124,12 @@ public class GameEnding : MonoBehaviour
         int count = 0;
         foreach(string name in _names)
         {
-            _top[count] = Instantiate(_topText, _Grid.transform);
+            Vector2 currentContentSize = _GridContent.GetComponent<RectTransform>().sizeDelta;
+            if (count > 10 && currentContentSize.y <= _startContentSize.y + (_names.Count-12)*20)
+            {               
+                _GridContent.GetComponent<RectTransform>().sizeDelta = currentContentSize + new Vector2(0, 20);
+            }           
+            _top[count] = Instantiate(_topText, _GridContent.transform);
             RectTransform m_RectTransform = _top[count].GetComponent<RectTransform>();
             m_RectTransform.anchoredPosition = new Vector2(1.3658f, 95 - (count * 20));
             _top[count].transform.Find("Name1").GetComponent<TextMeshProUGUI>().text = _names[count];
@@ -123,6 +137,7 @@ public class GameEnding : MonoBehaviour
             _top[count].transform.Find("Place").GetComponent<TextMeshProUGUI>().text = (count+1).ToString();
             count++;
         }
+        _GridContent.GetComponent<RectTransform>().anchoredPosition = Vector2.one;
     }
 
     private void DeleteTop()
@@ -134,29 +149,64 @@ public class GameEnding : MonoBehaviour
             count--;
         }
     }
-    //régler bouttons on/off score et time laisser enfoncé quand activé
-    //Ajouter le player dans le player prefs et peut custom nom avec champ texte
+
     //Ajouter scrollbar
     //Importer des bouttons
     public void TimeOnOff()
     {
-        _isTime = !_isTime;
-        if(_isTime)
+
+        if(!_isTime)
         {
-            PlayerPrefs.SetString("Top5Names", string.Join("###", a));
-            PlayerPrefs.SetString("Top5Times", string.Join("###", b));
-        }
-        else
-        {
+            _isTime = !_isTime;
+            _timeBt.interactable = false;
+            _scoreBt.interactable = true;
             PlayerPrefs.SetString("Top5Names", string.Join("###", a));
             PlayerPrefs.SetString("Top5Scores", string.Join("###", c));
+            PlayerPrefs.Save();
+            DeleteTop();
+            _names.Clear();
+            _valueStr.Clear();
+            _values.Clear();
+            CreateTop();
+            CheckTop();
+            ShowTop();
         }
-        DeleteTop();
-        _names.Clear();
-        _valueStr.Clear();
-        _values.Clear();
-        CreateTop();
-        CheckTop();
-        ShowTop();
+    }
+    public void ScoreOnOff()
+    {
+        if (_isTime)
+        {
+            _timeBt.interactable = true;
+            _scoreBt.interactable = false;
+            _isTime = !_isTime;
+            PlayerPrefs.SetString("Top5Names", string.Join("###", a));
+            PlayerPrefs.SetString("Top5Times", string.Join("###", b));
+            PlayerPrefs.Save();
+            DeleteTop();
+            _names.Clear();
+            _valueStr.Clear();
+            _values.Clear();
+            CreateTop();
+            CheckTop();
+            ShowTop();
+        }
+    }
+
+    public void ConfirmName()
+    {
+        if((_PlayerName.text.Length-1) <= 11 && _PlayerName.text.Length > 0)
+        {
+            if (!_nameError.text.Length.Equals("")) { _nameError.SetText(""); }
+            _playerNameStr = _PlayerName.text;
+            if (_currentPlace > -1){
+                _names[_currentPlace] = _playerNameStr;
+                DeleteTop();
+                ShowTop();
+            }
+        } 
+        else
+        {
+            _nameError.SetText("Your username has to contain a maximum of 11 characters !");
+        }
     }
 }
