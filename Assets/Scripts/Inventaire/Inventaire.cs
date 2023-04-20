@@ -53,7 +53,7 @@ public class Inventaire : MonoBehaviour
         }
         RefreshContent();
     }
-    private void RefreshContent()
+    public void RefreshContent()
     {
 
         for(int i = 0; i < inventorySlotsParent.childCount; i++)
