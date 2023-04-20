@@ -5,7 +5,7 @@ using System.Threading;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class Unit : MonoBehaviour
 {
@@ -16,43 +16,35 @@ public class Unit : MonoBehaviour
     [SerializeField] private float speed = 3;
     [SerializeField] private AnimationClip zombAtt;
     [SerializeField] private float _maxZombHealth = default;
-    [SerializeField] private int ennemyLayer;
-    [SerializeField] private GameObject ragDollPrefab;
-    public Collider[] ragCol;
     [SerializeField] private GameObject _healthBar;
+    [SerializeField] private int _points = 100;
     private float _zombHealth;
+    private UI_Manager _uiManager;
+    public bool isDead = false;   
     Animator animator;
-    private bool _following = false;
+    private bool _following = false, groundEnnemy = false;
     Vector3[] path;
     int targetIndex;
 
     private void Start()
     {
+        _uiManager = FindObjectOfType<UI_Manager>().GetComponent<UI_Manager>();
         _zombHealth = _maxZombHealth;
+        _healthBar.GetComponent<Slider>().value = _zombHealth / _maxZombHealth;
         animator = GetComponent<Animator>();
-
-        //gameObject.GetComponent<CharacterController>().enabled = false;
-        //Physics.IgnoreLayerCollision(ragdollLayer, ennemyLayer);
-
-        //les colliders du ragdoll commencent désactivé.
-        /*
-        for (int i = 0; i < ragCol.Length; i++)
-        {
-            Physics.IgnoreCollision(ragCol[i], gameObject.GetComponent<CharacterController>());
-            ragCol[i].GetComponent<Collider>().enabled = false;
-            //ragCol[i].GetComponent<Rigidbody>().isKinematic = true;
-        }
-        */
     }
+    
     private void Update()
     {
-        //if (ragCol[0] == false)
-        //{
+        this.GetComponent<CharacterController>().SimpleMove(Vector3.forward * 0);
+
+        if (isDead == false)
+        {
             if (!animator.GetCurrentAnimatorClipInfo(0).Equals(zombAtt))
             {
                 PlayerDetection();
             }
-        //}
+        }
         
     }
 
@@ -111,7 +103,7 @@ public class Unit : MonoBehaviour
     public void TakeDamage(float damage)
     {
          _zombHealth -= damage;
-        _healthBar.GetComponent<UnityEngine.UIElements.Slider>().value = _zombHealth/_maxZombHealth;
+        _healthBar.GetComponent<Slider>().value = _zombHealth/_maxZombHealth;
         if(_zombHealth < 1)
         {
             Die();
@@ -120,25 +112,8 @@ public class Unit : MonoBehaviour
 
     private void Die()
     {
-        Debug.Log(this.GetComponent<Collider>());
-
-        //GameObject ragdoll = Instantiate(ragDollPrefab, this.transform.position, this.transform.rotation);
-        //ragdoll.transform.localPosition = this.transform.localPosition;
-        //ragdoll.transform.localEulerAngles = this.transform.localEulerAngles;
-        //ragdoll.transform.localRotation= this.transform.localRotation;
-       // ragdoll.transform.localScale = this.transform.localScale;
-        //Destroy(this.gameObject);
-        /*
-        //désactiver le collider de base en les animation pour laisser place au ragdoll.
-
-        gameObject.GetComponent<CharacterController>().enabled = false;
-        gameObject.GetComponent<Animator>().enabled = false;
-        for (int i = 0; i < ragCol.Length; i++)
-        {
-            //ignorer la collision entre les collider du ragdoll et le collider principal.
-            //Physics.IgnoreCollision(gameObject.GetComponent<CapsuleCollider>(), ragCol[i].GetComponent<Collider>());
-            ragCol[i].enabled = true;
-        }*/
+        _uiManager.AjouterScore(_points);
+        isDead = true;
     }
 
     //fix player mouvement
@@ -149,7 +124,6 @@ public class Unit : MonoBehaviour
         animator.SetBool("isAttack", true);
         StartCoroutine("waitAttack");
         
-        
         //Remove health from player
 
     }
@@ -158,7 +132,7 @@ public class Unit : MonoBehaviour
     {
         yield return new WaitForSeconds((animator.GetCurrentAnimatorStateInfo(0).length/1.5f) - 0.5f);
         animator.SetBool("isAttack", false);
-        TakeDamage(50);
+        //TakeDamage(50);
     }
 
     public void OnPathFound(Vector3[] newPath, bool pathSuccessful)
@@ -198,7 +172,7 @@ public class Unit : MonoBehaviour
             rotation = Quaternion.Slerp(this.transform.rotation, _lookatRotation, _smoothCoef);
             transform.rotation = rotation;
             Vector3 move = new Vector3(currentWaypoint.x - this.transform.position.x, 0, currentWaypoint.z - this.transform.position.z).normalized;
-            ennemyCharCont.Move(move * Time.deltaTime * speed);
+            ennemyCharCont.SimpleMove(move * Time.deltaTime * speed);
             yield return null;
         }
     }

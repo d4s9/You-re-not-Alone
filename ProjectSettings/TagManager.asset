@@ -9,6 +9,9 @@ TagManager:
   - Objet
   - marker
   - Puzzle
+  - Weapon
+  - Damage
+  - Enemie
   layers:
   - Default
   - TransparentFX

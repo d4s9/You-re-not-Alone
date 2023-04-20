@@ -52,6 +52,12 @@ public class diggable : MonoBehaviour
         }
     }
 
+    /*
+    void dig_none()
+    {
+        hole_phase(0);
+    }*/
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "shovel")

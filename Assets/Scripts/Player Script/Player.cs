@@ -70,7 +70,6 @@ public class Player : MonoBehaviour
     [SerializeField] float deceleration;
     [SerializeField] float decelerationMax;
     [SerializeField] float decelerationMin;
-    [SerializeField] private float maxVelocity = 1.0f;
     private float minMaxWalkingVelocity = 0.5f;
     private float minMaxRunVelocity = 2.0f;
     [SerializeField] float currentMaxVelocity;
@@ -331,6 +330,7 @@ public class Player : MonoBehaviour
             {
                 animator.SetBool(isAttackingHash, true);
                 lastAttack = Time.time;
+
             }
 
         }
@@ -399,7 +399,8 @@ public class Player : MonoBehaviour
         }
         //####
         //Diggin
-        if(isDigginPressed && !isAttacking)
+        //Regarde si la pelle est active, sinon le joueur peut pelleter avec toute les armes.
+        if(isDigginPressed && !isAttacking && Pelle.activeSelf == true)
         {
             animator.SetBool(isDigginHash, true);
         }
