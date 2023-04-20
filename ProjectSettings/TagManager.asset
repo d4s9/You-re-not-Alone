@@ -10,6 +10,8 @@ TagManager:
   - marker
   - Puzzle
   - Weapon
+  - Damage
+  - Enemie
   layers:
   - Default
   - TransparentFX

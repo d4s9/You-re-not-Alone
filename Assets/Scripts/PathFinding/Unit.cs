@@ -129,7 +129,7 @@ public class Unit : MonoBehaviour
     {
         yield return new WaitForSeconds((animator.GetCurrentAnimatorStateInfo(0).length/1.5f) - 0.5f);
         animator.SetBool("isAttack", false);
-        TakeDamage(50);
+        //TakeDamage(50);
     }
 
     public void OnPathFound(Vector3[] newPath, bool pathSuccessful)
