@@ -8,6 +8,7 @@ public class Weapons_effects : MonoBehaviour
 {
     [SerializeField] int damage_imput = 50;
     [SerializeField] GameObject player;
+    [SerializeField] ParticleSystem blood_PS;
     public AudioClip[] clip;
     AudioSource audio;
     //on ne veux pas que le joueur fasse deux fois des dégats pendant la même animation.
@@ -28,7 +29,7 @@ public class Weapons_effects : MonoBehaviour
 
             if (audio.isPlaying == false)
             {
-                
+                Instantiate(blood_PS, other.transform.position, other.transform.rotation);
                 audio.clip = clip[Random.Range(0, 3)];
                 audio.Play();
                 Thread.Sleep(1);
