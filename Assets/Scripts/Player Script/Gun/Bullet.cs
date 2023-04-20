@@ -26,7 +26,7 @@ public class Bullet : MonoBehaviour
             Instantiate(blood_PS, other.transform.position, other.transform.rotation);
             Debug.Log("HIT !!!");
             other.GetComponent<Unit>().TakeDamage(damage_imput);
-            audio.clip = clip[Random.Range(0, 3)];
+            audio.clip = clip[Random.Range(0, clip.Length)];
             audio.Play();
             Thread.Sleep(1);
             Destroy(gameObject);

@@ -30,9 +30,9 @@ public class Weapons_effects : MonoBehaviour
             if (audio.isPlaying == false)
             {
                 Instantiate(blood_PS, other.transform.position, other.transform.rotation);
-                audio.clip = clip[Random.Range(0, 3)];
+                audio.clip = clip[Random.Range(0, clip.Length)];
                 audio.Play();
-                Thread.Sleep(1);
+                //Thread.Sleep(1);
                 //await Task.Delay(1000);
             }
             did_damage = 1;

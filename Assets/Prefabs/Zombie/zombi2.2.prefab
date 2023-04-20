@@ -1616,10 +1616,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4096
   angleVision: 45
-  speed: 3
+  speed: 4
   zombAtt: {fileID: -203655887218126122, guid: f9d9720cdd55213469ddf1495ccc7623, type: 3}
   _maxZombHealth: 100
   _healthBar: {fileID: 596444032760134473}
+  _points: 100
   isDead: 0
 --- !u!114 &6574674381536852364
 MonoBehaviour:

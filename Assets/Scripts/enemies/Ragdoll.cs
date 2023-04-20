@@ -7,7 +7,6 @@ public class Ragdoll : MonoBehaviour
 {
     public Rigidbody[] ragRB;
 
-    // Start is called before the first frame update
     void Start()
     {
         ragRB = GetComponentsInChildren<Rigidbody>();
@@ -30,7 +29,6 @@ public class Ragdoll : MonoBehaviour
             gameObject.GetComponent<Unit>().enabled = false;
             gameObject.GetComponent<CharacterController>().enabled = false;
             gameObject.GetComponent<Animator>().enabled = false;
-            
             ragState(false);
         }
     }
