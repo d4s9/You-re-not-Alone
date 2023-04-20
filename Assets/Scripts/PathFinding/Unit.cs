@@ -17,7 +17,9 @@ public class Unit : MonoBehaviour
     [SerializeField] private AnimationClip zombAtt;
     [SerializeField] private float _maxZombHealth = default;
     [SerializeField] private GameObject _healthBar;
+    [SerializeField] private int _points = 100;
     private float _zombHealth;
+    private UI_Manager _uiManager;
     public bool isDead = false;   
     Animator animator;
     private bool _following = false, groundEnnemy = false;
@@ -26,6 +28,7 @@ public class Unit : MonoBehaviour
 
     private void Start()
     {
+        _uiManager = FindObjectOfType<UI_Manager>().GetComponent<UI_Manager>();
         _zombHealth = _maxZombHealth;
         _healthBar.GetComponent<Slider>().value = _zombHealth / _maxZombHealth;
         animator = GetComponent<Animator>();
@@ -109,6 +112,7 @@ public class Unit : MonoBehaviour
 
     private void Die()
     {
+        _uiManager.AjouterScore(_points);
         isDead = true;
     }
 
@@ -119,7 +123,6 @@ public class Unit : MonoBehaviour
 
         animator.SetBool("isAttack", true);
         StartCoroutine("waitAttack");
-        
         
         //Remove health from player
 

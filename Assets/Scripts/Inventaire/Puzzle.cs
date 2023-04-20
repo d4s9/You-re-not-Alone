@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -11,9 +13,13 @@ public class Puzzle : MonoBehaviour
     [SerializeField] GameObject flamme;
     [SerializeField] private Inventaire inventaire;
     [SerializeField] private Player player;
+    [SerializeField] GameObject barriereOuvert;
+    [SerializeField] GameObject barriereFermer;
+    [SerializeField] GameObject radeau;
+    [SerializeField] GameObject posRadeau;
 
     private List<ItemData> contenu = new List<ItemData>();
-    
+
     void Start()
     {
         contenu = inventaire.getList();
@@ -26,7 +32,7 @@ public class Puzzle : MonoBehaviour
     {
        if(contenu.Contains(item:Bois) == true && contenu.Contains(item:Batterie) == true)
         {
-            
+            activeFeux();
         }
     }
     public void activeFeux()
@@ -38,14 +44,62 @@ public class Puzzle : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.E))
                 {
-                    Instantiate(flamme);
-                    print("allume le feux");
-
+                    GameObject feuxActive;
+                    GameObject positionBarriere;
+                    feuxActive = Instantiate(flamme);
+                    feuxActive.transform.position = feuxCamp.transform.position;
+                   
+                    positionBarriere = Instantiate(barriereOuvert);
+                    positionBarriere.transform.position = barriereFermer.transform.position;
+                    Destroy(barriereFermer);
+                    contenu.Remove(Bois); contenu.Remove(Batterie);
+                   
+                    inventaire.RefreshContent();
                 }
             }
 
         }
     }
+    
+    public void verifBois()
+    {
+        List<ItemData> listBois = contenu.FindAll(findBois);
+        if (listBois.Count >= 5 )
+        {
+            activeRadeau();
+        }
+    }
+    
+    public void activeRadeau()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(player.transform.position, player.transform.forward, out hit, 2.6f))
+        {
+            if (hit.transform.CompareTag("Puzzle"))
+            {
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    GameObject rad;
+                    rad = Instantiate(radeau);
+                    radeau.transform.position = posRadeau.transform.position;
+                }
+            }
 
+        }
+    }
+    private static bool findBois(ItemData Bois)
+    {
 
+        if (Bois.nom == "Bois")
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }
+
+
+

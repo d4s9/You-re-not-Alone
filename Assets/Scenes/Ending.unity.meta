@@ -1,5 +1,10 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Materials/Materials.meta
+guid: b99690d8415064f4daf314daabdd2511
+folderAsset: yes
+========
 guid: f551f118d25aa124c923bcc500ac86f7
+>>>>>>>> 6e4128d1da386aaf130a182113d986efefa9607f:Assets/Scenes/Ending.unity.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

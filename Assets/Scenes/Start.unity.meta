@@ -1,7 +1,13 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Materials/Transparent.mat.meta
+guid: efad7a2de12c54247b2d160e5578f311
+NativeFormatImporter:
+========
 guid: f4166b9aab70f30479a17c37fef4b9ca
 DefaultImporter:
+>>>>>>>> 6e4128d1da386aaf130a182113d986efefa9607f:Assets/Scenes/Start.unity.meta
   externalObjects: {}
+  mainObjectFileID: 2100000
   userData: 
   assetBundleName: 
   assetBundleVariant: 
