@@ -70,7 +70,6 @@ public class Player : MonoBehaviour
     [SerializeField] float deceleration;
     [SerializeField] float decelerationMax;
     [SerializeField] float decelerationMin;
-    [SerializeField] private float maxVelocity = 1.0f;
     private float minMaxWalkingVelocity = 0.5f;
     private float minMaxRunVelocity = 2.0f;
     [SerializeField] float currentMaxVelocity;

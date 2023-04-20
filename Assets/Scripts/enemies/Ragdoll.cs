@@ -26,8 +26,10 @@ public class Ragdoll : MonoBehaviour
     {
         if (GetComponent<Unit>().isDead == true)
         {
+            gameObject.GetComponent<Unit>().enabled = false;
             gameObject.GetComponent<CharacterController>().enabled = false;
             gameObject.GetComponent<Animator>().enabled = false;
+            
             ragState(false);
         }
     }
