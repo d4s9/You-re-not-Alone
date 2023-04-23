@@ -44,8 +44,8 @@ public class GameEnding : MonoBehaviour
 
         time = TimeSpan.FromSeconds(_currentTime);
 
-        _ResultsTxt[0].SetText("Your Score : " + _currentScore.ToString());
-        _ResultsTxt[1].SetText("Your Time : " + time.ToString("h':'mm':'ss':'ff"));
+        _ResultsTxt[0].SetText("votre score : " + _currentScore.ToString());
+        _ResultsTxt[1].SetText("votre temps : " + time.ToString("h':'mm':'ss':'ff"));
 
         CreateTop();
         CheckTop("Time");
@@ -274,7 +274,7 @@ public class GameEnding : MonoBehaviour
         } 
         else
         {
-            _nameError.SetText("Your username has to contain a maximum of 11 characters !");
+            _nameError.SetText("votre nom doit contenir un maximum de 11 characteres !");
         }
     }
 }
