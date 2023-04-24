@@ -17,16 +17,19 @@ public class Puzzle : MonoBehaviour
     [SerializeField] GameObject barriereFermer;
     [SerializeField] GameObject radeau;
     [SerializeField] GameObject posRadeau;
+    [SerializeField] GameObject txtActivePuzzle;
 
     private List<ItemData> contenu = new List<ItemData>();
 
     void Start()
     {
         contenu = inventaire.getList();
+        txtActivePuzzle.SetActive(false);
     }
     void Update()
     {
         allumeFeu(contenu);
+        verifBois();
     }
     public void allumeFeu(List<ItemData> contenu)
     {
@@ -42,6 +45,7 @@ public class Puzzle : MonoBehaviour
         {
             if (hit.transform.CompareTag("Puzzle"))
             {
+                txtActivePuzzle.SetActive(true);
                 if (Input.GetKeyDown(KeyCode.E))
                 {
                     GameObject feuxActive;
@@ -56,9 +60,14 @@ public class Puzzle : MonoBehaviour
                    
                     inventaire.RefreshContent();
                 }
+                else
+                {
+                    txtActivePuzzle.SetActive(false);
+                }
             }
 
         }
+
     }
     
     public void verifBois()
@@ -77,12 +86,17 @@ public class Puzzle : MonoBehaviour
         {
             if (hit.transform.CompareTag("Puzzle"))
             {
+                txtActivePuzzle.SetActive(true);
                 if (Input.GetKeyDown(KeyCode.E))
                 {
                     GameObject rad;
                     rad = Instantiate(radeau);
                     radeau.transform.position = posRadeau.transform.position;
                 }
+            }
+            else
+            {
+                txtActivePuzzle.SetActive(false);
             }
 
         }
