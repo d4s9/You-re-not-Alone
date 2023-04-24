@@ -1621,7 +1621,12 @@ MonoBehaviour:
   _maxZombHealth: 100
   _healthBar: {fileID: 596444032760134473}
   _points: 100
+  _attackDamage: 10
+  ennemyLayer:
+    serializedVersion: 2
+    m_Bits: 0
   isDead: 0
+  isAttack: 0
 --- !u!114 &6574674381536852364
 MonoBehaviour:
   m_ObjectHideFlags: 0

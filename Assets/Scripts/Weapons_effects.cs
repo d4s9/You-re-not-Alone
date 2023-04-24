@@ -27,15 +27,13 @@ public class Weapons_effects : MonoBehaviour
         {
             other.GetComponent<Unit>().TakeDamage(30);
 
-            if (audio.isPlaying == false)
+            if (did_damage == 0)
             {
                 Instantiate(blood_PS, other.transform.position, other.transform.rotation);
-                audio.clip = clip[Random.Range(0, clip.Length)];
+                audio.clip = clip[Random.Range(0, clip.Length - 1)];
                 audio.Play();
-                //Thread.Sleep(1);
-                //await Task.Delay(1000);
+                did_damage = 1;
             }
-            did_damage = 1;
         }
     }
 
@@ -47,8 +45,7 @@ public class Weapons_effects : MonoBehaviour
         }
 
 
-
-        if (pelte == 0 && player.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Je pelte"))
+            if (pelte == 0 && player.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Je pelte"))
         {
             audio.clip = clip[4];
             audio.Play();

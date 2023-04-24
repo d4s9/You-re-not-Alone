@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 280492621160692172}
   m_Layer: 12
   m_Name: Weapon_02
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -200,7 +200,7 @@ GameObject:
   - component: {fileID: 280492621246234387}
   m_Layer: 12
   m_Name: Weapon_02_7
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -822,7 +822,7 @@ GameObject:
   - component: {fileID: 280492621574126126}
   m_Layer: 12
   m_Name: Weapon_02_5
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1739,7 +1739,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: e1e7a0c968a02d84c9d47c5a4e89cb93, type: 3}
   - {fileID: 8300000, guid: ac843d6cdd95c964b9aae8bbbca753bd, type: 3}
   - {fileID: 8300000, guid: 6e0bfb1ee3a55da4e8855329a96f4a75, type: 3}
-  - {fileID: 8300000, guid: 6e0bfb1ee3a55da4e8855329a96f4a75, type: 3}
   - {fileID: 8300000, guid: f58d25a65095a6a47b5013c57728ecad, type: 3}
 --- !u!82 &280492621989584078
 AudioSource:
@@ -1915,7 +1914,7 @@ GameObject:
   - component: {fileID: 280492622156810237}
   m_Layer: 12
   m_Name: Weapon_02_6
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2496,7 +2495,7 @@ GameObject:
   - component: {fileID: 280492622499982843}
   m_Layer: 12
   m_Name: ref_righ_hand_target
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2863,7 +2862,7 @@ GameObject:
   - component: {fileID: 280492622714956001}
   m_Layer: 12
   m_Name: ref_left_hand_target
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2897,7 +2896,7 @@ GameObject:
   - component: {fileID: 280492622717126932}
   m_Layer: 12
   m_Name: Weapon_02_3
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3078,7 +3077,7 @@ GameObject:
   - component: {fileID: 280492622954645402}
   m_Layer: 12
   m_Name: Weapon_02_4
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3209,7 +3208,7 @@ GameObject:
   - component: {fileID: 280492623044395999}
   m_Layer: 12
   m_Name: Weapon_02_2
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3568,6 +3567,7 @@ MonoBehaviour:
   m4: {fileID: 280492621541627441}
   Pelle: {fileID: 280492622475959793}
   BaseballBat: {fileID: 280492621763039368}
+  _maxHealth: 100
 --- !u!114 &7510508749172345876
 MonoBehaviour:
   m_ObjectHideFlags: 0

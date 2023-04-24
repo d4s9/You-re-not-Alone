@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
-
+using UnityEngine.Animations;
 
 public class Bullet : MonoBehaviour
 {
@@ -18,7 +18,7 @@ public class Bullet : MonoBehaviour
         Destroy(gameObject, lifeTime);
     }
 
-    //L'enemie prend des d�gat lorsque le joueur le frappe.
+    //L'enemie prend des d�gat lorsque le joueur le frappe.
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Enemie")
@@ -30,6 +30,11 @@ public class Bullet : MonoBehaviour
             audio.Play();
             Thread.Sleep(1);
             Destroy(gameObject);
+        }
+        //(félix) les balles ne ce détruisent pas lorsqu'ils touchent l'arme (il entrait en colision avec l'arme lorsque le joueur avancais dans la même direction qu'il tirait).
+        if (other.tag == "Weapon")
+        {
+            Physics.IgnoreCollision(other.GetComponent<Collider>(), gameObject.GetComponent<Collider>());
         }
         else
         {

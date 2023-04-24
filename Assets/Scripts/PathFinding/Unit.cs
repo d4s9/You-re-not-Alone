@@ -114,7 +114,7 @@ public class Unit : MonoBehaviour
         _healthBar.GetComponent<Slider>().value = _zombHealth/_maxZombHealth;
         if(_zombHealth < 1)
         {
-            //isDead = true; // j'ai ajouté cette ligne, puisque die ne rendait pas isDead true. j'ignore pourquoi.
+            isDead = true; // j'ai ajouté cette ligne, puisque die ne rendait pas isDead true. j'ignore pourquoi.****************
             Die();
         }
     }
