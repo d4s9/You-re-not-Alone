@@ -15,11 +15,11 @@ public class AttackState : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        animator.transform.LookAt(player);
         float distance = Vector3.Distance(player.position, animator.transform.position);
         if (distance > 2.5f)
         {
-            animator.SetBool("isAttack", false);
-            animator.SetBool("attack", false);           
+            animator.SetBool("isAttack", false);         
         }        
     }
 
@@ -28,14 +28,8 @@ public class AttackState : StateMachineBehaviour
     {
         Physics.IgnoreLayerCollision(12, 25, false);
         animator.transform.LookAt(player);
-        /*
-        animator.transform.LookAt(player);
-        float distance = Vector3.Distance(player.position, animator.transform.position);
-        if(distance < 2.5f)
-        {            
-            player.GetComponent<Player>().PlayerDamage(animator.transform.GetComponent<Unit>().GetDamage());
-        }   
-        */
+
+        animator.transform.rotation *= Quaternion.FromToRotation(Vector3.left, animator.transform.forward);
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

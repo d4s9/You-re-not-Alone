@@ -19,7 +19,6 @@ public class Unit : MonoBehaviour
     [SerializeField] private GameObject _healthBar;
     [SerializeField] private int _points = 100;
     [SerializeField] private int _attackDamage = 10;
-    [SerializeField] private LayerMask ennemyLayer;
     private float _zombHealth;
     private UI_Manager _uiManager;
     public bool isDead = false, isAttack;   
@@ -72,15 +71,16 @@ public class Unit : MonoBehaviour
             {
                 if (Physics.CheckCapsule(p1, p2, ennemyCharCont.radius * this.transform.localScale.x + 0.2f, playerLayer) && !_uiManager.GetJoueurMort())
                 {
-                    isAttack = true;
-                    _following = false;
-                    animator.SetBool("isWalking", false);
-                    //Attack(target);
+                    animator.SetBool("isWalking", false);                 
                 }
                 else
                 {
-                    PathRequaestManager.RequestPath(new PathRequest(transform.position, target.transform.position, OnPathFound));
+                   PathRequaestManager.RequestPath(new PathRequest(transform.position, target.transform.position, OnPathFound));
                 }
+            }
+            else
+            {
+                _following= false;
             }
         }
         
@@ -94,27 +94,23 @@ public class Unit : MonoBehaviour
                     {                                            
                         if(Physics.CheckCapsule(p1, p2, ennemyCharCont.radius * this.transform.localScale.x + 0.2f, playerLayer) && !_uiManager.GetJoueurMort())
                         {
-                            isAttack = true;
                             animator.SetBool("isWalking", false);
-                            //Attack(target);
                         } else
                         {
                             _following = true;
                             PathRequaestManager.RequestPath(new PathRequest(transform.position, target.transform.position, OnPathFound));
-                        }
+                        }                       
                     }
                 }                           
             }
         }
     }
-    
     public void TakeDamage(float damage)
     {
          _zombHealth -= damage;
         _healthBar.GetComponent<Slider>().value = _zombHealth/_maxZombHealth;
         if(_zombHealth < 1)
         {
-            //isDead = true; // j'ai ajouté cette ligne, puisque die ne rendait pas isDead true. j'ignore pourquoi.****************
             Die();
         }
     }
@@ -125,7 +121,6 @@ public class Unit : MonoBehaviour
         isDead = true;
     }
 
-    //fix player mouvement
 
     public void Attack(GameObject p_target)
     {
@@ -134,20 +129,6 @@ public class Unit : MonoBehaviour
         {
             target.GetComponent<Player>().PlayerDamage(_attackDamage);
         }
-        //StartCoroutine("waitAttack");    
-        //Remove health from player
-
-    }
-
-    IEnumerator waitAttack()
-    {
-        yield return new WaitForSeconds(0.1f);
-        Debug.Log((animator.GetCurrentAnimatorStateInfo(0).length / 1.5f) - 0.5f);
-        yield return new WaitForSeconds((animator.GetCurrentAnimatorStateInfo(0).length / 1.5f));
-        animator.SetBool("isAttack", false);
-        target.GetComponent<Player>().PlayerDamage(_attackDamage);
-        isAttack = false;
-        //TakeDamage(50);     
     }
 
     public void OnPathFound(Vector3[] newPath, bool pathSuccessful)
