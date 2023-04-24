@@ -1403,9 +1403,6 @@ MonoBehaviour:
   _healthBar: {fileID: 0}
   _points: 100
   _attackDamage: 10
-  ennemyLayer:
-    serializedVersion: 2
-    m_Bits: 0
   isDead: 0
   isAttack: 0
 --- !u!1 &1506816101
@@ -2813,31 +2810,31 @@ PrefabInstance:
       objectReference: {fileID: 1089663193}
     - target: {fileID: 769601792904414976, guid: 5297063463b55cd4386cad23afc80172, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.523211
+      value: 12.38
       objectReference: {fileID: 0}
     - target: {fileID: 769601792904414976, guid: 5297063463b55cd4386cad23afc80172, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.47
+      value: 8.64
       objectReference: {fileID: 0}
     - target: {fileID: 769601792904414976, guid: 5297063463b55cd4386cad23afc80172, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -16.684898
+      value: -14.4
       objectReference: {fileID: 0}
     - target: {fileID: 769601792904414976, guid: 5297063463b55cd4386cad23afc80172, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.8029877
+      value: 0.78820544
       objectReference: {fileID: 0}
     - target: {fileID: 769601792904414976, guid: 5297063463b55cd4386cad23afc80172, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.23355494
+      value: 0.61541224
       objectReference: {fileID: 0}
     - target: {fileID: 769601792904414976, guid: 5297063463b55cd4386cad23afc80172, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.5265085
+      value: 0.000000024449536
       objectReference: {fileID: 0}
     - target: {fileID: 769601792904414976, guid: 5297063463b55cd4386cad23afc80172, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.15313894
+      value: -0.000000019089622
       objectReference: {fileID: 0}
     - target: {fileID: 769601792904414979, guid: 5297063463b55cd4386cad23afc80172, type: 3}
       propertyPath: _player
@@ -2861,11 +2858,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 769601793226195858, guid: 5297063463b55cd4386cad23afc80172, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000024449538
+      value: 0.000000024449536
       objectReference: {fileID: 0}
     - target: {fileID: 769601793226195858, guid: 5297063463b55cd4386cad23afc80172, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000000019089624
+      value: -0.000000019089622
       objectReference: {fileID: 0}
     - target: {fileID: 2879345511353795491, guid: 5297063463b55cd4386cad23afc80172, type: 3}
       propertyPath: m_RootOrder
@@ -6260,19 +6257,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5157959131787091548, guid: c2197f1ce4970454c881de17533bd25c, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5157959131832065061, guid: c2197f1ce4970454c881de17533bd25c, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5157959131832065061, guid: c2197f1ce4970454c881de17533bd25c, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5157959132299362860, guid: c2197f1ce4970454c881de17533bd25c, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
@@ -6477,9 +6466,6 @@ MonoBehaviour:
   _healthBar: {fileID: 642923736}
   _points: 100
   _attackDamage: 10
-  ennemyLayer:
-    serializedVersion: 2
-    m_Bits: 0
   isDead: 0
   isAttack: 0
 --- !u!143 &5246978736635405454
@@ -7829,9 +7815,6 @@ MonoBehaviour:
   _healthBar: {fileID: 596444034447281601}
   _points: 100
   _attackDamage: 10
-  ennemyLayer:
-    serializedVersion: 2
-    m_Bits: 33554432
   isDead: 0
   isAttack: 0
 --- !u!114 &6574674383089782783
@@ -8937,9 +8920,6 @@ MonoBehaviour:
   _healthBar: {fileID: 0}
   _points: 100
   _attackDamage: 10
-  ennemyLayer:
-    serializedVersion: 2
-    m_Bits: 0
   isDead: 0
   isAttack: 0
 --- !u!137 &7706234626296122896
