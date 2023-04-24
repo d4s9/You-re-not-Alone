@@ -6,9 +6,6 @@ using UnityEngine.UI;
 public class BackGroundMusicManager : MonoBehaviour
 {
     [SerializeField] private GameObject _soundPannel;
-    /*
-    [SerializeField] private Sprite[] _volumeLogo;
-    */
 
     private Button _muteButton;
     private AudioSource _audioSource;
@@ -19,8 +16,9 @@ public class BackGroundMusicManager : MonoBehaviour
         _muteButton = _soundPannel.GetComponentInChildren<Button>();
         _soundBar = _soundPannel.GetComponentInChildren<Slider>();
         //_audioSource = GameObject.FindGameObjectWithTag("Music").GetComponent<AudioSource>();
-        _muteButton.image.color = (PlayerPrefs.GetInt("Muted") == 1) ? Color.red : Color.green;
-        if(PlayerPrefs.GetInt("Muted") == 1)
+        _muteButton.interactable = (PlayerPrefs.GetInt("Muted") == 1) ? false : true;
+        Debug.Log(PlayerPrefs.GetFloat("Volume"));
+        if (PlayerPrefs.GetInt("Muted") == 0)
             //_audioSource.Stop();
         
         _soundBar.value = PlayerPrefs.GetFloat("Volume");
@@ -51,14 +49,21 @@ public class BackGroundMusicManager : MonoBehaviour
         if(value == 0 && PlayerPrefs.GetInt("Muted") == 0)
         {
             PlayerPrefs.SetInt("Muted", 1);
-            _muteButton.image.color = Color.red;
+            _muteButton.interactable = false;
            // _audioSource.Pause();
         } else if(value > 0 && PlayerPrefs.GetInt("Muted") == 1)
         {
             PlayerPrefs.SetInt("Muted", 0);
-            _muteButton.image.color = Color.green;
+            _muteButton.interactable = true;
            // _audioSource.Play();
         }
+        PlayerPrefs.Save();
+    }
+
+    public void OnApplicationQuit()
+    {
+        float value = _soundBar.value;
+        PlayerPrefs.SetFloat("Volume", value);
         PlayerPrefs.Save();
     }
 }

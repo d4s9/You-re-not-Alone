@@ -94,6 +94,11 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject Pelle;
     [SerializeField] private GameObject BaseballBat;
 
+    //Vie
+    [SerializeField] private int _maxHealth = 100;
+    private int _health;
+    private UI_Manager _uiManager;
+
     
 
     private void Awake()
@@ -102,7 +107,8 @@ public class Player : MonoBehaviour
         playerInput = new PlayerInput();
         characterController = GetComponent<CharacterController>();
         rigBuilder = GetComponent<RigBuilder>();
-
+        _uiManager = FindObjectOfType<UI_Manager>().GetComponent<UI_Manager>();
+        _health = _maxHealth;
         //Initialise la gravité
         characterController.SimpleMove(Vector3.forward * 0);
 
@@ -724,5 +730,15 @@ public class Player : MonoBehaviour
         if (movementDirection.magnitude == 0) { return; }
         var rotation = Quaternion.LookRotation(movementDirection);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, RotationSpeed);
+    }
+
+    public void PlayerDamage(int degats)
+    {
+        _health -= degats;
+        _uiManager.UpdateHealth(_health, _maxHealth);
+        if(_health <= 0)
+        {
+            _uiManager.joueurMort();
+        }
     }
 }
