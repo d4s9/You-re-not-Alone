@@ -43,6 +43,7 @@ public class Puzzle : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(player.transform.position, player.transform.forward, out hit, 2.6f))
         {
+
             if (hit.transform.CompareTag("Puzzle"))
             {
                 txtActivePuzzle.SetActive(true);
@@ -60,10 +61,11 @@ public class Puzzle : MonoBehaviour
                    
                     inventaire.RefreshContent();
                 }
-                else
-                {
-                    txtActivePuzzle.SetActive(false);
-                }
+
+            }
+            else
+            {
+                txtActivePuzzle.SetActive(false);
             }
 
         }
