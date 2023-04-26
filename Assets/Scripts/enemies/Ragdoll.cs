@@ -5,19 +5,37 @@ using UnityEngine;
 
 public class Ragdoll : MonoBehaviour
 {
-    public Rigidbody[] ragRB;
-
+    public Rigidbody[] ragRigidBody;
+    //public GameObject parent;
+    public Vector3[] pos_initial = {};
+    public Vector3[] rot_initial = {};
+    //private Game
     void Start()
     {
-        ragRB = GetComponentsInChildren<Rigidbody>();
+        //ragRigidBody = GetComponentsInChildren<Rigidbody>();
         ragState(true);
+        
+        for (int i = 0; i < ragRigidBody.Length;i++)
+        {
+            pos_initial[i] = ragRigidBody[i].GetComponent<Transform>().localPosition;
+            rot_initial[i] = ragRigidBody[i].GetComponent<Transform>().localEulerAngles;
+        }
     }
 
-    void ragState(bool m_state)
+    public void ragState(bool m_state)
     {
-        foreach (var rigidbody in ragRB)
+        foreach (var rigidbody in ragRigidBody)
         {
             rigidbody.isKinematic = m_state;
+        }
+    }
+
+    public void backup()
+    {
+        for (int i = 0; i <= ragRigidBody.Length; i++)
+        {
+            ragRigidBody[i].GetComponent<Transform>().localPosition = pos_initial[i];
+            ragRigidBody[i].GetComponent<Transform>().localEulerAngles = rot_initial[i];
         }
     }
 

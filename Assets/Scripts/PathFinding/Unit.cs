@@ -142,7 +142,7 @@ public class Unit : MonoBehaviour
         }
     }
 
-    IEnumerator FollowPath()
+    public IEnumerator FollowPath()
     {
         
         animator.SetBool("isWalking", true);

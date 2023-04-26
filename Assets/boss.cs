@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.XR;
@@ -12,13 +14,14 @@ public class boss : MonoBehaviour
         [SerializeField] GameObject player;
         float push_angle;
         public CharacterController con;
-        public GameObject par;
+        public GameObject parent;
 
 
         //public float knockbackForce;
         private Vector3 impact = Vector3.zero;
         public bool kb = false;
-        public float KnockBackTimer = 1;
+        public float KnockBackTime = 5;
+        private float KnockBackTimer = 1;
         // Start is called before the first frame update
         void Start()
         {
@@ -45,16 +48,20 @@ public class boss : MonoBehaviour
             KnockBackTimer -= Time.deltaTime;
             Vector3 new_location = (new_pos * KnockBackTimer);
 
-            par.GetComponent<CharacterController>().Move(new_location.normalized);
+            parent.GetComponent<CharacterController>().Move(new_location.normalized);
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.tag == "Damage" && kb == false)
-            {
+              if (other.tag == "Damage" && kb == false && player.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("attack melee"))
+              {
                 kb = true;
-                knockback();
-            }
+                parent.GetComponent<Unit>().StopAllCoroutines();
+                parent.GetComponent<Unit>().enabled = false;
+                parent.GetComponent<CharacterController>().enabled = false;
+                parent.GetComponent<Animator>().enabled = false;
+                gameObject.GetComponent<Ragdoll>().ragState(false);
+        }
         }
 
 
@@ -64,17 +71,24 @@ public class boss : MonoBehaviour
             //durée du knockback
             if (kb == true)
             {
-                KnockBackTimer += Time.deltaTime;
 
-                if (KnockBackTimer >= 0.5)
+                KnockBackTimer += Time.deltaTime;    
+
+                if (KnockBackTimer >= KnockBackTime)
                 {
                     kb = false;
                     KnockBackTimer = 0;
+                    parent.GetComponent<Unit>().enabled = true;
+                    parent.GetComponent<CharacterController>().enabled = true;
+                    parent.GetComponent<Animator>().enabled = true;
+                    StartCoroutine(parent.GetComponent<Unit>().FollowPath());
+                    gameObject.GetComponent<Ragdoll>().ragState(true);
+                    gameObject.GetComponent<Ragdoll>().backup();
                 }
             }
 
 
-            if (par.GetComponent<Unit>().isDead == false)
+            if (parent.GetComponent<Unit>().isDead == false && kb == false)
             {
                 rotate();
             }
