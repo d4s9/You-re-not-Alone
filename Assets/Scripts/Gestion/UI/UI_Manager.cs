@@ -10,21 +10,28 @@ public class UI_Manager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _timeTxt;
     [SerializeField] private TextMeshProUGUI _scoreTxt;
     [SerializeField] private Slider _healthbar; 
+    [SerializeField] private GameObject _playerDeadPanel;
 
-    private int _score = 0;
+    private int _score;
     private int invSpace = 5;
     private bool _isPaused = false;
     private bool _mort;
 
     void Start()
     {
+        _score = PlayerPrefs.GetInt("PlayerScore");       
         _mort = false;
+
+        UpdateScore();
     }
 
     void Update()
     {
-        _timeTxt.SetText("Time : " + Time.time.ToString("00:00.00"));
-        PauseGame();
+        if (!_mort)
+        {
+            _timeTxt.SetText("Time : " + Time.time.ToString("00:00.00"));
+            PauseGame();
+        }       
     }
 
     public void PauseGame()
@@ -68,10 +75,21 @@ public class UI_Manager : MonoBehaviour
 
     public void joueurMort()
     {
-        _mort = true;
-        PlayerPrefs.SetInt("PlayerScore", _score);
-        PlayerPrefs.SetString("PlayerTime", Time.time.ToString());
+        _mort = true;        
+        StartCoroutine("GameEnding");
+    }
 
+    IEnumerator GameEnding()
+    {
+        yield return new WaitForSeconds(2f);
+        Time.timeScale = 0;
+        _playerDeadPanel.SetActive(true);
+    }
+
+    public void FinishedLvl()
+    {
+        PlayerPrefs.SetInt("PlayerScore", _score);
+        PlayerPrefs.SetString("PlayerTime", Time.time.ToString() + float.Parse(PlayerPrefs.GetString("PlayerTime")));
     }
 
     public void AjouterScore(int scoreAAjouter)

@@ -17,7 +17,6 @@ public class BackGroundMusicManager : MonoBehaviour
         _soundBar = _soundPannel.GetComponentInChildren<Slider>();
         //_audioSource = GameObject.FindGameObjectWithTag("Music").GetComponent<AudioSource>();
         _muteButton.interactable = (PlayerPrefs.GetInt("Muted") == 1) ? false : true;
-        Debug.Log(PlayerPrefs.GetFloat("Volume"));
         if (PlayerPrefs.GetInt("Muted") == 0)
             //_audioSource.Stop();
         

@@ -426,7 +426,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &554107523
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -806,6 +806,10 @@ PrefabInstance:
       propertyPath: _camera
       value: 
       objectReference: {fileID: 68833360}
+    - target: {fileID: 4033004747794516929, guid: d36c644be18ac8d46b31d527e4c8a6d0, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4033004747794516931, guid: d36c644be18ac8d46b31d527e4c8a6d0, type: 3}
       propertyPath: Camera
       value: 
@@ -922,7 +926,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 802144339}
-  m_LocalRotation: {x: 0.23355494, y: 0.5265085, z: -0.15313894, w: 0.8029877}
+  m_LocalRotation: {x: 0.23355497, y: 0.5265086, z: -0.15313897, w: 0.80298775}
   m_LocalPosition: {x: 2.523211, y: 7.47, z: -16.684898}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2763,7 +2767,7 @@ GameObject:
   m_IsActive: 1
 --- !u!95 &745198600646141590
 Animator:
-  serializedVersion: 5
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2780,7 +2784,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &769601792836638545
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2810,31 +2814,31 @@ PrefabInstance:
       objectReference: {fileID: 1089663193}
     - target: {fileID: 769601792904414976, guid: 5297063463b55cd4386cad23afc80172, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12.38
+      value: 2.523211
       objectReference: {fileID: 0}
     - target: {fileID: 769601792904414976, guid: 5297063463b55cd4386cad23afc80172, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 8.64
+      value: 7.47
       objectReference: {fileID: 0}
     - target: {fileID: 769601792904414976, guid: 5297063463b55cd4386cad23afc80172, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -14.4
+      value: -16.684898
       objectReference: {fileID: 0}
     - target: {fileID: 769601792904414976, guid: 5297063463b55cd4386cad23afc80172, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.78820544
+      value: 0.80298775
       objectReference: {fileID: 0}
     - target: {fileID: 769601792904414976, guid: 5297063463b55cd4386cad23afc80172, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.61541224
+      value: 0.23355497
       objectReference: {fileID: 0}
     - target: {fileID: 769601792904414976, guid: 5297063463b55cd4386cad23afc80172, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000024449536
+      value: 0.5265086
       objectReference: {fileID: 0}
     - target: {fileID: 769601792904414976, guid: 5297063463b55cd4386cad23afc80172, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000019089622
+      value: -0.15313897
       objectReference: {fileID: 0}
     - target: {fileID: 769601792904414979, guid: 5297063463b55cd4386cad23afc80172, type: 3}
       propertyPath: _player
@@ -2858,11 +2862,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 769601793226195858, guid: 5297063463b55cd4386cad23afc80172, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000024449536
+      value: -0.000000024449538
       objectReference: {fileID: 0}
     - target: {fileID: 769601793226195858, guid: 5297063463b55cd4386cad23afc80172, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000019089622
+      value: 0.000000019089624
       objectReference: {fileID: 0}
     - target: {fileID: 2879345511353795491, guid: 5297063463b55cd4386cad23afc80172, type: 3}
       propertyPath: m_RootOrder
@@ -4199,7 +4203,7 @@ SkinnedMeshRenderer:
   m_DirtyAABB: 0
 --- !u!95 &2493472338954759653
 Animator:
-  serializedVersion: 5
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -4216,7 +4220,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!64 &2589217632676629103
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -6424,7 +6428,7 @@ GameObject:
   m_IsActive: 1
 --- !u!95 &5246978736635405452
 Animator:
-  serializedVersion: 5
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -6441,7 +6445,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &5246978736635405453
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8539,7 +8543,7 @@ GameObject:
   m_IsActive: 1
 --- !u!95 &7329275301050954326
 Animator:
-  serializedVersion: 5
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -8556,7 +8560,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &7377201080930784169
 GameObject:
   m_ObjectHideFlags: 0
