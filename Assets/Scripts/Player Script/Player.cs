@@ -738,6 +738,8 @@ public class Player : MonoBehaviour
         _uiManager.UpdateHealth(_health, _maxHealth);
         if(_health <= 0)
         {
+            Physics.IgnoreLayerCollision(12, 12);
+            animator.SetBool("isDead", true);
             _uiManager.joueurMort();
         }
     }

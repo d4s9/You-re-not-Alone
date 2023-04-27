@@ -2767,7 +2767,7 @@ GameObject:
   m_IsActive: 1
 --- !u!95 &745198600646141590
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2784,7 +2784,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1001 &769601792836638545
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2866,7 +2866,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 769601793226195858, guid: 5297063463b55cd4386cad23afc80172, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000000019089624
+      value: 0.000000019089622
       objectReference: {fileID: 0}
     - target: {fileID: 2879345511353795491, guid: 5297063463b55cd4386cad23afc80172, type: 3}
       propertyPath: m_RootOrder
@@ -4203,7 +4203,7 @@ SkinnedMeshRenderer:
   m_DirtyAABB: 0
 --- !u!95 &2493472338954759653
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -4220,7 +4220,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!64 &2589217632676629103
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -6428,7 +6428,7 @@ GameObject:
   m_IsActive: 1
 --- !u!95 &5246978736635405452
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -6445,7 +6445,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!114 &5246978736635405453
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7765,18 +7765,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c294a0038d7707a48b624d77d6e673cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ragRB:
-  - {fileID: 6574674382155723169}
-  - {fileID: 6574674382430878185}
-  - {fileID: 6574674383155213532}
-  - {fileID: 6574674381914163263}
-  - {fileID: 6574674381255999987}
-  - {fileID: 6574674381696752342}
-  - {fileID: 6574674382228401642}
-  - {fileID: 6574674382618227241}
-  - {fileID: 6574674381476959789}
-  - {fileID: 6574674382764703119}
-  - {fileID: 6574674383229622138}
+  ragRigidBody: []
+  pos_initial: []
+  rot_initial: []
 --- !u!143 &6574674383089782776
 CharacterController:
   m_ObjectHideFlags: 0
@@ -7818,7 +7809,7 @@ MonoBehaviour:
   _maxZombHealth: 100
   _healthBar: {fileID: 596444034447281601}
   _points: 100
-  _attackDamage: 10
+  _attackDamage: 50
   isDead: 0
   isAttack: 0
 --- !u!114 &6574674383089782783
@@ -8543,7 +8534,7 @@ GameObject:
   m_IsActive: 1
 --- !u!95 &7329275301050954326
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -8560,7 +8551,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &7377201080930784169
 GameObject:
   m_ObjectHideFlags: 0
