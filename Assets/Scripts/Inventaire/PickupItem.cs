@@ -12,6 +12,7 @@ public class PickupItem : MonoBehaviour
     [SerializeField] private GameObject pickupText;
     [SerializeField] private Inventaire inventaire;
     [SerializeField] private GameObject inventairePleinTxt;
+    ItemData objet;
 
     void Update()
     {
@@ -20,7 +21,8 @@ public class PickupItem : MonoBehaviour
         {
             if(hit.transform.CompareTag("Objet"))
             {
-                if(inventaire.IsFull() == true)
+                
+                if (inventaire.IsFull() == true)
                 {
                     inventairePleinTxt.SetActive(true);
                 }
