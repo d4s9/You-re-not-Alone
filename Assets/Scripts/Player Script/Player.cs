@@ -130,10 +130,6 @@ public class Player : MonoBehaviour
         setupJumpVariables();
 
     }
-    private void Update()
-    {
-        item = GetComponent<Inventaire>().getItemCurrentlySelected();
-    }
     //#########################################################################################
     //HASH AND SWITCH
     private void hash()
@@ -235,7 +231,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        item = GetComponent<Inventaire>().getItemCurrentlySelected();
 
         PlayerRotation();
         handleAnimation();
