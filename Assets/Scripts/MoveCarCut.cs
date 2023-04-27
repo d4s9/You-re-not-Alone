@@ -13,14 +13,17 @@ public class MoveCarCut : MonoBehaviour
 
     void Update()
     {
-        if ((this.transform.position - Waypoints[count].transform.position).x < 2 && (this.transform.position - Waypoints[count].transform.position).z < 2 && count < Waypoints.Length-1)
+        if(count < Waypoints.Length-1)
         {
-            count++;
+            if ((this.transform.position - Waypoints[count].transform.position).x < 2 && (this.transform.position - Waypoints[count].transform.position).z < 2)
+            {
+                count++;
+            }
         }
-        else if(count < Waypoints.Length)
+        if((this.transform.position - Waypoints[count].transform.position).x < 2 && (this.transform.position - Waypoints[count].transform.position).z < 2)
         {
             moveTowards(Waypoints[count]);
-        }       
+        }      
     }
 
     private void moveTowards(GameObject waypoint)

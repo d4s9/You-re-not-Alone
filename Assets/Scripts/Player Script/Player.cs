@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO.IsolatedStorage;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 using UnityEngine.InputSystem;
@@ -99,7 +100,11 @@ public class Player : MonoBehaviour
     private int _health;
     private UI_Manager _uiManager;
 
-    
+    ItemData item;
+    Inventaire inventaire;
+
+
+
 
     private void Awake()
     {
@@ -226,7 +231,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        item = GetComponent<Inventaire>().getItemCurrentlySelected();
 
         PlayerRotation();
         handleAnimation();
@@ -380,17 +385,23 @@ public class Player : MonoBehaviour
         {
             animator.SetBool(isRifleHash, false);
             animator.SetBool(isMeleeHash, true);
-            if (Alpha1Pressed)
+            if (item.nom == "Pelle")
             {
                 m4.SetActive(false);
                 Pelle.SetActive(true);
                 BaseballBat.SetActive(false);
             }
-            else if (Alpha2Pressed)
+            else if (item.nom == "Bâton de Baseball")
             {
                 m4.SetActive(false);
                 Pelle.SetActive(false);
                 BaseballBat.SetActive(true);
+            }
+            else if(item.nom == "m4")
+            {
+                m4.SetActive(true);
+                Pelle.SetActive(false);
+                BaseballBat.SetActive(false);
             }
             rigBuilder.enabled = false;
         }

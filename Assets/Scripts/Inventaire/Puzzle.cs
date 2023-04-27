@@ -58,18 +58,16 @@ public class Puzzle : MonoBehaviour
                     positionBarriere.transform.position = barriereFermer.transform.position;
                     Destroy(barriereFermer);
                     contenu.Remove(Bois); contenu.Remove(Batterie);
-                   
+                   txtActivePuzzle.SetActive(false);
                     inventaire.RefreshContent();
                 }
 
             }
-            else
-            {
-                txtActivePuzzle.SetActive(false);
-            }
-
         }
-
+        else
+        {
+            txtActivePuzzle.SetActive(false);
+        }
     }
     
     public void verifBois()
