@@ -1503,7 +1503,7 @@ Transform:
   m_GameObject: {fileID: 6340090078112256222}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 33.78, y: -0.02, z: -3.58}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.52, y: 1.11, z: 2.12}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2307958108167052026}
@@ -1622,9 +1622,6 @@ MonoBehaviour:
   _healthBar: {fileID: 596444032760134473}
   _points: 100
   _attackDamage: 10
-  ennemyLayer:
-    serializedVersion: 2
-    m_Bits: 0
   isDead: 0
   isAttack: 0
 --- !u!114 &6574674381536852364
@@ -1639,18 +1636,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c294a0038d7707a48b624d77d6e673cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ragRB:
-  - {fileID: 6574674382502790953}
-  - {fileID: 6574674382220103521}
-  - {fileID: 6574674381470138964}
-  - {fileID: 6574674382779252407}
-  - {fileID: 6574674383326951291}
-  - {fileID: 6574674382962388062}
-  - {fileID: 6574674382422383458}
-  - {fileID: 6574674382006895777}
-  - {fileID: 6574674383149441189}
-  - {fileID: 6574674381887032071}
-  - {fileID: 6574674381429219826}
+  ragRigidBody: []
+  pos_initial: []
+  rot_initial: []
 --- !u!1 &6416723021535374071
 GameObject:
   m_ObjectHideFlags: 0
