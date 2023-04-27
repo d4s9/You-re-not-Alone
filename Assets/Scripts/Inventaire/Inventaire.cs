@@ -103,10 +103,6 @@ public class Inventaire : MonoBehaviour
     public void UseActionButton()
     {
         print("Utilisation : " + itemCurrentlySelected.name);
-        if(itemCurrentlySelected.nom == "Hache")
-        {
-
-        }
         CloseActionPanel();
     }
     public void DestroyActionButton()
