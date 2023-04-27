@@ -101,7 +101,7 @@ public class Player : MonoBehaviour
     private UI_Manager _uiManager;
 
     ItemData item;
-    Inventaire inventaire;
+    [SerializeField] Inventaire inventaire;
 
 
 
