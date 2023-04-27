@@ -33,6 +33,17 @@ public class Weapons_effects : MonoBehaviour
                 audio.clip = clip[Random.Range(0, clip.Length - 1)];
                 audio.Play();
                 did_damage = 1;
+
+                //pour le boss
+                if (other.name == "boss")
+                {
+                    other.GetComponent<Unit>().StopAllCoroutines();
+                    other.GetComponent<Unit>().enabled = false;
+                    other.GetComponent<Animator>().enabled = false;
+                    other.GetComponent<CharacterController>().enabled = false;
+                    other.transform.GetChild(0).GetComponent<Ragdoll>().ragState(false);
+                    other.transform.GetChild(0).GetComponent<boss>().kb = true;
+                }
             }
         }
     }
