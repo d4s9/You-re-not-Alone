@@ -7,7 +7,6 @@ using UnityEngine;
 public class CameraScript : MonoBehaviour
 {
 
-    [SerializeField] private GameObject _player = default;
     [SerializeField] private GameObject[] _cameraList;
     private GameObject _currentCamera;
     private GameObject _mainCam;

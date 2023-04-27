@@ -13,7 +13,6 @@ public class UI_Manager : MonoBehaviour
     [SerializeField] private GameObject _playerDeadPanel;
 
     private int _score;
-    private int invSpace = 5;
     private bool _isPaused = false;
     private bool _mort;
 
