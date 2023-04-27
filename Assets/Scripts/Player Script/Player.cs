@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO.IsolatedStorage;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 using UnityEngine.InputSystem;
@@ -99,7 +100,11 @@ public class Player : MonoBehaviour
     private int _health;
     private UI_Manager _uiManager;
 
-    
+    ItemData item;
+    [SerializeField] Inventaire inventaire;
+
+
+
 
     private void Awake()
     {
@@ -248,6 +253,7 @@ public class Player : MonoBehaviour
         //handleJump();
 
 
+
     }
     private void FixedUpdate()
     {
@@ -304,6 +310,10 @@ public class Player : MonoBehaviour
         bool Alpha7Pressed = Input.GetKey(KeyCode.Alpha7);
         bool Alpha8Pressed = Input.GetKey(KeyCode.Alpha8);
         bool Alpha9Pressed = Input.GetKey(KeyCode.Alpha9);
+
+        //  get currently equiped item
+        item = inventaire.GetComponent<Inventaire>().getItemCurrentlySelected();
+
 
         //####
         //Mouvement
@@ -368,33 +378,35 @@ public class Player : MonoBehaviour
         */
         //#####                                                  C'est probablement ca que tu cherche Derek
         //Blend Tree Setter
+        //Start
         if ((isMelee == false) && (isRifle == false))
         {
             animator.SetBool(isMeleeHash, true);
-            Pelle.SetActive(false);
+            Pelle.SetActive(true);
             m4.SetActive(false);
-            BaseballBat.SetActive(true);
+            BaseballBat.SetActive(false);
             rigBuilder.enabled = false;
         }
-        if (isMeleePressed)
+        //RUntime
+        if (item.nom == "Pelle")
         {
+            rigBuilder.enabled = false;
+            m4.SetActive(false);
+            Pelle.SetActive(true);
+            BaseballBat.SetActive(false);
             animator.SetBool(isRifleHash, false);
             animator.SetBool(isMeleeHash, true);
-            if (Alpha1Pressed)
-            {
-                m4.SetActive(false);
-                Pelle.SetActive(true);
-                BaseballBat.SetActive(false);
-            }
-            else if (Alpha2Pressed)
-            {
-                m4.SetActive(false);
-                Pelle.SetActive(false);
-                BaseballBat.SetActive(true);
-            }
-            rigBuilder.enabled = false;
         }
-        if (isRiflePressed && (isMelee == true))
+        else if (item.nom == "Bâton de Baseball")
+        {
+            rigBuilder.enabled = false;
+            m4.SetActive(false);
+            Pelle.SetActive(false);
+            BaseballBat.SetActive(true);
+            animator.SetBool(isRifleHash, false);
+            animator.SetBool(isMeleeHash, true);
+        }
+        else if(item.nom == "m4")
         {
             animator.SetBool(isMeleeHash, false);
             animator.SetBool(isRifleHash, true);
@@ -403,6 +415,9 @@ public class Player : MonoBehaviour
             m4.SetActive(true);
             rigBuilder.enabled = true;
         }
+        
+        
+        
         //####
         //Diggin
         //Regarde si la pelle est active, sinon le joueur peut pelleter avec toute les armes.

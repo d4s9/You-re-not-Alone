@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Ragdoll : MonoBehaviour
 {
@@ -41,7 +42,16 @@ public class Ragdoll : MonoBehaviour
 
     void Update()
     {
-        if (GetComponent<Unit>().isDead == true)
+        /*
+        if (gameObject.GetComponent<boss>().parent.name == "boss")
+        {
+            gameObject.GetComponent<Unit>().StopAllCoroutines();
+            gameObject.GetComponent<boss>().parent.GetComponent<Unit>().enabled = false;
+            ragState(false);
+        }
+        */
+
+        if (gameObject.GetComponent<boss>().kb == true || gameObject.GetComponent<Unit>().isDead == true )
         {
             gameObject.GetComponent<Unit>().StopAllCoroutines();
             gameObject.GetComponent<Unit>().enabled = false;

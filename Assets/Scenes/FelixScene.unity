@@ -4090,8 +4090,8 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 391194205}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 90610866745c38243ab22014415f04a9, type: 3}
-  m_Controller: {fileID: 0}
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5f83ce29a850a5e4c8f754d89f49a33a, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -7484,11 +7484,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 596444033596915175, guid: 8754356bb448d3c44a7935c56c8749b9, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 596444033596915175, guid: 8754356bb448d3c44a7935c56c8749b9, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 599470359847895281, guid: 8754356bb448d3c44a7935c56c8749b9, type: 3}
       propertyPath: m_Layer
@@ -7565,6 +7565,10 @@ PrefabInstance:
     - target: {fileID: 6340090078112256222, guid: 8754356bb448d3c44a7935c56c8749b9, type: 3}
       propertyPath: m_Name
       value: zombi2.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6340090078112256222, guid: 8754356bb448d3c44a7935c56c8749b9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6416723021535374071, guid: 8754356bb448d3c44a7935c56c8749b9, type: 3}
       propertyPath: m_Layer
@@ -11407,17 +11411,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 90610866745c38243ab22014415f04a9, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 90610866745c38243ab22014415f04a9, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 9100000, guid: 5f83ce29a850a5e4c8f754d89f49a33a, type: 2}
     - target: {fileID: 5866666021909216657, guid: 90610866745c38243ab22014415f04a9, type: 3}
       propertyPath: m_ApplyRootMotion
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5866666021909216657, guid: 90610866745c38243ab22014415f04a9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 90610866745c38243ab22014415f04a9, type: 3}
 --- !u!4 &1151497916 stripped
 Transform:
@@ -12033,6 +12038,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 280492621763039368, guid: a6893cb400dc1fb449cdf6932eaab740, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 280492621763039413, guid: a6893cb400dc1fb449cdf6932eaab740, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7165648423537989200, guid: a6893cb400dc1fb449cdf6932eaab740, type: 3}
       propertyPath: m_Name
       value: Player 2.0

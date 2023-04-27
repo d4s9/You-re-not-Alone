@@ -44,7 +44,11 @@ public class Unit : MonoBehaviour
 
         if (isDead == false)
         {
-            if (!animator.GetCurrentAnimatorClipInfo(0).Equals(zombAtt))
+            if (gameObject.name == "boss")
+            {
+                PlayerDetection();
+            }
+            else if (!animator.GetCurrentAnimatorClipInfo(0).Equals(zombAtt))
             {
                 PlayerDetection();
             }

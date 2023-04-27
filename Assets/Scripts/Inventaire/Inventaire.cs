@@ -9,6 +9,7 @@ public class Inventaire : MonoBehaviour
      [SerializeField] private GameObject inventoryPanel;
      [SerializeField] private Transform inventorySlotsParent;
 
+
      const int InventorySize = 24;
 
 
@@ -17,6 +18,8 @@ public class Inventaire : MonoBehaviour
     [SerializeField] private GameObject deleteActionButton;
 
     private ItemData itemCurrentlySelected;
+    private ItemData bois;
+    private ItemData armeActive;
 
     [SerializeField] private Sprite slotVide;
      
@@ -25,7 +28,8 @@ public class Inventaire : MonoBehaviour
 
     private void Awake()
     {
-        instance = this; 
+        instance = this;
+        itemCurrentlySelected = bois;
     }
 
     private void Start()
@@ -102,7 +106,8 @@ public class Inventaire : MonoBehaviour
     }
     public void UseActionButton()
     {
-        print("Utilisation : " + itemCurrentlySelected.name);
+        armeActive = itemCurrentlySelected;
+        inventoryPanel.SetActive(false);
         CloseActionPanel();
     }
     public void DestroyActionButton()
@@ -114,5 +119,9 @@ public class Inventaire : MonoBehaviour
     public List<ItemData> getList()
     {
         return contenu;
+    }
+    public ItemData getItemCurrentlySelected()
+    {
+        return armeActive;
     }
 }
