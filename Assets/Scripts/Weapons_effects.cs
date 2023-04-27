@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Weapons_effects : MonoBehaviour
 {
-    [SerializeField] int damage_imput = 50;
+    [SerializeField] public int damage_imput = 50;
     [SerializeField] GameObject player;
     [SerializeField] ParticleSystem blood_PS;
     public AudioClip[] clip;
@@ -33,7 +33,7 @@ public class Weapons_effects : MonoBehaviour
                 audio.clip = clip[Random.Range(0, clip.Length - 1)];
                 audio.Play();
                 did_damage = 1;
-
+                /*
                 //pour le boss
                 if (other.name == "boss")
                 {
@@ -43,7 +43,7 @@ public class Weapons_effects : MonoBehaviour
                     other.GetComponent<CharacterController>().enabled = false;
                     other.transform.GetChild(0).GetComponent<Ragdoll>().ragState(false);
                     other.transform.GetChild(0).GetComponent<boss>().kb = true;
-                }
+                }*/
             }
         }
     }

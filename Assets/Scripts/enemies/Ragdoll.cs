@@ -10,6 +10,7 @@ public class Ragdoll : MonoBehaviour
     //public GameObject parent;
     public Vector3[] pos_initial = {};
     public Vector3[] rot_initial = {};
+    public bool isBoss = false;
     //private Game
     void Start()
     {
@@ -42,22 +43,16 @@ public class Ragdoll : MonoBehaviour
 
     void Update()
     {
-        /*
-        if (gameObject.GetComponent<boss>().parent.name == "boss")
+        if (isBoss == false)
         {
-            gameObject.GetComponent<Unit>().StopAllCoroutines();
-            gameObject.GetComponent<boss>().parent.GetComponent<Unit>().enabled = false;
-            ragState(false);
-        }
-        */
-
-        if (gameObject.GetComponent<boss>().kb == true || gameObject.GetComponent<Unit>().isDead == true )
-        {
-            gameObject.GetComponent<Unit>().StopAllCoroutines();
-            gameObject.GetComponent<Unit>().enabled = false;
-            gameObject.GetComponent<CharacterController>().enabled = false;
-            gameObject.GetComponent<Animator>().enabled = false;
-            ragState(false);
+            if (gameObject.GetComponent<Unit>().isDead == true && isBoss == false)
+            {
+                gameObject.GetComponent<Unit>().StopAllCoroutines();
+                gameObject.GetComponent<Unit>().enabled = false;
+                gameObject.GetComponent<CharacterController>().enabled = false;
+                gameObject.GetComponent<Animator>().enabled = false;
+                ragState(false);
+            }
         }
     }
 }

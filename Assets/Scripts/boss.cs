@@ -50,11 +50,12 @@ public class boss : MonoBehaviour
 
             parent.GetComponent<CharacterController>().Move(new_location.normalized);
         }
-
+    
         private void OnTriggerEnter(Collider other)
         {
               if (other.tag == "Damage" && kb == false && player.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("attack melee"))
               {
+                parent.GetComponent<Unit>().TakeDamage(other.GetComponent<Weapons_effects>().damage_imput);
                 kb = true;
                 parent.GetComponent<Unit>().StopAllCoroutines();
                 parent.GetComponent<Unit>().enabled = false;
@@ -71,7 +72,7 @@ public class boss : MonoBehaviour
             //durée du knockback
             if (kb == true)
             {
-
+                
                 KnockBackTimer += Time.deltaTime;    
 
                 if (KnockBackTimer >= KnockBackTime)
@@ -79,9 +80,9 @@ public class boss : MonoBehaviour
                     kb = false;
                     KnockBackTimer = 0;
                     parent.GetComponent<Unit>().enabled = true;
+                    StartCoroutine(parent.GetComponent<Unit>().FollowPath());
                     parent.GetComponent<CharacterController>().enabled = true;
                     parent.GetComponent<Animator>().enabled = true;
-                    StartCoroutine(parent.GetComponent<Unit>().FollowPath());
                     gameObject.GetComponent<Ragdoll>().ragState(true);
                     gameObject.GetComponent<Ragdoll>().backup();
                 }
