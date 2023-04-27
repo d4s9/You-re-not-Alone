@@ -19,6 +19,7 @@ public class Inventaire : MonoBehaviour
 
     private ItemData itemCurrentlySelected;
     private ItemData bois;
+    private ItemData armeActive;
 
     [SerializeField] private Sprite slotVide;
      
@@ -105,7 +106,7 @@ public class Inventaire : MonoBehaviour
     }
     public void UseActionButton()
     {
-        print("Utilisation : " + itemCurrentlySelected.name);
+        armeActive = itemCurrentlySelected;
         CloseActionPanel();
     }
     public void DestroyActionButton()
@@ -120,6 +121,6 @@ public class Inventaire : MonoBehaviour
     }
     public ItemData getItemCurrentlySelected()
     {
-        return itemCurrentlySelected;
+        return armeActive;
     }
 }
