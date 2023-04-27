@@ -5,15 +5,16 @@ using UnityEngine.Playables;
 
 public class ReadSceneManager : MonoBehaviour
 {
-    [SerializeField] private Playable cutScene;
+    private PlayableDirector cutScene;
     void Start()
     {
+        cutScene= GetComponent<PlayableDirector>();
         cutScene.Play();
     }
 
     void Update()
     {
-        if(Time.time > cutScene.GetDuration())
+        if(Time.time > cutScene.duration)
         {
             Debug.Log("Change Scene");
             //this.GetComponent<Scene_Manager>().ChangeScene();
