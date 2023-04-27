@@ -107,6 +107,7 @@ public class Inventaire : MonoBehaviour
     public void UseActionButton()
     {
         armeActive = itemCurrentlySelected;
+        inventoryPanel.SetActive(false);
         CloseActionPanel();
     }
     public void DestroyActionButton()
