@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a23078518d71764b97749be04a73129, type: 3}
   m_Name: Pelle
   m_EditorClassIdentifier: 
-  nom: 
+  nom: Pelle
   description: 
   visuel: {fileID: 0}
   prefab: {fileID: 0}
-  itemType: 0
+  itemType: 1

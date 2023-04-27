@@ -9,6 +9,7 @@ public class Inventaire : MonoBehaviour
      [SerializeField] private GameObject inventoryPanel;
      [SerializeField] private Transform inventorySlotsParent;
 
+
      const int InventorySize = 24;
 
 
@@ -17,6 +18,7 @@ public class Inventaire : MonoBehaviour
     [SerializeField] private GameObject deleteActionButton;
 
     private ItemData itemCurrentlySelected;
+    private ItemData bois;
 
     [SerializeField] private Sprite slotVide;
      
@@ -25,7 +27,8 @@ public class Inventaire : MonoBehaviour
 
     private void Awake()
     {
-        instance = this; 
+        instance = this;
+        itemCurrentlySelected = bois;
     }
 
     private void Start()
