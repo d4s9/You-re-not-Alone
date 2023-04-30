@@ -13,15 +13,16 @@ public class Unit : MonoBehaviour
     [SerializeField] private float ennemyDetectionDistance;
     [SerializeField] private LayerMask playerLayer;
     [SerializeField] private float angleVision;
-    [SerializeField] private float speed = 3;
+    [SerializeField] public float speed = 3;
     [SerializeField] private AnimationClip zombAtt;
-    [SerializeField] private float _maxZombHealth = default;
+    [SerializeField] public float _maxZombHealth = default;
     [SerializeField] private GameObject _healthBar;
     [SerializeField] private int _points = 100;
     [SerializeField] private int _attackDamage = 10;
-    private float _zombHealth;
+    public float _zombHealth;
     private UI_Manager _uiManager;
     public bool isDead = false, isAttack;   
+    public GameObject ragHolder;
     Animator animator;
     private bool _following = false, groundEnnemy = false;
     Vector3[] path;
@@ -113,7 +114,7 @@ public class Unit : MonoBehaviour
     {
          _zombHealth -= damage;
         _healthBar.GetComponent<Slider>().value = _zombHealth/_maxZombHealth;
-        if(_zombHealth < 1)
+        if (_zombHealth < 1)
         {
             Die();
         }
@@ -123,6 +124,7 @@ public class Unit : MonoBehaviour
     {
         _uiManager.AjouterScore(_points);
         isDead = true;
+        ragHolder.GetComponent<Ragdoll>().activerag(false); // devien un ragdoll
     }
 
 

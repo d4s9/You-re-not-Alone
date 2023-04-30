@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.WSA;
 
 public class revive : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class revive : MonoBehaviour
     [SerializeField] float rotation_speed = 500f;
     [SerializeField] float up_speed = 1f;
     [SerializeField] float rot_acc = 3f;
-
+    public bool activated = false;
     void Start()
     {
         i = 0f;
@@ -31,10 +32,13 @@ public class revive : MonoBehaviour
 
     void Update()
     {
-        if (gameObject.transform.position.y < 15)
+        if (activated == true)
         {
-            rotate();
-            upp();
+            if (gameObject.transform.position.y < 15)
+            {
+                rotate();
+                upp();
+            }
         }
     }
 }

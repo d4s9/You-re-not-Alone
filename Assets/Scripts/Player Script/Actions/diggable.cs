@@ -9,7 +9,7 @@ public class diggable : MonoBehaviour
     public GameObject loot;
     //nombre de pelletage pour déterrer l'objet.
     [SerializeField] int nb = 1;
-    
+    [SerializeField] GameObject player;
     int i;//comptage de pelletage
 
     //créer une list pour les model de troue.
@@ -60,7 +60,7 @@ public class diggable : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "shovel")
+        if (other.tag == "Damage" && player.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Je pelte"))
         {
             dig_detect();
         }
