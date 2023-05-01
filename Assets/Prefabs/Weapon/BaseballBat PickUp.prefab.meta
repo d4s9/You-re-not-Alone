@@ -1,6 +1,12 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Prefabs/Weapon/BaseballBat PickUp.prefab.meta
 guid: 1679a0ccdd6b3dd46833bb1f219a8d13
 PrefabImporter:
+========
+guid: e148964f3710f2840a3a9ac7a2f354ca
+folderAsset: yes
+DefaultImporter:
+>>>>>>>> d8ebf52dc99adb5bb5d56413bac50b8b9e5d6c38:Assets/Polybrush Data/Prefab Palette.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

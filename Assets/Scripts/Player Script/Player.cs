@@ -388,6 +388,7 @@ public class Player : MonoBehaviour
             rigBuilder.enabled = false;
         }
         //RUntime
+        Debug.Log(item.nom);
         if (item.nom == "Pelle")
         {
             rigBuilder.enabled = false;

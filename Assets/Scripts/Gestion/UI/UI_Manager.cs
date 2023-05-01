@@ -30,7 +30,6 @@ public class UI_Manager : MonoBehaviour
     {
         if (!_mort)
         {
-            Debug.Log(_timeTxt.text);
             time = TimeSpan.FromSeconds(Time.time);
             _timeTxt.SetText("Time: " + time.ToString("mm':'ss':'ff"));
             PauseGame();

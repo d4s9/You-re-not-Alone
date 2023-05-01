@@ -1,7 +1,26 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
+<<<<<<<< HEAD:Assets/Prefabs/UI/InventaireAffichage.prefab.meta
+<<<<<<< HEAD
+guid: a1cb4206764e39b41ad01215f7fb562d
+=======
+guid: b55b2f1d320cf6f49a7423ec6087925a
+>>>>>>> cd1ef7a5142df49adc1be661d0344f0d014b07b6
+PrefabImporter:
+========
 guid: 75240d6118926f442b3f2c0c8d3d17d4
 folderAsset: yes
 DefaultImporter:
+>>>>>>>> 4ff3cd4a3bdc525bf10f728fe03755b04cae6fbb:Assets/Polybrush Data/Brush Settings.meta
+=======
+<<<<<<<< HEAD:Assets/Polybrush Data/Color Palette.meta
+guid: b0971c3c333c4dd4b887aeac47537f84
+========
+guid: 75240d6118926f442b3f2c0c8d3d17d4
+>>>>>>>> d8ebf52dc99adb5bb5d56413bac50b8b9e5d6c38:Assets/Polybrush Data/Brush Settings.meta
+folderAsset: yes
+DefaultImporter:
+>>>>>>> d8ebf52dc99adb5bb5d56413bac50b8b9e5d6c38
   externalObjects: {}
   userData: 
   assetBundleName: 

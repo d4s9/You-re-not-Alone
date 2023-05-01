@@ -1,6 +1,16 @@
 fileFormatVersion: 2
-guid: 764a2f826435b6642b836d565b1fbadf
+<<<<<<<< HEAD:Assets/Prefabs/Weapon/BaseballBat.prefab.meta
+<<<<<<< HEAD
+guid: 5cb11489c64b67f45be6b47106f6d899
+=======
+guid: e9db95424013b2b419de344fef34aefc
+>>>>>>> cd1ef7a5142df49adc1be661d0344f0d014b07b6
 PrefabImporter:
+========
+guid: 035aae7aa5d7aa84b8f60435f8feee1d
+folderAsset: yes
+DefaultImporter:
+>>>>>>>> d8ebf52dc99adb5bb5d56413bac50b8b9e5d6c38:Assets/Polybrush Data.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

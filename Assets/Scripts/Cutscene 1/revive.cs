@@ -30,6 +30,11 @@ public class revive : MonoBehaviour
         transform.localPosition = new Vector3 (gameObject.transform.position.x, k, gameObject.transform.position.z);
     }
 
+   /* private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Damage" && player.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Je pelte"))
+    }*/
+
     void Update()
     {
         if (activated == true)
