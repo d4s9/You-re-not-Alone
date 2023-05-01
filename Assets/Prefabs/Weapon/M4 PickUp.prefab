@@ -9,9 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8932854444826296377}
-  m_Layer: 12
+  - component: {fileID: 978704710}
+  - component: {fileID: 978704707}
+  m_Layer: 6
   m_Name: M4 PickUp
-  m_TagString: Untagged
+  m_TagString: Objet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 8932854444826296376}
   m_LocalRotation: {x: 0, y: -0, z: 0, w: -1}
   m_LocalPosition: {x: 0.0025584071, y: 0.004695472, z: 0.000047206762}
-  m_LocalScale: {x: 0.009999998, y: 0.010000005, z: 0.010000005}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8932854444986026422}
@@ -38,6 +40,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -360}
+--- !u!65 &978704710
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8932854444826296376}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1.4701183}
+  m_Center: {x: 3.604925e-11, y: -4.1817633e-11, z: 0.23505908}
+--- !u!114 &978704707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8932854444826296376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13b01bc08d5496642844cf9f2c70e44a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemData: {fileID: 11400000, guid: 11d4ff45f747a814686d86bee4a1a308, type: 2}
 --- !u!1 &8932854444837891820
 GameObject:
   m_ObjectHideFlags: 0
@@ -50,7 +78,7 @@ GameObject:
   - component: {fileID: 8932854444837891816}
   - component: {fileID: 8932854444837891823}
   - component: {fileID: 8932854444837891822}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Weapon_02_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,7 +176,7 @@ GameObject:
   - component: {fileID: 8932854444986026417}
   - component: {fileID: 8932854444986026416}
   - component: {fileID: 8932854444986026423}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Weapon_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -246,7 +274,7 @@ GameObject:
   - component: {fileID: 8932854445063690103}
   - component: {fileID: 8932854445063690102}
   - component: {fileID: 8932854445063690101}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Weapon_02_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -344,7 +372,7 @@ GameObject:
   - component: {fileID: 8932854445137069759}
   - component: {fileID: 8932854445137069758}
   - component: {fileID: 8932854445137069757}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Weapon_02_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -442,7 +470,7 @@ GameObject:
   - component: {fileID: 8932854445402024854}
   - component: {fileID: 8932854445402024853}
   - component: {fileID: 8932854445402024852}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Weapon_02_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -540,7 +568,7 @@ GameObject:
   - component: {fileID: 8932854445491637054}
   - component: {fileID: 8932854445491637053}
   - component: {fileID: 8932854445491637052}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Weapon_02_6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -638,7 +666,7 @@ GameObject:
   - component: {fileID: 8932854445741469038}
   - component: {fileID: 8932854445741469037}
   - component: {fileID: 8932854445741469036}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Weapon_02_7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
