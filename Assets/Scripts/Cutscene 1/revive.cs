@@ -37,13 +37,13 @@ public class revive : MonoBehaviour
 
     void Update()
     {
-        if (activated == true)
-        {
+       // if (activated == true)
+       // {
             if (gameObject.transform.position.y < 15)
             {
                 rotate();
                 upp();
             }
-        }
+       // }
     }
 }

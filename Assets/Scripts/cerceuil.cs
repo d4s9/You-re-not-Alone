@@ -6,6 +6,7 @@ public class cerceuil : MonoBehaviour
 {
     //objet retrouver dans le corps creusé.
     public GameObject loot;
+    public GameObject sfx;
     //nombre de pelletage pour déterrer l'objet.
     [SerializeField] int nb;
     [SerializeField] GameObject player;
@@ -30,6 +31,7 @@ public class cerceuil : MonoBehaviour
     void spawn()
     {
         Instantiate(loot, transform.position, transform.rotation);
+        Instantiate(sfx, transform.position, transform.rotation);
     }
 
     //detecter si le joueur creuse sur le gameobject.
