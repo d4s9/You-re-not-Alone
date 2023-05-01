@@ -1,9 +1,8 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class diggable : MonoBehaviour
+public class cerceuil : MonoBehaviour
 {
     //objet retrouver dans le corps creusé.
     public GameObject loot;
@@ -40,22 +39,22 @@ public class diggable : MonoBehaviour
         i++;
         //changer le modele du troue pour un troue plus profont. **** créer une fonction pour le changement de modele du troue.
         hole_phase(i);
-
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Damage" && player.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Je pelte") && i < nb && diglock == false)
+        if (other.tag == "Damage" && player.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("attack melee") && i < nb && diglock == false)
         {
             diglock = true;
             dig_detect();
         }
+        // spawn();
         else if (i == nb)
         {
             //spawner le loot.
             spawn();
             //ne peut plus spawner d'objets.
-            i = nb+1;
+            i = nb + 1;
         }
         else
         {
@@ -64,7 +63,7 @@ public class diggable : MonoBehaviour
 
     void Update()
     {
-        if (!player.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Je pelte"))
+        if (!player.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("attack melee"))
         {
             diglock = false;
         }
