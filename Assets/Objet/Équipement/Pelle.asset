@@ -15,5 +15,5 @@ MonoBehaviour:
   nom: Pelle
   description: 
   visuel: {fileID: 0}
-  prefab: {fileID: 0}
+  prefab: {fileID: 8888494475339480876, guid: e5d3d0bc0bda74d469f476619a1a448d, type: 3}
   itemType: 1
