@@ -388,8 +388,10 @@ public class Player : MonoBehaviour
             rigBuilder.enabled = false;
         }
         //RUntime
-        Debug.Log(item.nom);
-        if (item.nom == "Pelle")
+
+        
+    
+        if (item == null || item.nom == "Pelle")
         {
             rigBuilder.enabled = false;
             m4.SetActive(false);
@@ -407,7 +409,7 @@ public class Player : MonoBehaviour
             animator.SetBool(isRifleHash, false);
             animator.SetBool(isMeleeHash, true);
         }
-        else if(item.nom == "m4")
+        else if (item.nom == "m4")
         {
             animator.SetBool(isMeleeHash, false);
             animator.SetBool(isRifleHash, true);
@@ -416,6 +418,8 @@ public class Player : MonoBehaviour
             m4.SetActive(true);
             rigBuilder.enabled = true;
         }
+        
+       
         
         
         
