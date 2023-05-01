@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -12,6 +13,7 @@ public class UI_Manager : MonoBehaviour
     [SerializeField] private Slider _healthbar; 
     [SerializeField] private GameObject _playerDeadPanel;
 
+    TimeSpan time;
     private int _score;
     private bool _isPaused = false;
     private bool _mort;
@@ -28,7 +30,9 @@ public class UI_Manager : MonoBehaviour
     {
         if (!_mort)
         {
-            _timeTxt.SetText("Time : " + Time.time.ToString("00:00.00"));
+            Debug.Log(_timeTxt.text);
+            time = TimeSpan.FromSeconds(Time.time);
+            _timeTxt.SetText("Time: " + time.ToString("mm':'ss':'ff"));
             PauseGame();
         }       
     }

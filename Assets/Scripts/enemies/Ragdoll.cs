@@ -20,7 +20,7 @@ public class Ragdoll : MonoBehaviour
         //ragRigidBody = GetComponentsInChildren<Rigidbody>();
         ragState(true);
         charControlerStepOffset = unitParent.GetComponent<CharacterController>().stepOffset;
-        for (int i = 0; i < ragRigidBody.Length; i++)
+        for (int i = 0; i < ragRigidBody.Length -1; i++)
         {
             pos_initial[i] = ragRigidBody[i].GetComponent<Transform>().localPosition;
             rot_initial[i] = ragRigidBody[i].GetComponent<Transform>().localEulerAngles;
