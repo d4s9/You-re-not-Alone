@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Weapons_effects : MonoBehaviour
 {
-    [SerializeField] int damage_imput = 50;
+    [SerializeField] public int damage_imput = 50;
     [SerializeField] GameObject player;
     [SerializeField] ParticleSystem blood_PS;
     public AudioClip[] clip;
@@ -20,6 +20,13 @@ public class Weapons_effects : MonoBehaviour
         audio = GetComponent<AudioSource>();
     }
 
+    void playRandomAudio()
+    {
+        audio.clip = clip[Random.Range(0, clip.Length - 1)];
+        audio.Play();
+        did_damage = 1;
+    }
+
     //L'enemie prend des dégat lorsque le joueur le frappe.
     private void OnTriggerEnter(Collider other)
     {
@@ -30,20 +37,7 @@ public class Weapons_effects : MonoBehaviour
             if (did_damage == 0)
             {
                 Instantiate(blood_PS, other.transform.position, other.transform.rotation);
-                audio.clip = clip[Random.Range(0, clip.Length - 1)];
-                audio.Play();
-                did_damage = 1;
-
-                //pour le boss
-                if (other.name == "boss")
-                {
-                    other.GetComponent<Unit>().StopAllCoroutines();
-                    other.GetComponent<Unit>().enabled = false;
-                    other.GetComponent<Animator>().enabled = false;
-                    other.GetComponent<CharacterController>().enabled = false;
-                    other.transform.GetChild(0).GetComponent<Ragdoll>().ragState(false);
-                    other.transform.GetChild(0).GetComponent<boss>().kb = true;
-                }
+                playRandomAudio();
             }
         }
     }
@@ -55,10 +49,9 @@ public class Weapons_effects : MonoBehaviour
             did_damage = 0;
         }
 
-
             if (pelte == 0 && player.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Je pelte"))
         {
-            audio.clip = clip[4];
+            audio.clip = clip[3];
             audio.Play();
             pelte = 1;
         }
