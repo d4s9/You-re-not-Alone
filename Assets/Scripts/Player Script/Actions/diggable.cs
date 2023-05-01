@@ -40,13 +40,7 @@ public class diggable : MonoBehaviour
         i++;
         //changer le modele du troue pour un troue plus profont. **** créer une fonction pour le changement de modele du troue.
         hole_phase(i);
-        /*
-        //si atteint le nb de pelletage necessaire.
-        if (i == nb)
-        {
-            //spawner le loot.
-            spawn();
-        }*/
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -56,7 +50,6 @@ public class diggable : MonoBehaviour
             diglock = true;
             dig_detect();
         }
-        // spawn();
         else if (i == nb)
         {
             //spawner le loot.
