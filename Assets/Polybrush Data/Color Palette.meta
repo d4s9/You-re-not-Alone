@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Polybrush Data/Color Palette.meta
 guid: b0971c3c333c4dd4b887aeac47537f84
+========
+guid: 75240d6118926f442b3f2c0c8d3d17d4
+>>>>>>>> d8ebf52dc99adb5bb5d56413bac50b8b9e5d6c38:Assets/Polybrush Data/Brush Settings.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
