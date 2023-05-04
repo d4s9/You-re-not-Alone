@@ -35,7 +35,7 @@ public class GameEnding : MonoBehaviour
     {
         
         _currentScore = PlayerPrefs.GetInt("PlayerScore", 0);
-        _currentTime = float.Parse(PlayerPrefs.GetString("PlayerTime", 61.46f.ToString()));
+        _currentTime = float.Parse(PlayerPrefs.GetString("PlayerTime", 0f.ToString()));
         _startContentSize = _GridContent.GetComponent<RectTransform>().sizeDelta;
         _nameError.SetText("");
       
