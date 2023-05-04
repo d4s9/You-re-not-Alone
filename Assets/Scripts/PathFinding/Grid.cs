@@ -10,7 +10,6 @@ public class Grid : MonoBehaviour
     public float nodeRadius;
     public LayerMask unwalkableMask;
     Node[,] grid;
-
     float nodeDiameter;
     int gridSizeX, gridSizeY;
 
@@ -31,20 +30,7 @@ public class Grid : MonoBehaviour
             return gridSizeX * gridSizeY;
         }
     }
-    public void CreateGrid()
-    {
-        grid = new Node[gridSizeX, gridSizeY];
-        Vector3 worldBottomLeft = transform.position - Vector3.right * gridWorldSize.x / 2 - Vector3.forward * gridWorldSize.y / 2;
-        for (int x = 0; x < gridSizeX; x++)
-        {
-            for (int y = 0; y < gridSizeY; y++)
-            {
-                Vector3 worldPoint = worldBottomLeft + Vector3.right * (x * nodeDiameter + nodeRadius) + Vector3.forward * (y * nodeDiameter + nodeRadius);
-                bool walkable = !(Physics.CheckSphere(worldPoint, nodeRadius, unwalkableMask));
-                grid[x, y] = new Node(walkable, worldPoint, x, y);
-            }
-        }
-    }
+  
 
     public List<Node> GetNeighbours(Node node)
     {
@@ -81,6 +67,21 @@ public class Grid : MonoBehaviour
 
         return grid[x, y];
 
+    }
+    public void CreateGrid()
+    {
+        grid = new Node[gridSizeX, gridSizeY];
+        Vector3 worldBottomLeft = transform.position - Vector3.right * gridWorldSize.x / 2 - Vector3.forward * gridWorldSize.y / 2;
+        for (int x = 0; x < gridSizeX; x++)
+        {
+            for (int y = 0; y < gridSizeY; y++)
+            {
+                Vector3 worldPoint = worldBottomLeft + Vector3.right * (x * nodeDiameter + nodeRadius) + Vector3.forward * (y * nodeDiameter + nodeRadius);
+                bool walkable = !(Physics.CheckSphere(worldPoint, nodeRadius, unwalkableMask));
+               
+                grid[x, y] = new Node(walkable, worldPoint, x, y);
+            }
+        }
     }
 
     private void OnDrawGizmos()

@@ -30,17 +30,18 @@ public class Unit : MonoBehaviour
 
     private void Start()
     {
+        
         isAttack = false;
         _uiManager = FindObjectOfType<UI_Manager>().GetComponent<UI_Manager>();
         _zombHealth = _maxZombHealth;
         _healthBar.GetComponent<Slider>().value = _zombHealth / _maxZombHealth;
         animator = GetComponent<Animator>();
         animator.SetFloat("AnimSpeed", (speed / 10) + 1);
+        Physics.IgnoreLayerCollision(25, 26);
     }
     
     private void Update()
     {
-        
         this.GetComponent<CharacterController>().SimpleMove(Vector3.forward * 0);
 
         if (isDead == false)
@@ -169,7 +170,7 @@ public class Unit : MonoBehaviour
                 }
                 currentWaypoint = path[targetIndex];               
             }
-
+            
             Quaternion _lookatRotation = Quaternion.LookRotation(new Vector3(currentWaypoint.x - this.transform.position.x, 0, currentWaypoint.z - this.transform.position.z), Vector3.up);
             rotation = Quaternion.Slerp(this.transform.rotation, _lookatRotation, _smoothCoef);
             transform.rotation = rotation;
