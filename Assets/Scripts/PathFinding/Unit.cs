@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 public class Unit : MonoBehaviour
 {
-    [SerializeField] private GameObject target;
+    [SerializeField] public GameObject target;
     [SerializeField] private float ennemyDetectionDistance;
     [SerializeField] private LayerMask playerLayer;
     [SerializeField] private float angleVision;
@@ -118,6 +118,10 @@ public class Unit : MonoBehaviour
         if (_zombHealth < 1)
         {
             Die();
+        }
+        else if (_following == false)
+        {
+            _following = true;
         }
     }
 

@@ -463,7 +463,7 @@ MonoBehaviour:
   _maxZombHealth: 100
   _healthBar: {fileID: 6035573718257476623}
   _points: 100
-  _attackDamage: 50
+  _attackDamage: 15
   _zombHealth: 0
   isDead: 0
   isAttack: 0
