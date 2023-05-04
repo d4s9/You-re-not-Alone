@@ -52,11 +52,12 @@ public class Player : MonoBehaviour
     private bool isMovementPressed;
     private bool isRunPressed;
     private bool isAttackingPressed;
-    private bool isMeleePressed;
-    private bool isRiflePressed;
+    private bool isMeleePressed; //Obsolète depuis l'implémentation de l'inventaire
+    private bool isRiflePressed; //Idem
     private bool isDigginPressed;
 
     //JUMPING VARIABLES
+    //OBSOLÈTE DÛ AU BUG NON RÉSOLU
     [SerializeField] bool isJumpingPressed = false;
     private float initialJumpVelocity;
     private float maxJumpHeight = 1.0f;
@@ -117,7 +118,7 @@ public class Player : MonoBehaviour
 Créateur : Derek
 Fonction Awake qui va chercher nombreux parametre utilisé tout au long du programme
                                 
-                                                        AWAKE
+                                                   ***  AWAKE ***
                    
 ************************************************************************************************************************/
     private void Awake()
@@ -137,8 +138,10 @@ Fonction Awake qui va chercher nombreux parametre utilisé tout au long du progra
         //L'initialisation de la vie ainsi permet de garder en mémoire la vie maximale plutôt que d'utiliser une seule variable
         _health = _maxHealth;
 
-        //Initialise la gravité
-        characterController.SimpleMove(Vector3.forward * 0); //Méthode qui as remplacé l'utilisation de la gravité géré par le script
+        //Initialise la gravité de base
+        //OBSOLÈTE car implémentation manuelle de la gravité
+        //characterController.SimpleMove(Vector3.forward * 0); 
+        
 
         //Coeur de l'animation
         animator = GetComponent<Animator>();
@@ -149,13 +152,17 @@ Fonction Awake qui va chercher nombreux parametre utilisé tout au long du progra
         inputCallback();
 
         setupJumpVariables();
-
     }
+
+
+
+
+
 /************************************************************************************************************************
 Créateur : Derek
 Fonction hash est utilisé pour convertir les string en hash afin d'optimiser le code
 
-                                                        HASH AND SWITCH
+                                               *** HASH AND SWITCH ***
 
 ************************************************************************************************************************/
     private void hash()
@@ -171,13 +178,16 @@ Fonction hash est utilisé pour convertir les string en hash afin d'optimiser le 
         isRifleHash = Animator.StringToHash("isRifle");
         isDigginHash = Animator.StringToHash("isDiggin");
     }
-    /************************************************************************************************************************
-    Créateur : Derek
-    Fonction hash est utilisé pour convertir les string en hash afin d'optimiser le code
 
-                                                            INPUT
 
-    ************************************************************************************************************************/
+
+/************************************************************************************************************************
+Créateur : Derek
+Fonction hash est utilisé pour convertir les string en hash afin d'optimiser le code
+
+                                                    *** INPUT ***
+
+************************************************************************************************************************/
     private void inputCallback()
     {
         // set the player input callbacks
@@ -210,15 +220,26 @@ Fonction hash est utilisé pour convertir les string en hash afin d'optimiser le 
         playerInput.CharacterControls.Diggin.canceled += onDiggin;
         playerInput.CharacterControls.Diggin.performed += onDiggin;
     }
-/************************************************************************************************************************
-Créateur : Derek
-CODE OBSOLÈTE
-Ce code est laissé dans le programme pour laisser des trâce de mon travail et aussi dans l'espoir de trouver le problème
-un jour.
 
-                                                        JUMP
+    private void OnEnable()
+    {
+        playerInput.CharacterControls.Enable();
+    }
 
-************************************************************************************************************************/
+    private void OnDisable()
+    {
+        playerInput.CharacterControls.Disable();
+    }
+
+    /************************************************************************************************************************
+    Créateur : Derek
+    CODE OBSOLÈTE
+    Ce code est laissé dans le programme pour laisser des trâce de mon travail et aussi dans l'espoir de trouver le problème
+    un jour.
+
+                                                        *** JUMP ***
+
+    ************************************************************************************************************************/
     private void setupJumpVariables()
     {
         float timeToApex = maxJumpTime / 2;
@@ -226,10 +247,13 @@ un jour.
         initialJumpVelocity = (2 * maxJumpHeight) / timeToApex;
     }
 
+
+
+
 /************************************************************************************************************************
 Créateur : Derek
 
-                                                        Callbacks
+                                                     *** Callbacks ***
 
 ************************************************************************************************************************/
     
@@ -290,43 +314,70 @@ Créateur : Derek
     {
         isDigginPressed = context.ReadValueAsButton();
     }
-//**********************************************************************************************************************/
+   
 
+
+/************************************************************************************************************************
+Créateur : Derek
+Coeur du fonctionnement du personnage
+                                                   *** UPDATES ***
+
+************************************************************************************************************************/
     // Update is called once per frame
     void Update()
     {
-        
 
+        //Script créé par Yoan qui permet au joueur de se tourner vers la souris
         PlayerRotation();
+
+        //Animations du personnage
         handleAnimation();
-        //handleRotation();
+
+        //handleRotation(); //Version obsolète par l'existance de la version de Yoan
+
+        //Course du personnage
         handleRun();
+
+        //Changement du blend tree lorsqu'un changement occure
         handleBlendTree();
 
-        if (isRunPressed)
-        {
-            characterController.Move(currentRunMovement * Time.deltaTime);
-        }
-        else
-        {
-            characterController.Move(currentMovement * Time.deltaTime);
-        }
-
+        //Gestion de la gravité du personnage
         handleGravity();
+
+        //Gestion du saut du personnage
         //Le personnage ne peut pas sauter vers l'avant et le problème est introuvable...
-        //handleJump();
+        //handleJump(); //Obsolète mais reste une trâce de mon travail
 
 
 
     }
+
+
+/************************************************************************************************************************
+Créateur : Yoan
+Gestion de certaine fonctionnalité de la caméra et de la souris
+
+                                                  *** FIXEDUPDATES ***
+
+************************************************************************************************************************/
     private void FixedUpdate()
     {
         Quaternion rotation = Quaternion.Lerp(transform.rotation, _lookAtRotation, _smoothCoef);
         transform.rotation = rotation;
     }
 
-    //########################################################################################################################################################
-    //Handle all animation
+
+
+
+
+/************************************************************************************************************************
+Créateur : Derek
+Gestion du changement de blend tree lorsque le personnage change d'arme
+
+                                                    *** BLEND TREE ***
+
+************************************************************************************************************************/
+
 
     private void handleBlendTree()
     {
@@ -353,6 +404,16 @@ Créateur : Derek
         animator.SetFloat(velocityXHash, velocityX);
 
     }
+
+
+
+/************************************************************************************************************************
+Créateur : Derek
+Gestion des animations du personnage
+
+                                                  *** ANIMATION ***
+
+************************************************************************************************************************/
     private void handleAnimation()
     {
         //get parameter values from animator
@@ -429,6 +490,7 @@ Créateur : Derek
         }
         //#####
         //Saut
+        //OBSOLÈTE
         //Problème du saut toujours pas trouvé
         /*
         if (isJumpingPressed)
@@ -439,8 +501,11 @@ Créateur : Derek
         {
             animator.SetBool(isJumpingHash, false);
         }
-        */
+        */                                                         //Le commentaire le plus important ever
         //#####                                                  C'est probablement ca que tu cherche Derek
+
+        //                          *** CHANGEMENT D'ARME, DE BLEND TREE, D'ANIMATION, ETC.. ***
+
         //Blend Tree Setter
         //Start
         if ((isMelee == false) && (isRifle == false))
@@ -451,10 +516,8 @@ Créateur : Derek
             BaseballBat.SetActive(false);
             rigBuilder.enabled = false;
         }
-        //RUntime
 
-        
-    
+        //RUntime
         if (item == null || item.nom == "Pelle")
         {
             rigBuilder.enabled = false;
@@ -483,11 +546,6 @@ Créateur : Derek
             rigBuilder.enabled = true;
         }
         
-       
-        
-        
-        
-        //####
         //Diggin
         //Regarde si la pelle est active, sinon le joueur peut pelleter avec toute les armes.
         if(isDigginPressed && !isAttacking && Pelle.activeSelf == true)
@@ -499,8 +557,13 @@ Créateur : Derek
             animator.SetBool(isDigginHash, false);
         }
     }
+/************************************************************************************************************************
+Créateur : Derek
+Groupement de fonction Lock et Velocity
 
-    //########################################################################################################################################################
+                                                    *** VELOCITY ***
+
+************************************************************************************************************************/
     // handles reset and locking of velocity
     private void lockOrResetVelocity(bool forwardPressed, bool leftPressed, bool rightPressed, bool backPressed, bool runPressed, float currentMaxVelocity)
     {
@@ -511,6 +574,13 @@ Créateur : Derek
         handleLock(forwardPressed, leftPressed, rightPressed, backPressed, runPressed, currentMaxVelocity);
 
     }
+/************************************************************************************************************************
+Créateur : Derek
+Reset de la vitesse du personnage lors de l'arrêt du mouvement
+
+                                                    *** RESET ***
+
+************************************************************************************************************************/
     private void handleReset(bool forwardPressed, bool leftPressed, bool rightPressed, bool backPressed)
     {
         
@@ -528,6 +598,16 @@ Créateur : Derek
         }
     }
 
+/************************************************************************************************************************
+Créateur : Derek
+Implémentation d'un mouvement plus réaliste
+Bloque le mouvement du joueur pour qu'il ne dépasse pas une certaine vitesse
+Implémenation néscessaire puisque nous utilison une accélération et decélération pour le mouvement
+Sans cette fonction le personnage accélèretait infinément
+
+                                                    *** LOCK ***
+
+************************************************************************************************************************/
     private void handleLock(bool forwardPressed, bool leftPressed, bool rightPressed, bool backPressed, bool runPressed, float currentMaxVelocity)
     {
         // lock forward
@@ -617,6 +697,13 @@ Créateur : Derek
         }
     }
 
+/************************************************************************************************************************
+Créateur : Derek
+Groupement des fonctions d'acc et de decc
+
+                                            *** ACCÉLÉRATION ET DECÉLÉRATION ***
+
+************************************************************************************************************************/
     // handles acceleration and deceleration
     private void changeVelocity(bool forwardPressed, bool leftPressed, bool rightPressed, bool backPressed, bool runPressed, float currentMaxVelocity)
     {
@@ -627,36 +714,53 @@ Créateur : Derek
         handleDeceleration(forwardPressed, leftPressed, rightPressed, backPressed, runPressed);
 
     }
+
+/************************************************************************************************************************
+Créateur : Derek
+Implicit
+                                                    *** ACCÉLÉRATION ***
+
+************************************************************************************************************************/
     private void handleAcceleration(bool forwardPressed, bool leftPressed, bool rightPressed, bool backPressed, float currentMaxVelocity)
     {
         // if player presses forward, increase velocity in z direction
         if (forwardPressed && velocityZ < currentMaxVelocity)
         {
             velocityZ += Time.deltaTime * acceleration;
-            Debug.Log("W");
+            //Debug.Log("W");
         }
 
         // increase velocity in left direction
         if (leftPressed && velocityX > -currentMaxVelocity)
         {
             velocityX -= Time.deltaTime * acceleration;
-            Debug.Log("A");
+            //Debug.Log("A");
         }
 
         //increase velocity in right direction
         if (rightPressed && velocityX < currentMaxVelocity)
         {
             velocityX += Time.deltaTime * acceleration;
-            Debug.Log("D");
+            //Debug.Log("D");
         }
 
         //increase velocity in back direction
         if (backPressed && velocityZ > -currentMaxVelocity)
         {
             velocityZ -= Time.deltaTime * acceleration;
-            Debug.Log("S");
+            //Debug.Log("S");
         }
     }
+
+/************************************************************************************************************************
+Créateur : Derek
+Gestion de la decc lors de la course et de la marche
+Gestion de la decc selon les directions X Y du perso
+
+                                                    *** Deceleration ***
+
+************************************************************************************************************************/
+
     private void handleDeceleration(bool forwardPressed, bool leftPressed, bool rightPressed, bool backPressed, bool runPressed)
     {
         // set the deceleration for if run is pressed or not
@@ -696,7 +800,13 @@ Créateur : Derek
         }
     }
 
-    //########################################################################################################################################################
+/************************************************************************************************************************
+Créateur : Derek
+OBSOLÈTE
+                                                    *** JUMP ***
+
+************************************************************************************************************************/
+
     private void handleJump()
     {
         if (!isJumping && characterController.isGrounded && isJumpingPressed)
@@ -709,7 +819,16 @@ Créateur : Derek
             isJumping = false;
         }
     }
+/************************************************************************************************************************
+Créateur : Derek
+Gestion de la gravité du personnage
+Ce script a été créé en parallèle avec le saut.
+Le saut étant obsolète n'empêche pas l'utilisation de ce script.
+J'ai donc décidé de garder ce script.
 
+                                                    *** GRAVITY (2013) ***
+
+************************************************************************************************************************/
     private void handleGravity()
     {
         bool isFalling = currentMovement.y <= 0.0f || !isJumpingPressed;
@@ -736,7 +855,13 @@ Créateur : Derek
             currentRunMovement.y = nextYVelocity;
         }
     }
+/************************************************************************************************************************
+Créateur : Yoan
+Gestion de la rotation du joueur vers la caméra
 
+                                                 *** ROTATION / CAMÉRA ***
+
+************************************************************************************************************************/
     private void PlayerRotation()
     {
         Plane groundPlane = new Plane(Vector3.up, -transform.position.y);
@@ -750,7 +875,13 @@ Créateur : Derek
         }
 
     }
-    
+/************************************************************************************************************************
+Créateur : Derek
+Gestion de la course du personnage
+
+                                                    *** RUN ***
+
+************************************************************************************************************************/
     private void handleRun()
     {
         if(isRunPressed)
@@ -761,6 +892,12 @@ Créateur : Derek
             characterController.Move(currentMovement * Time.deltaTime);
         }
     }
+/************************************************************************************************************************
+Créateur : Derek
+OBSOLÈTE
+                                                    *** ROTATION / CAMÉRA ***
+
+************************************************************************************************************************/
     private void handleRotation()
     {
         var targetVector = new Vector3(_input.InputVector.x, 0, _input.InputVector.y);
@@ -774,15 +911,6 @@ Créateur : Derek
         {
             RotateFromMouseVector();
         }
-    }
-    private void OnEnable()
-    {
-        playerInput.CharacterControls.Enable();
-    }
-
-    private void OnDisable()
-    {
-        playerInput.CharacterControls.Disable();
     }
 
     private void RotateFromMouseVector()
@@ -815,7 +943,12 @@ Créateur : Derek
         var rotation = Quaternion.LookRotation(movementDirection);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, RotationSpeed);
     }
+/************************************************************************************************************************
+Créateur : Yoan
+Gestion de la vie du personnage
+                                                 *** VIE DU PERSONNAGE ***
 
+************************************************************************************************************************/
     public void PlayerDamage(int degats)
     {
         _health -= degats;
