@@ -108,6 +108,7 @@ public class Player : MonoBehaviour
     [SerializeField] private int _maxHealth = 100;
     private int _health;
     private UI_Manager _uiManager;
+    private bool isDead = false;
 
     ItemData item;
     [SerializeField] Inventaire inventaire;
@@ -508,7 +509,7 @@ Gestion des animations du personnage
 
         //Blend Tree Setter
         //Start
-        if ((isMelee == false) && (isRifle == false))
+        if ((isMelee == false) && (isRifle == false) && (isDead != true))
         {
             animator.SetBool(isMeleeHash, true);
             Pelle.SetActive(true);
@@ -518,7 +519,7 @@ Gestion des animations du personnage
         }
 
         //RUntime
-        if (item == null || item.nom == "Pelle")
+        if ((item == null || item.nom == "Pelle" ) && (isDead != true))
         {
             rigBuilder.enabled = false;
             m4.SetActive(false);
@@ -527,7 +528,7 @@ Gestion des animations du personnage
             animator.SetBool(isRifleHash, false);
             animator.SetBool(isMeleeHash, true);
         }
-        else if (item.nom == "Bâton de Baseball")
+        else if ((item.nom == "Bâton de Baseball") && (isDead != true))
         {
             rigBuilder.enabled = false;
             m4.SetActive(false);
@@ -536,7 +537,7 @@ Gestion des animations du personnage
             animator.SetBool(isRifleHash, false);
             animator.SetBool(isMeleeHash, true);
         }
-        else if (item.nom == "m4")
+        else if ((item.nom == "m4") && (isDead != true))
         {
             animator.SetBool(isMeleeHash, false);
             animator.SetBool(isRifleHash, true);
@@ -955,6 +956,12 @@ Gestion de la vie du personnage
         _uiManager.UpdateHealth(_health, _maxHealth);
         if(_health <= 0)
         {
+            isDead = true;
+            Pelle.SetActive(false);
+            m4.SetActive(false);
+            BaseballBat.SetActive(false);
+            animator.SetBool("isMelee", false);
+            animator.SetBool("isRifle", false);
             Physics.IgnoreLayerCollision(12, 12);
             animator.SetBool("isDead", true);
             _uiManager.joueurMort();
