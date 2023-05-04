@@ -36,7 +36,7 @@ public class Unit : MonoBehaviour
         _zombHealth = _maxZombHealth;
         _healthBar.GetComponent<Slider>().value = _zombHealth / _maxZombHealth;
         animator = GetComponent<Animator>();
-        animator.SetFloat("AnimSpeed", (speed / 10) + 1);
+        //animator.SetFloat("AnimSpeed", (speed / 10) + 1);
         Physics.IgnoreLayerCollision(25, 26);
     }
     
@@ -179,7 +179,7 @@ public class Unit : MonoBehaviour
             rotation = Quaternion.Slerp(this.transform.rotation, _lookatRotation, _smoothCoef);
             transform.rotation = rotation;
             Vector3 move = new Vector3(currentWaypoint.x - this.transform.position.x, 0, currentWaypoint.z - this.transform.position.z).normalized;
-            ennemyCharCont.SimpleMove(move * Time.deltaTime * (speed * 50));
+            ennemyCharCont.SimpleMove(move * Time.deltaTime * (speed*50));
             yield return null;
         }
     }
