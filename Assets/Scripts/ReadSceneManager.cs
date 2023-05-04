@@ -14,6 +14,7 @@ public class ReadSceneManager : MonoBehaviour
 
     void Update()
     {
+       // if(cutScene.time > )
         if(Time.time > cutScene.duration)
         {
             Debug.Log("Change Scene");
