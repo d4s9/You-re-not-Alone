@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: "B\xE2ton de Baseball"
   m_EditorClassIdentifier: 
   nom: "B\xE2ton de Baseball"
-  description: 
+  description: "Une arme de corps \xE0 corps"
   visuel: {fileID: 21300000, guid: b8db513c00597c54ca1e9aee2d70821c, type: 3}
   prefab: {fileID: 5237783369199498959, guid: 764a2f826435b6642b836d565b1fbadf, type: 3}
   itemType: 1

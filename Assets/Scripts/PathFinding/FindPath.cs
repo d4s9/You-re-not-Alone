@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Runtime.CompilerServices;
 
 public class FindPath : MonoBehaviour
 {
     Grid grid;
-
     private void Awake()
     {
         grid = GetComponent<Grid>();
@@ -16,12 +16,13 @@ public class FindPath : MonoBehaviour
     {
         Vector3[] wayPoints = new Vector3[0];
         bool pathIsSucess = false;
-
+        
         Node startNode = grid.NodeFromWorldPoint(request.pathStart);
         Node targetNode = grid.NodeFromWorldPoint(request.pathEnd);
 
         if(startNode.walkable && targetNode.walkable)
         {
+           
             Heap<Node> openSet = new Heap<Node>(grid.MaxSize);
             HashSet<Node> closedSet = new HashSet<Node>();
             openSet.Add(startNode);
@@ -37,6 +38,7 @@ public class FindPath : MonoBehaviour
                 }
                 foreach (Node neighbour in grid.GetNeighbours(currentNode))
                 {
+                                    
                     if (!neighbour.walkable || closedSet.Contains(neighbour))
                     {
                         continue;
