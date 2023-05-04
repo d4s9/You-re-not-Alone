@@ -9,22 +9,30 @@ using UnityEngine.InputSystem.XR;
 
 
 /// A faire
-// Limiter vitesse de déplacement lors des attaques
-//Melee
-//rifle
-//Vérifier le cooldown sur les attaques
+// Limiter vitesse de déplacement lors des attaques (Abandonné)
+//Melee (Fait)
+//rifle (Fait)
+//Vérifier le cooldown sur les attaques (Fait ?) 
 /// 
+
+/************************************************************************************************************************
+Créateur général du script Player : Derek
+L'utilisation de nombreux tutoriel à mené à la création de ce script
+************************************************************************************************************************/
 public class Player : MonoBehaviour
 {
+
     // DECLARE REFERENCE VARIABLES
-    private InputHandler _input;
-    private PlayerInput playerInput;
-    private CharacterController characterController;
-    private Animator animator;
-    private RigBuilder rigBuilder;
+    private InputHandler _input; //Première méthode d'obtention des inputs du player
+    private PlayerInput playerInput; //Séconnde méthode
+    private CharacterController characterController; //Coeur du personnage
+    private Animator animator; //Coeur des animations
+    private RigBuilder rigBuilder; //Utilisé pour le inverse Kinematic lors de l'utilisation des armes à feu
 
 
     //Variables to store optimized setter/getter parameter IDs
+    //Le ashing n'a pas été respecté tout au long du projet, par cause de manque de temps
+    //L'utilisation du ashing était une nouvelle fonctionnalité que j'ai appris et pas encore maitrisé à 100%
     private int isWalkingHash;
     private int isRunningHash;
     private int isJumpingHash;
@@ -105,21 +113,34 @@ public class Player : MonoBehaviour
 
 
 
-
+/************************************************************************************************************************
+Créateur : Derek
+Fonction Awake qui va chercher nombreux parametre utilisé tout au long du programme
+                                
+                                                        AWAKE
+                   
+************************************************************************************************************************/
     private void Awake()
     {
+        //Input du joueur
         _input = GetComponent<InputHandler>();
         playerInput = new PlayerInput();
+
         characterController = GetComponent<CharacterController>();
+
+        //IK
         rigBuilder = GetComponent<RigBuilder>();
+
+        //UI
         _uiManager = FindObjectOfType<UI_Manager>().GetComponent<UI_Manager>();
+
+        //L'initialisation de la vie ainsi permet de garder en mémoire la vie maximale plutôt que d'utiliser une seule variable
         _health = _maxHealth;
+
         //Initialise la gravité
-        characterController.SimpleMove(Vector3.forward * 0);
+        characterController.SimpleMove(Vector3.forward * 0); //Méthode qui as remplacé l'utilisation de la gravité géré par le script
 
-        
-
-
+        //Coeur de l'animation
         animator = GetComponent<Animator>();
 
         //S'occupe du StringToHash
@@ -130,8 +151,13 @@ public class Player : MonoBehaviour
         setupJumpVariables();
 
     }
-    //#########################################################################################
-    //HASH AND SWITCH
+/************************************************************************************************************************
+Créateur : Derek
+Fonction hash est utilisé pour convertir les string en hash afin d'optimiser le code
+
+                                                        HASH AND SWITCH
+
+************************************************************************************************************************/
     private void hash()
     {
         //Hash
@@ -145,7 +171,13 @@ public class Player : MonoBehaviour
         isRifleHash = Animator.StringToHash("isRifle");
         isDigginHash = Animator.StringToHash("isDiggin");
     }
+    /************************************************************************************************************************
+    Créateur : Derek
+    Fonction hash est utilisé pour convertir les string en hash afin d'optimiser le code
 
+                                                            INPUT
+
+    ************************************************************************************************************************/
     private void inputCallback()
     {
         // set the player input callbacks
@@ -178,7 +210,15 @@ public class Player : MonoBehaviour
         playerInput.CharacterControls.Diggin.canceled += onDiggin;
         playerInput.CharacterControls.Diggin.performed += onDiggin;
     }
-    //####################################################################################
+/************************************************************************************************************************
+Créateur : Derek
+CODE OBSOLÈTE
+Ce code est laissé dans le programme pour laisser des trâce de mon travail et aussi dans l'espoir de trouver le problème
+un jour.
+
+                                                        JUMP
+
+************************************************************************************************************************/
     private void setupJumpVariables()
     {
         float timeToApex = maxJumpTime / 2;
@@ -186,47 +226,71 @@ public class Player : MonoBehaviour
         initialJumpVelocity = (2 * maxJumpHeight) / timeToApex;
     }
 
-    //###########################################################################################
-    //handle all callback
+/************************************************************************************************************************
+Créateur : Derek
+
+                                                        Callbacks
+
+************************************************************************************************************************/
+    
+
+    //handler function to set the player input values
+    //Input des mouvements
+    private void onMovementInput (InputAction.CallbackContext context)
+    {
+        //Utilisation de context.ReadValue qui est un peu de la triche haha
+        currentMovementInput = context.ReadValue<Vector2>();
+        //x
+        currentMovement.x = currentMovementInput.x;
+        currentRunMovement.x = currentMovementInput.x * RunSpeed;
+        //y
+        currentMovement.z = currentMovementInput.y;
+        currentRunMovement.z = currentMovementInput.y * RunSpeed;
+        //Global
+        isMovementPressed = currentMovementInput.x != 0 || currentMovementInput.y != 0;
+    }
+
+    //Inputs de la course
     private void onRun(InputAction.CallbackContext context)
     {
         isRunPressed = context.ReadValueAsButton();
     }
 
-    //handler function to set the player input values
-    private void onMovementInput (InputAction.CallbackContext context)
-    {
-        currentMovementInput = context.ReadValue<Vector2>();
-        currentMovement.x = currentMovementInput.x;
-        currentMovement.z = currentMovementInput.y;
-        currentRunMovement.x = currentMovementInput.x * RunSpeed;
-        currentRunMovement.z = currentMovementInput.y * RunSpeed;
-        isMovementPressed = currentMovementInput.x != 0 || currentMovementInput.y != 0;
-    }
-
+    //Inputs du jump
+    //OBSOLÈTE
     private void onJump(InputAction.CallbackContext context)
     {
         isJumpingPressed= context.ReadValueAsButton();
     }
 
+    //Attaque de melee
     private void onAttack(InputAction.CallbackContext context)
     {
         isAttackingPressed = context.ReadValueAsButton();
     }
 
+    
+    //Changement d'arme
+    //Obsolète dû à l'implémentation de l'inventaire
     private void onMeleeSwitch(InputAction.CallbackContext context)
     {
         isMeleePressed= context.ReadValueAsButton();
     }
+    //Changement d'arme
+    //Obsolète dû à l'implémentation de l'inventaire
     private void onRifleSwitch(InputAction.CallbackContext context)
     {
         isRiflePressed = context.ReadValueAsButton();
     }
+    
+
+    //Utilisation de la pelle pour pelleter
+    //J'ai créé c'ette partie du pelletage mais Félix est l'auteur du reste du concept
     private void onDiggin(InputAction.CallbackContext context)
     {
         isDigginPressed = context.ReadValueAsButton();
     }
-    //###########################################################################################
+//**********************************************************************************************************************/
 
     // Update is called once per frame
     void Update()
