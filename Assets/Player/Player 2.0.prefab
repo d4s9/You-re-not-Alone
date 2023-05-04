@@ -1465,10 +1465,7 @@ MonoBehaviour:
   damage_imput: 50
   player: {fileID: 7165648423537989200}
   blood_PS: {fileID: 3556565457537119099, guid: 55f5f81f6022152419fdfb7b91946388, type: 3}
-  clip:
-  - {fileID: 8300000, guid: 87ca02617be546d4f9b8a068792488aa, type: 3}
-  - {fileID: 8300000, guid: e4f2f5454234c6c479518db495ef88ce, type: 3}
-  - {fileID: 8300000, guid: e4f2f5454234c6c479518db495ef88ce, type: 3}
+  clip: []
 --- !u!82 &280492621969526393
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2450,7 +2447,7 @@ MeshCollider:
   m_GameObject: {fileID: 280492622475959793}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
@@ -3449,6 +3446,7 @@ GameObject:
   - component: {fileID: 7510508749172346090}
   - component: {fileID: 7510508749172345872}
   - component: {fileID: 7510508749172345873}
+  - component: {fileID: 7510508749172345874}
   - component: {fileID: 7510508749172345875}
   - component: {fileID: 7510508749172345876}
   - component: {fileID: 7510508749172345877}
@@ -3456,7 +3454,6 @@ GameObject:
   - component: {fileID: 7510508749172345879}
   - component: {fileID: 7510508749172346088}
   - component: {fileID: 7510508749172346089}
-  - component: {fileID: 249828651}
   m_Layer: 12
   m_Name: Player 2.0
   m_TagString: Player
@@ -3524,6 +3521,23 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &7510508749172345874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7165648423537989200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fd0e22163802a04f9b4cacce128f5df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _wallMaterial: {fileID: 2100000, guid: 69dc38e0b825a7443946377fdce809f7, type: 2}
+  _camera: {fileID: 0}
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 3072
 --- !u!114 &7510508749172345875
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3546,15 +3560,14 @@ MonoBehaviour:
   decelerationMin: 3
   currentMaxVelocity: 0
   RotateTowardMouse: 1
-  MovementSpeed: 5
-  RunSpeed: 5
+  MovementSpeed: 9
+  RunSpeed: 2
   RotationSpeed: 0.1
   Camera: {fileID: 0}
   m4: {fileID: 280492621541627441}
   Pelle: {fileID: 280492622475959793}
   BaseballBat: {fileID: 280492621763039368}
   _maxHealth: 100
-  inventaire: {fileID: 0}
 --- !u!114 &7510508749172345876
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3741,49 +3754,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventaire: {fileID: 0}
   inventairePleinTxt: {fileID: 0}
---- !u!114 &249828651
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7165648423537989200}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2d8418b0b9634b1892b0268dd9c2743, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  boneShape: 1
-  drawBones: 1
-  drawTripods: 0
-  boneSize: 1
-  tripodSize: 1
-  boneColor: {r: 0, g: 0, b: 1, a: 0.5}
-  m_Transforms:
-  - {fileID: 280492622196408279}
-  - {fileID: 280492622477335005}
-  - {fileID: 280492621750965040}
-  - {fileID: 280492622054626786}
-  - {fileID: 280492622571429592}
-  - {fileID: 280492622446153944}
-  - {fileID: 280492622529156348}
-  - {fileID: 280492621513519623}
-  - {fileID: 280492622145245450}
-  - {fileID: 280492622965013804}
-  - {fileID: 280492621899614131}
-  - {fileID: 280492621505857633}
-  - {fileID: 280492622385606761}
-  - {fileID: 280492622370884252}
-  - {fileID: 280492621240367885}
-  - {fileID: 280492621751691215}
-  - {fileID: 280492621497314850}
-  - {fileID: 280492621763039415}
-  - {fileID: 280492622475959792}
-  - {fileID: 280492621942592794}
-  - {fileID: 280492622515695270}
-  - {fileID: 280492621269110693}
-  - {fileID: 280492623092753773}
-  - {fileID: 280492623109313537}
-  - {fileID: 280492621484351331}
-  - {fileID: 280492623107711963}
-  - {fileID: 280492621355725118}
