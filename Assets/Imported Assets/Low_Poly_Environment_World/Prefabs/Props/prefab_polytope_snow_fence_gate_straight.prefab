@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5865036527879484511}
   - component: {fileID: 704864996969115230}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: prefab_polytope_snow_fence_gate_straight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57,6 +57,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: e9a34ddbd19450343801ab91d0837ec1, type: 3}
       propertyPath: m_Name
       value: model_polytope_snow_fence_gate_straight
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e9a34ddbd19450343801ab91d0837ec1, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e9a34ddbd19450343801ab91d0837ec1, type: 3}
       propertyPath: m_RootOrder

@@ -23,6 +23,7 @@ public class spawner : MonoBehaviour
         i++;
     }
 
+    
 
     void Update()
     {
@@ -30,5 +31,11 @@ public class spawner : MonoBehaviour
         {
             spawn();
         }
+
+       if (ennemi.GetComponent<Unit>()._zombHealth < 0) 
+       {
+            i -= 1;
+            Destroy(ennemi);
+       }
     }
 }
