@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 public class Unit : MonoBehaviour
 {
-    [SerializeField] private GameObject target;
+    [SerializeField] public GameObject target;
     [SerializeField] private float ennemyDetectionDistance;
     [SerializeField] private LayerMask playerLayer;
     [SerializeField] private float angleVision;
@@ -119,18 +119,9 @@ public class Unit : MonoBehaviour
         {
             Die();
         }
-        else
+        else if (_following == false)
         {
             _following = true;
-            /*
-            CharacterController ennemyCharCont = this.gameObject.GetComponent<CharacterController>();
-            float _smoothCoef = 0.02f;
-            Quaternion rotation = this.transform.rotation;
-            //Vector3 currentWaypoint = path[0];
-            Quaternion _lookatRotation = Quaternion.LookRotation(new Vector3(target.transform.position.x - this.transform.position.x, 0, target.transform.position.z - this.transform.position.z), Vector3.up);
-            rotation = Quaternion.Slerp(this.transform.rotation, _lookatRotation, _smoothCoef);
-            transform.rotation = rotation;
-            */
         }
     }
 
