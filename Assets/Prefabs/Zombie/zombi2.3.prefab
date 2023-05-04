@@ -329,7 +329,7 @@ GameObject:
   - component: {fileID: 52278916247152177}
   - component: {fileID: 52278916247152183}
   - component: {fileID: 52278916247152330}
-  m_Layer: 0
+  m_Layer: 26
   m_Name: zombi2.3
   m_TagString: Enemie
   m_Icon: {fileID: 0}
@@ -464,8 +464,10 @@ MonoBehaviour:
   _healthBar: {fileID: 6035573718257476623}
   _points: 100
   _attackDamage: 50
+  _zombHealth: 0
   isDead: 0
   isAttack: 0
+  ragHolder: {fileID: 898699796677005208}
 --- !u!114 &52278916247152330
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -478,9 +480,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c294a0038d7707a48b624d77d6e673cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ragRigidBody: []
+  ragRigidBody:
+  - {fileID: 52278916975073391}
+  - {fileID: 52278915630960679}
+  - {fileID: 52278915910704402}
+  - {fileID: 52278917218755057}
+  - {fileID: 52278916738066493}
+  - {fileID: 52278916633555736}
+  - {fileID: 52278915901243060}
+  - {fileID: 52278917173576740}
+  - {fileID: 52278915373980647}
+  - {fileID: 52278916781555683}
+  - {fileID: 52278915561346113}
   pos_initial: []
   rot_initial: []
+  unitParent: {fileID: 898699796677005208}
+  isBoss: 0
 --- !u!1 &1378265295585946621
 GameObject:
   m_ObjectHideFlags: 0
