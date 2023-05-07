@@ -509,7 +509,7 @@ Gestion des animations du personnage
 
         //Blend Tree Setter
         //Start
-        if ((isMelee == false) && (isRifle == false) && (isDead != true))
+        if (!isDead && (isMelee == false) && (isRifle == false))
         {
             animator.SetBool(isMeleeHash, true);
             Pelle.SetActive(true);
@@ -519,7 +519,7 @@ Gestion des animations du personnage
         }
 
         //RUntime
-        if ((item == null || item.nom == "Pelle" ) && (isDead != true))
+        if (!isDead && (item == null || item.nom == "Pelle" ))
         {
             rigBuilder.enabled = false;
             m4.SetActive(false);
@@ -528,7 +528,7 @@ Gestion des animations du personnage
             animator.SetBool(isRifleHash, false);
             animator.SetBool(isMeleeHash, true);
         }
-        else if ((item.nom == "Bâton de Baseball") && (isDead != true))
+        else if (!isDead && (item.nom == "Bâton de Baseball"))
         {
             rigBuilder.enabled = false;
             m4.SetActive(false);
@@ -537,7 +537,7 @@ Gestion des animations du personnage
             animator.SetBool(isRifleHash, false);
             animator.SetBool(isMeleeHash, true);
         }
-        else if ((item.nom == "m4") && (isDead != true))
+        else if (!isDead && (item.nom == "m4"))
         {
             animator.SetBool(isMeleeHash, false);
             animator.SetBool(isRifleHash, true);

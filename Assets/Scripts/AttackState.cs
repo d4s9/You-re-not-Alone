@@ -27,7 +27,7 @@ public class AttackState : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         Physics.IgnoreLayerCollision(12, 25, false);
-        animator.transform.LookAt(player);
+        //animator.transform.LookAt(player);
 
         animator.transform.rotation *= Quaternion.FromToRotation(Vector3.left, animator.transform.forward);
     }

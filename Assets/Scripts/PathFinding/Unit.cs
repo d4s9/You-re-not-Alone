@@ -42,7 +42,7 @@ public class Unit : MonoBehaviour
     
     private void Update()
     {
-        this.GetComponent<CharacterController>().SimpleMove(Vector3.forward * 0);
+        //this.GetComponent<CharacterController>().SimpleMove(Vector3.forward * 0);
 
         if (isDead == false)
         {
@@ -155,7 +155,6 @@ public class Unit : MonoBehaviour
 
     public IEnumerator FollowPath()
     {
-        
         animator.SetBool("isWalking", true);
         CharacterController ennemyCharCont = this.gameObject.GetComponent<CharacterController>();
         float _smoothCoef = 0.02f;
@@ -174,7 +173,7 @@ public class Unit : MonoBehaviour
                 }
                 currentWaypoint = path[targetIndex];               
             }
-            
+            Debug.DrawRay(this.transform.position, transform.forward, Color.red, 1);
             Quaternion _lookatRotation = Quaternion.LookRotation(new Vector3(currentWaypoint.x - this.transform.position.x, 0, currentWaypoint.z - this.transform.position.z), Vector3.up);
             rotation = Quaternion.Slerp(this.transform.rotation, _lookatRotation, _smoothCoef);
             transform.rotation = rotation;
