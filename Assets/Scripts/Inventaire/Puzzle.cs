@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.UI;
 
 public class Puzzle : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class Puzzle : MonoBehaviour
     [SerializeField] GameObject radeau;
     [SerializeField] GameObject posRadeau;
     [SerializeField] GameObject txtActivePuzzle;
+    [SerializeField] private Image FadeOutImage;
 
     private List<ItemData> contenu = new List<ItemData>();
 
@@ -92,6 +94,7 @@ public class Puzzle : MonoBehaviour
                     GameObject rad;
                     rad = Instantiate(radeau);
                     radeau.transform.position = posRadeau.transform.position;
+                    FadeOutImage.gameObject.SetActive(true);
                 }
             }
         }
