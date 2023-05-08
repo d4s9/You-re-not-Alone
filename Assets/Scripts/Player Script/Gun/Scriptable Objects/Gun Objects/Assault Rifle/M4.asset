@@ -15,7 +15,7 @@ MonoBehaviour:
   name: Assault Rifle (M4)
   damage: 22
   maxDistance: 200
-  currentAmmo: 3363
+  currentAmmo: 31
   magSize: 31
   fireRate: 300
   reloadTime: 1.5

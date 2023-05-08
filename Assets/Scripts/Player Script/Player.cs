@@ -437,6 +437,8 @@ Gestion des animations du personnage
         bool Alpha8Pressed = Input.GetKey(KeyCode.Alpha8);
         bool Alpha9Pressed = Input.GetKey(KeyCode.Alpha9);
 
+        bool isReload = Input.GetKey(KeyCode.R);
+
         //  get currently equiped item
         item = inventaire.GetComponent<Inventaire>().getItemCurrentlySelected();
 
@@ -488,6 +490,15 @@ Gestion des animations du personnage
             if (!isAttackingPressed && isAttacking)
         {
             animator.SetBool(isAttackingHash, false);
+        }
+            //Reload
+            if(!isAttackingPressed && isReload)
+        {
+            animator.SetBool("isReload", true);
+        }
+        else if (!isReload)
+        {
+            animator.SetBool("isReload", false);
         }
         //#####
         //Saut
