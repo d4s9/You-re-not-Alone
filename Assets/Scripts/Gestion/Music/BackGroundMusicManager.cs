@@ -25,6 +25,8 @@ public class BackGroundMusicManager : MonoBehaviour
 
     public void MusicOnOff()
     {
+        _muteButton = _soundPannel.GetComponentInChildren<Button>();
+        _soundBar = _soundPannel.GetComponentInChildren<Slider>();
         if (PlayerPrefs.GetInt("Muted") == 0)
         {
             _soundBar.value = 0;
@@ -42,6 +44,7 @@ public class BackGroundMusicManager : MonoBehaviour
 
     public void MusicVolumeUpdate()
     {
+        _soundBar = _soundPannel.GetComponentInChildren<Slider>();
         float value = _soundBar.value;
        // _audioSource.volume = value;
         PlayerPrefs.SetFloat("Volume", value);
@@ -61,6 +64,7 @@ public class BackGroundMusicManager : MonoBehaviour
 
     public void OnApplicationQuit()
     {
+        _soundBar = _soundPannel.GetComponentInChildren<Slider>();
         float value = _soundBar.value;
         PlayerPrefs.SetFloat("Volume", value);
         PlayerPrefs.Save();
