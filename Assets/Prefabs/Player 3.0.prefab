@@ -1296,11 +1296,11 @@ GameObject:
   - component: {fileID: 7954766282264188948}
   - component: {fileID: 4072711041021198958}
   - component: {fileID: 4033004747794516928}
-  - component: {fileID: 4033004747794516929}
   - component: {fileID: 4033004747794516931}
   - component: {fileID: 7954766282264188951}
   - component: {fileID: 7954766282264188950}
   - component: {fileID: 787059141}
+  - component: {fileID: 1809650041}
   m_Layer: 12
   m_Name: Player 3.0
   m_TagString: Player
@@ -1368,23 +1368,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &4033004747794516929
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7290995078601687726}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fd0e22163802a04f9b4cacce128f5df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _wallMaterial: {fileID: 2100000, guid: 69dc38e0b825a7443946377fdce809f7, type: 2}
-  _camera: {fileID: 0}
-  _layerMask:
-    serializedVersion: 2
-    m_Bits: 3072
 --- !u!114 &4033004747794516931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1407,13 +1390,13 @@ MonoBehaviour:
   decelerationMin: 3
   currentMaxVelocity: 0
   RotateTowardMouse: 1
-  MovementSpeed: 10
-  RunSpeed: 3
+  MovementSpeed: 9
+  RunSpeed: 4
   RotationSpeed: 0.1
   Camera: {fileID: 0}
   m4: {fileID: 412972918378707221}
   Pelle: {fileID: 2811171896502434906}
-  BaseballBat: {fileID: 0}
+  BaseballBat: {fileID: 2305100486318726893}
   _maxHealth: 100
   inventaire: {fileID: 0}
 --- !u!114 &7954766282264188951
@@ -1460,8 +1443,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70f6561c7e2b025419651d64aa17b7b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reloadKey: 0
+  reloadKey: 114
 --- !u!114 &787059141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7290995078601687726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1c2c4c3ddaa9fb47aecabfe512b5dc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventaire: {fileID: 0}
+  inventairePleinTxt: {fileID: 0}
+--- !u!114 &1809650041
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2048,48 +2045,64 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4738076845068214586, guid: 8d9a7a333ee8bc34aa2916228752f6cb, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.015
+      objectReference: {fileID: 0}
+    - target: {fileID: 4738076845068214586, guid: 8d9a7a333ee8bc34aa2916228752f6cb, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.015
+      objectReference: {fileID: 0}
+    - target: {fileID: 4738076845068214586, guid: 8d9a7a333ee8bc34aa2916228752f6cb, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.015
+      objectReference: {fileID: 0}
+    - target: {fileID: 4738076845068214586, guid: 8d9a7a333ee8bc34aa2916228752f6cb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: 0.00048
       objectReference: {fileID: 0}
     - target: {fileID: 4738076845068214586, guid: 8d9a7a333ee8bc34aa2916228752f6cb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.00004
       objectReference: {fileID: 0}
     - target: {fileID: 4738076845068214586, guid: 8d9a7a333ee8bc34aa2916228752f6cb, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.00214
       objectReference: {fileID: 0}
     - target: {fileID: 4738076845068214586, guid: 8d9a7a333ee8bc34aa2916228752f6cb, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.67064786
       objectReference: {fileID: 0}
     - target: {fileID: 4738076845068214586, guid: 8d9a7a333ee8bc34aa2916228752f6cb, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: 0.42196545
       objectReference: {fileID: 0}
     - target: {fileID: 4738076845068214586, guid: 8d9a7a333ee8bc34aa2916228752f6cb, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.5216355
       objectReference: {fileID: 0}
     - target: {fileID: 4738076845068214586, guid: 8d9a7a333ee8bc34aa2916228752f6cb, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: 0.31634337
       objectReference: {fileID: 0}
     - target: {fileID: 4738076845068214586, guid: 8d9a7a333ee8bc34aa2916228752f6cb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: 166.352
       objectReference: {fileID: 0}
     - target: {fileID: 4738076845068214586, guid: 8d9a7a333ee8bc34aa2916228752f6cb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -95.888
       objectReference: {fileID: 0}
     - target: {fileID: 4738076845068214586, guid: 8d9a7a333ee8bc34aa2916228752f6cb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: -117.17
       objectReference: {fileID: 0}
     - target: {fileID: 4740259503782879010, guid: 8d9a7a333ee8bc34aa2916228752f6cb, type: 3}
       propertyPath: m_Name
       value: Mob_Baseball_Bat_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4740259503782879010, guid: 8d9a7a333ee8bc34aa2916228752f6cb, type: 3}
+      propertyPath: m_TagString
+      value: Weapon
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8d9a7a333ee8bc34aa2916228752f6cb, type: 3}
@@ -2098,6 +2111,27 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4738076845068214586, guid: 8d9a7a333ee8bc34aa2916228752f6cb, type: 3}
   m_PrefabInstance: {fileID: 6788495061844640207}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2305100486318726893 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4740259503782879010, guid: 8d9a7a333ee8bc34aa2916228752f6cb, type: 3}
+  m_PrefabInstance: {fileID: 6788495061844640207}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &785258956
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2305100486318726893}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &9100916559642474797
 PrefabInstance:
   m_ObjectHideFlags: 0
