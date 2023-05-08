@@ -94,11 +94,10 @@ public class Puzzle : MonoBehaviour
                     radeau.transform.position = posRadeau.transform.position;
                 }
             }
-            else
-            {
-                txtActivePuzzle.SetActive(false);
-            }
-
+        }
+        else
+        {
+            txtActivePuzzle.SetActive(false);
         }
     }
     private static bool findBois(ItemData Bois)
