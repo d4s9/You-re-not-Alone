@@ -50,6 +50,7 @@ public class Ragdoll : MonoBehaviour
 
         if (m_state == false)
         {
+            StopCoroutine(unitParent.GetComponent<Unit>().FollowPath());
             unitParent.GetComponent<Unit>().StopAllCoroutines();
             unitParent.GetComponent<Unit>().enabled = false;
             
@@ -61,9 +62,9 @@ public class Ragdoll : MonoBehaviour
         }
         else if (m_state == true)
         {
+            unitParent.GetComponent<CharacterController>().enabled = true;
             unitParent.GetComponent<Unit>().enabled = true;
             
-            unitParent.GetComponent<CharacterController>().enabled = true;
             
             StartCoroutine(unitParent.GetComponent<Unit>().FollowPath());
             

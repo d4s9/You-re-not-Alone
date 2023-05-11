@@ -4,5 +4,26 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Start.unity
+    guid: efad7a2de12c54247b2d160e5578f311
+  - enabled: 1
+    path: Assets/Scenes/FelixScene.unity
+    guid: a898cb2cbf4e1c546a4308091d485613
+  - enabled: 1
+    path: Assets/Scenes/Scenes Test/DemoScene_SnowRoads.unity
+    guid: a8ff3e5a5a9b37448babcbade2ece24c
+  - enabled: 1
+    path: Assets/Scenes/SceneGab(Niveau1).unity
+    guid: 84977c5fb0b08cf47b2c3f16eef94ba2
+  - enabled: 1
+    path: Assets/Scenes/Scenes Test/RadeauCut.unity
+    guid: ca49b0188551c094486a4239f5ed8b88
+  - enabled: 1
+    path: Assets/Scenes/boss.unity
+    guid: ef94150b5aee0a447acef6a695ba8475
+  - enabled: 1
+    path: Assets/Scenes/Ending.unity
+    guid: b99690d8415064f4daf314daabdd2511
   m_configObjects: {}
