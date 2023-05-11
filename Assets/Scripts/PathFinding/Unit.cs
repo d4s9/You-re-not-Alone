@@ -9,13 +9,13 @@ using UnityEngine.UI;
 
 public class Unit : MonoBehaviour
 {
-    [SerializeField] public GameObject target;
-    [SerializeField] public float ennemyDetectionDistance;
+    [SerializeField] private GameObject target;
+    [SerializeField] private float ennemyDetectionDistance;
     [SerializeField] private LayerMask playerLayer;
-    [SerializeField] public float angleVision;
-    [SerializeField] public float speed = 3;
+    [SerializeField] private float angleVision;
+    [SerializeField] private float speed = 3;
     [SerializeField] private AnimationClip zombAtt;
-    [SerializeField] public float _maxZombHealth = default;
+    [SerializeField] private float _maxZombHealth = default;
     [SerializeField] private GameObject _healthBar;
     [SerializeField] private int _points = 100;
     [SerializeField] private int _attackDamage = 10;
@@ -127,6 +127,7 @@ public class Unit : MonoBehaviour
 
     private void Die()
     {
+        Destroy(_healthBar);
         _uiManager.AjouterScore(_points);
         isDead = true;
         ragHolder.GetComponent<Ragdoll>().activerag(false); // devien un ragdoll
@@ -207,5 +208,30 @@ public class Unit : MonoBehaviour
     public int GetDamage()
     {
         return _attackDamage;
+    }
+
+    public void SetTarget(GameObject p_target)
+    {
+        target = p_target;
+    }
+    public void SetAngleVision(float p_angleVision)
+    {
+        angleVision = p_angleVision;
+    }
+    public void SetEnnemyDetection(float p_distance)
+    {
+        ennemyDetectionDistance = p_distance;
+    }
+    public void SetSpeed(float p_speed)
+    {
+        speed = p_speed;
+    }
+    public float GetMaxHealth()
+    {
+        return _maxZombHealth;
+    }
+    public float GetSpeed()
+    {
+        return speed;
     }
 }

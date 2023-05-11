@@ -5,48 +5,62 @@ using UnityEngine;
 
 public class spawner : MonoBehaviour
 {
-    [SerializeField] GameObject ennemi;
-    [SerializeField] GameObject player;
+    [SerializeField] private GameObject ennemiPrefab;
+    [SerializeField] private GameObject player;
+    [SerializeField] private GameObject deadZomb;
     public bool active = false;
     public float nb_to_spawn = 1f;
     public int nb_spawned = 0;
     void Start()
     {
+        for(int i = 0; i < nb_to_spawn; i++)
+        {
+            spawn();
+        }
     }
 
     void spawn()
     {
-        Instantiate(ennemi, this.transform);
-        ennemi.transform.localPosition = new Vector3(0, 0, 0);
-        ennemi.GetComponent<Unit>().target = player;
-        ennemi.GetComponent<Unit>().ennemyDetectionDistance = 100;
-        ennemi.GetComponent<Unit>().angleVision = 360;
+        GameObject ennemi = Instantiate(ennemiPrefab, this.transform);
+        ennemi.transform.position = RandomPos();
+        ennemi.GetComponent<Unit>().SetTarget(player);
+        ennemi.GetComponent<Unit>().SetEnnemyDetection(0);
+        ennemi.GetComponent<Unit>().SetAngleVision(360);
+
+        RaycastHit hit;
+        if(Physics.Raycast(ennemi.transform.position, Vector3.down, out hit, Mathf.Infinity, 15))
+        {
+            Debug.DrawRay(ennemi.transform.position, Vector3.down * hit.distance, Color.red);
+            ennemi.transform.position = new Vector3(ennemi.transform.position.x, ennemi.transform.position.y - hit.distance, ennemi.transform.position.z);
+        }
         nb_spawned++;
     }
 
     void Update()
+    {            
+
+       for(int i = 0; i < nb_spawned; i++)
+        {
+            if (transform.GetChild(i).GetComponent<Unit>().isDead)
+            {
+                transform.GetChild(i).parent = deadZomb.transform;
+                nb_spawned--;
+                spawn();
+            }
+        }    
+    }
+
+    private Vector3 RandomPos()
     {
-        
-       if (nb_spawned < nb_to_spawn)
+        Vector3 pos;
+        do
         {
-            spawn();
-        }
-
-        //verifier pour chaque instances.
-        for (int l = 0; l < nb_spawned; l++)
-        {
-            //s'il est mort et qu'un troisième ennemi apparait, le premié disparait.
-            if (transform.GetChild(l).GetComponent<Unit>()._zombHealth < 0 && nb_spawned == 3)
-            {
-                GameObject a = gameObject.transform.GetChild(l).gameObject;
-                Destroy(a);
-                nb_spawned -= 1;
-            }
-
-            else if (transform.GetChild(l).GetComponent<Unit>()._zombHealth <0)
-            {
-                nb_spawned -= 1;
-            }
-        }
+            float x = Mathf.Clamp(Random.value * 58, 10, 58);
+            float z = Mathf.Clamp(Random.value * 13, 0, 13);
+            if (z > 1.5f)
+                z = -z;
+            pos = new Vector3(x, 3, z);
+        } while(Physics.BoxCast(pos, new Vector3(0.5f, 1, 0.5f), Vector3.up));
+        return pos;
     }
 }

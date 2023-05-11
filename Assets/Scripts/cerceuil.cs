@@ -5,6 +5,7 @@ using UnityEngine;
 public class cerceuil : MonoBehaviour
 {
     [SerializeField] private GameObject escapeCar;
+    [SerializeField] private GameObject spawner;
 
     //objet retrouver dans le corps creusé.
     public GameObject loot;
@@ -58,6 +59,7 @@ public class cerceuil : MonoBehaviour
             //spawner le loot.
             spawn();
             escapeCar.SetActive(true);
+            spawner.SetActive(true);
             //ne peut plus spawner d'objets.
             i = nb + 1;
         }

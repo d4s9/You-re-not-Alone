@@ -452,7 +452,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b56d9c4397eee4468bd5616f35be90f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  target: {fileID: 7290995078601687726, guid: d36c644be18ac8d46b31d527e4c8a6d0, type: 3}
   ennemyDetectionDistance: 100
   playerLayer:
     serializedVersion: 2

@@ -29,7 +29,7 @@ public class boss : MonoBehaviour
         // Start is called before the first frame update
         void Start()
         {
-            maxhealt = (gameObject.GetComponent<Unit>()._maxZombHealth);
+            maxhealt = (gameObject.GetComponent<Unit>().GetMaxHealth());
            phase1 = maxhealt * 0.25f;       // 25/100
            phase2 = maxhealt * 0.50f;      // 50/100
            phase3 = maxhealt * 0.75f;     // 75/100
@@ -67,7 +67,7 @@ public class boss : MonoBehaviour
                     kb = false;
                     KnockBackTimer = 0;
                     parent.GetComponent<Ragdoll>().activerag(true);
-                    gameObject.GetComponent<Unit>().speed += 20f;
+                    gameObject.GetComponent<Unit>().SetSpeed(gameObject.GetComponent<Unit>().GetSpeed()+20);
                     rotation_speed += 100f;
             }
             }
