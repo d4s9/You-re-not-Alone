@@ -9,8 +9,7 @@ public class spawner : MonoBehaviour
     [SerializeField] GameObject player;
     public bool active = false;
     public float nb_to_spawn = 1f;
-    private int i = 0;
-    public int nb_inst=0;
+    public int nb_spawned = 0;
     void Start()
     {
     }
@@ -18,34 +17,35 @@ public class spawner : MonoBehaviour
     void spawn()
     {
         Instantiate(ennemi, this.transform);
-        ennemi.transform.localPosition = new Vector3 (0,0,0);
+        ennemi.transform.localPosition = new Vector3(0, 0, 0);
         ennemi.GetComponent<Unit>().target = player;
         ennemi.GetComponent<Unit>().ennemyDetectionDistance = 100;
         ennemi.GetComponent<Unit>().angleVision = 360;
+        nb_spawned++;
     }
 
     void Update()
     {
         
-       if (/*active==true &&*/ i < nb_to_spawn)
+       if (nb_spawned < nb_to_spawn)
         {
             spawn();
-            i += 1;
-            nb_inst++;
         }
-       
-        for (int l = 0; l < i; l++)
+
+        //verifier pour chaque instances.
+        for (int l = 0; l < nb_spawned; l++)
         {
-            GameObject a = gameObject.transform.GetChild(l).gameObject;
-            if (transform.GetChild(l).GetComponent<Unit>()._zombHealth < 0)
+            //s'il est mort et qu'un troisième ennemi apparait, le premié disparait.
+            if (transform.GetChild(l).GetComponent<Unit>()._zombHealth < 0 && nb_spawned == 3)
             {
-                i -= 1;
-                transform.GetChild(l).GetComponent<Unit>()._zombHealth = 0;
-            }
-            if (nb_inst == 2 && transform.GetChild(l).GetComponent<Unit>()._zombHealth == 0)
-            {
+                GameObject a = gameObject.transform.GetChild(l).gameObject;
                 Destroy(a);
-                nb_inst -= 1;
+                nb_spawned -= 1;
+            }
+
+            else if (transform.GetChild(l).GetComponent<Unit>()._zombHealth <0)
+            {
+                nb_spawned -= 1;
             }
         }
     }

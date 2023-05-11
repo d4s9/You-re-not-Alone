@@ -1838,6 +1838,7 @@ MonoBehaviour:
   player: {fileID: 337071306}
   active: 1
   nb_to_spawn: 1
+  nb_spawned: 0
 --- !u!65 &1922111038
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1952,6 +1953,7 @@ MonoBehaviour:
   player: {fileID: 337071306}
   active: 1
   nb_to_spawn: 1
+  nb_spawned: 0
 --- !u!65 &1936262829
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2045,6 +2047,10 @@ PrefabInstance:
       propertyPath: inventairePleinTxt
       value: 
       objectReference: {fileID: 1161999470}
+    - target: {fileID: 849055948, guid: d36c644be18ac8d46b31d527e4c8a6d0, type: 3}
+      propertyPath: damage_imput
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 4033004747794516931, guid: d36c644be18ac8d46b31d527e4c8a6d0, type: 3}
       propertyPath: Camera
       value: 
