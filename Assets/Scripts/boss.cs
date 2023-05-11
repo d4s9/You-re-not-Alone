@@ -21,6 +21,7 @@ public class boss : MonoBehaviour
         
         private float phase1;
         private float phase2;
+        private bool changed = false;
         private float phase3;
         private float phaseCounter = 0;
         private float maxhealt;
@@ -77,8 +78,9 @@ public class boss : MonoBehaviour
             {
                 rotate();
             }
-            else if(gameObject.GetComponent<Unit>().isDead)
+            else if(gameObject.GetComponent<Unit>().isDead && !changed)
             {
+                changed = true;
                 uimanager.FinishedLvl();
                 fade.gameObject.SetActive(true);
             }

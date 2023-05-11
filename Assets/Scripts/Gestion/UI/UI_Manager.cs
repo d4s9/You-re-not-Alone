@@ -92,7 +92,8 @@ public class UI_Manager : MonoBehaviour
     public void FinishedLvl()
     {
         PlayerPrefs.SetInt("PlayerScore", _score);
-        PlayerPrefs.SetString("PlayerTime", (Time.timeSinceLevelLoad + PlayerPrefs.GetString("PlayerTime", "0")).ToString());
+        Debug.Log(PlayerPrefs.GetString("PlayerTime", "0"));
+        PlayerPrefs.SetString("PlayerTime", (Time.timeSinceLevelLoad + float.Parse(PlayerPrefs.GetString("PlayerTime", "0"))).ToString());
     }
 
     public void AjouterScore(int scoreAAjouter)

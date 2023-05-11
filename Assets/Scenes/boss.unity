@@ -1417,6 +1417,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42dd8f159d03a8446b565b7b01184aa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1040073007 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1505621547607065683, guid: c51df2d5f15c36f438c79f4dcca94953, type: 3}
+  m_PrefabInstance: {fileID: 1794647524}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cdb3e723c83da64793538568bdc96c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1040073008 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1505621547607065684, guid: c51df2d5f15c36f438c79f4dcca94953, type: 3}
+  m_PrefabInstance: {fileID: 1794647524}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5c005e68d615244f90b29d9e0218cca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1056960520
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2403,18 +2425,38 @@ PrefabInstance:
     - target: {fileID: 2640894942213450740, guid: c51df2d5f15c36f438c79f4dcca94953, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 1040073005}
+    - target: {fileID: 2640894942213450740, guid: c51df2d5f15c36f438c79f4dcca94953, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ResumeGame
       objectReference: {fileID: 0}
     - target: {fileID: 2640894942574868116, guid: c51df2d5f15c36f438c79f4dcca94953, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 1040073008}
+    - target: {fileID: 2640894942574868116, guid: c51df2d5f15c36f438c79f4dcca94953, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: MusicVolumeUpdate
+      objectReference: {fileID: 0}
+    - target: {fileID: 2640894942703144500, guid: c51df2d5f15c36f438c79f4dcca94953, type: 3}
+      propertyPath: m_Interactable
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2640894942936668997, guid: c51df2d5f15c36f438c79f4dcca94953, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 1040073007}
+    - target: {fileID: 2640894942936668997, guid: c51df2d5f15c36f438c79f4dcca94953, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadBegenning
       objectReference: {fileID: 0}
     - target: {fileID: 2640894943064190049, guid: c51df2d5f15c36f438c79f4dcca94953, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 1040073008}
+    - target: {fileID: 2640894943064190049, guid: c51df2d5f15c36f438c79f4dcca94953, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: MusicOnOff
       objectReference: {fileID: 0}
     - target: {fileID: 2875474303958964186, guid: c51df2d5f15c36f438c79f4dcca94953, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2819,10 +2861,18 @@ PrefabInstance:
     - target: {fileID: 7147942090155949070, guid: c51df2d5f15c36f438c79f4dcca94953, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 1040073007}
+    - target: {fileID: 7147942090155949070, guid: c51df2d5f15c36f438c79f4dcca94953, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadBegenning
       objectReference: {fileID: 0}
     - target: {fileID: 7147942090463360320, guid: c51df2d5f15c36f438c79f4dcca94953, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 1040073007}
+    - target: {fileID: 7147942090463360320, guid: c51df2d5f15c36f438c79f4dcca94953, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Quit
       objectReference: {fileID: 0}
     - target: {fileID: 7532207186057414114, guid: c51df2d5f15c36f438c79f4dcca94953, type: 3}
       propertyPath: m_SizeDelta.x
