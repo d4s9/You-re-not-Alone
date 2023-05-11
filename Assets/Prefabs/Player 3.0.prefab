@@ -50,7 +50,6 @@ MonoBehaviour:
   player: {fileID: 7290995078601687726}
   blood_PS: {fileID: 3556565457537119099, guid: 55f5f81f6022152419fdfb7b91946388, type: 3}
   clip:
-  - {fileID: 8300000, guid: e1e7a0c968a02d84c9d47c5a4e89cb93, type: 3}
   - {fileID: 8300000, guid: ac843d6cdd95c964b9aae8bbbca753bd, type: 3}
   - {fileID: 8300000, guid: 6e0bfb1ee3a55da4e8855329a96f4a75, type: 3}
   - {fileID: 8300000, guid: f58d25a65095a6a47b5013c57728ecad, type: 3}
@@ -1301,6 +1300,7 @@ GameObject:
   - component: {fileID: 7954766282264188950}
   - component: {fileID: 787059141}
   - component: {fileID: 1809650041}
+  - component: {fileID: 1089663200}
   m_Layer: 12
   m_Name: Player 3.0
   m_TagString: Player
@@ -1451,7 +1451,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7290995078601687726}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d1c2c4c3ddaa9fb47aecabfe512b5dc1, type: 3}
   m_Name: 
@@ -1459,6 +1459,20 @@ MonoBehaviour:
   inventaire: {fileID: 0}
   inventairePleinTxt: {fileID: 0}
 --- !u!114 &1809650041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7290995078601687726}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1c2c4c3ddaa9fb47aecabfe512b5dc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventaire: {fileID: 0}
+  inventairePleinTxt: {fileID: 0}
+--- !u!114 &1089663200
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

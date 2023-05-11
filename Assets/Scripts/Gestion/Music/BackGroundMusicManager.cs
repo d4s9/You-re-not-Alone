@@ -7,7 +7,7 @@ public class BackGroundMusicManager : MonoBehaviour
 {
     [SerializeField] private GameObject _soundPannel;
     [SerializeField] private int id = 0;
-    [SerializeField] private AudioSource pelleSource;
+    [SerializeField] private AudioSource pelleSource = default;
     
     private Button _muteButton;
     private AudioSource _audioSource;
@@ -15,6 +15,7 @@ public class BackGroundMusicManager : MonoBehaviour
 
     void Start()
     {
+
         _muteButton = _soundPannel.GetComponentInChildren<Button>();
         _soundBar = _soundPannel.GetComponentInChildren<Slider>();
         //_audioSource = GameObject.FindGameObjectWithTag("Music").GetComponent<AudioSource>();

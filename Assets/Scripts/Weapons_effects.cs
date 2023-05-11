@@ -51,7 +51,7 @@ public class Weapons_effects : MonoBehaviour
 
             if (pelte == 0 && player.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Je pelte"))
         {
-            audio.clip = clip[3];
+            audio.clip = clip[2];
             audio.Play();
             pelte = 1;
         }
