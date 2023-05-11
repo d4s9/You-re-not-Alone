@@ -344,7 +344,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 898699796677005208}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 28.614, y: 0.376, z: -10.73}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -453,11 +453,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  ennemyDetectionDistance: 15
+  ennemyDetectionDistance: 100
   playerLayer:
     serializedVersion: 2
     m_Bits: 4096
-  angleVision: 45
+  angleVision: 360
   speed: 3
   zombAtt: {fileID: 7400000, guid: 34c7891f59518e842be468f1474e2bd7, type: 2}
   _maxZombHealth: 100
@@ -492,8 +492,30 @@ MonoBehaviour:
   - {fileID: 52278915373980647}
   - {fileID: 52278916781555683}
   - {fileID: 52278915561346113}
-  pos_initial: []
-  rot_initial: []
+  pos_initial:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  rot_initial:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
   unitParent: {fileID: 898699796677005208}
   isBoss: 0
 --- !u!1 &1378265295585946621

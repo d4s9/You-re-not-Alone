@@ -10,9 +10,9 @@ using UnityEngine.UI;
 public class Unit : MonoBehaviour
 {
     [SerializeField] public GameObject target;
-    [SerializeField] private float ennemyDetectionDistance;
+    [SerializeField] public float ennemyDetectionDistance;
     [SerializeField] private LayerMask playerLayer;
-    [SerializeField] private float angleVision;
+    [SerializeField] public float angleVision;
     [SerializeField] public float speed = 3;
     [SerializeField] private AnimationClip zombAtt;
     [SerializeField] public float _maxZombHealth = default;
