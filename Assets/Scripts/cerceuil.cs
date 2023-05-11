@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class cerceuil : MonoBehaviour
 {
+    [SerializeField] private GameObject escapeCar;
+
     //objet retrouver dans le corps creusé.
     public GameObject loot;
     public GameObject sfx;
@@ -25,7 +27,7 @@ public class cerceuil : MonoBehaviour
     void hole_phase(int m_i)
     {
         //le meshfilter est changé.
-        gameObject.GetComponent<MeshFilter>().mesh = holePhase[m_i];
+        //gameObject.GetComponent<MeshFilter>().mesh = holePhase[m_i];
     }
 
     void spawn()
@@ -55,6 +57,7 @@ public class cerceuil : MonoBehaviour
         {
             //spawner le loot.
             spawn();
+            escapeCar.SetActive(true);
             //ne peut plus spawner d'objets.
             i = nb + 1;
         }

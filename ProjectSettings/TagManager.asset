@@ -12,6 +12,7 @@ TagManager:
   - Weapon
   - Damage
   - Enemie
+  - Music
   layers:
   - Default
   - TransparentFX

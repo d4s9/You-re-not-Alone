@@ -44,8 +44,7 @@ public class FadeInOutManager : MonoBehaviour
         this.GetComponent<Image>().color = new Color(0f, 0f, 0f, fadeAlpha);
         if (fadeAlpha >= 1f)
         {
-            //sceneManager.ChangeScene();
-            //Destroy(gameObject);
+            sceneManager.ChangeScene();
         }
     }
 }

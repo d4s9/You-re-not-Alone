@@ -32,7 +32,7 @@ public class UI_Manager : MonoBehaviour
         {
             time = TimeSpan.FromSeconds(Time.time);
             _timeTxt.SetText("Time: " + time.ToString("mm':'ss':'ff"));
-            PauseGame();
+            PauseGame();           
         }       
     }
 
@@ -54,7 +54,6 @@ public class UI_Manager : MonoBehaviour
             }
         }
     }
-
     public void ResumeGame()
     {
         if(_isPaused) 
