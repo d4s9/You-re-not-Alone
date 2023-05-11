@@ -56,7 +56,6 @@ public class boss : MonoBehaviour
         // Update is called once per frame
         void Update()
         {
-        
             //durée du knockback
             if (kb == true && gameObject.GetComponent<Unit>().isDead == false)
             {
@@ -67,9 +66,9 @@ public class boss : MonoBehaviour
                     kb = false;
                     KnockBackTimer = 0;
                     parent.GetComponent<Ragdoll>().activerag(true);
-                    gameObject.GetComponent<Unit>().speed += 20f;
+                    //gameObject.GetComponent<Unit>().speed += 2f;
                     rotation_speed += 100f;
-            }
+                }
             }
             else if (gameObject.GetComponent<Unit>().isDead == false && kb == false)
             {

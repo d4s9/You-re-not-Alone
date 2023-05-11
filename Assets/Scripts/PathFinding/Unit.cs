@@ -25,7 +25,7 @@ public class Unit : MonoBehaviour
     public GameObject ragHolder;
     Animator animator;
     private bool _following = false, groundEnnemy = false;
-    Vector3[] path;
+    public Vector3[] path;
     int targetIndex;
 
     private void Start()
@@ -152,7 +152,6 @@ public class Unit : MonoBehaviour
             StartCoroutine("FollowPath");
         }
     }
-
     public IEnumerator FollowPath()
     {
         animator.SetBool("isWalking", true);

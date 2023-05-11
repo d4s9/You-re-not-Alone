@@ -7,6 +7,7 @@ public class spawner : MonoBehaviour
 {
     [SerializeField] GameObject ennemi;
     [SerializeField] GameObject player;
+    [SerializeField] Transform deadCell;
     public bool active = false;
     public float nb_to_spawn = 1f;
     public int nb_spawned = 0;
@@ -27,25 +28,26 @@ public class spawner : MonoBehaviour
     void Update()
     {
         
-       if (nb_spawned < nb_to_spawn)
+       if (nb_spawned < nb_to_spawn && active == true)
         {
             spawn();
         }
 
+       if (deadCell.childCount > 2)
+        {
+            GameObject a = deadCell.GetChild(0).gameObject;
+            Destroy(a);
+        }
+
+
         //verifier pour chaque instances.
         for (int l = 0; l < nb_spawned; l++)
         {
-            //s'il est mort et qu'un troisième ennemi apparait, le premié disparait.
-            if (transform.GetChild(l).GetComponent<Unit>()._zombHealth < 0 && nb_spawned == 3)
-            {
-                GameObject a = gameObject.transform.GetChild(l).gameObject;
-                Destroy(a);
-                nb_spawned -= 1;
-            }
-
-            else if (transform.GetChild(l).GetComponent<Unit>()._zombHealth <0)
+            if (transform.GetChild(l).GetComponent<Unit>()._zombHealth < 0)
             {
                 nb_spawned -= 1;
+                //GameObject a = gameObject.transform.GetChild(l).gameObject;
+                gameObject.transform.GetChild(l).gameObject.transform.SetParent(deadCell, false);
             }
         }
     }
