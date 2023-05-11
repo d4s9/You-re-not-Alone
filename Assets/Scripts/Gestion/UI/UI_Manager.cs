@@ -40,6 +40,7 @@ public class UI_Manager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
+            Debug.Log("Test");
             if (_isPaused)
             {
                 Time.timeScale = 1;

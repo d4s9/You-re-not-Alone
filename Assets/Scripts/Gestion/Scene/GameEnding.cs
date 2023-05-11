@@ -30,12 +30,12 @@ public class GameEnding : MonoBehaviour
     TimeSpan time;
 
     GameObject[] _top;
-    private int _currentPlace;
+    private int _currentPlaceT, _currentPlaceS;
     void Start()
     {
-        
+        PlayerPrefs.DeleteAll();
         _currentScore = PlayerPrefs.GetInt("PlayerScore", 0);
-        _currentTime = float.Parse(PlayerPrefs.GetString("PlayerTime", 0f.ToString()));
+        _currentTime = float.Parse(PlayerPrefs.GetString("PlayerTime", 100f.ToString()));
         _startContentSize = _GridContent.GetComponent<RectTransform>().sizeDelta;
         _nameError.SetText("");
       
@@ -106,24 +106,45 @@ public class GameEnding : MonoBehaviour
         List<string> _names = leaderboard.Equals("Time") ? _namesT : _namesS;
         List<string> _valueStr = leaderboard.Equals("Time") ? _valuesTStr : _valueSStr;
         float currentValue = leaderboard.Equals("Time") ? _currentTime : _currentScore;
-
-        _currentPlace = -1;
+        int _currentPlace = -1;
         for (int i = _values.Count - 1; i >= 0; i--)
         {
-            if (currentValue > _values[i])
-            {
-                if (i > 0)
+            if (!leaderboard.Equals("Time")){
+                if (currentValue > _values[i])
                 {
-                    if (currentValue <= _values[i - 1])
+                    if (i > 0)
+                    {
+                        if (currentValue <= _values[i - 1])
+                        {
+                            _currentPlace = i;
+                        }
+                    }
+                    else
                     {
                         _currentPlace = i;
                     }
                 }
-                else
-                {
-                    _currentPlace = i;
-                }
             }
+            else if (leaderboard.Equals("Time"))
+            {
+                if (currentValue < _values[i])
+                {
+                    if (i > 0)
+                    {
+                        if (currentValue >= _values[i - 1])
+                        {
+                            _currentPlace = i;
+                        }
+                    }
+                    else
+                    {
+                        _currentPlace = i;
+                    }
+                }
+
+            }
+
+            
         }
         if (_currentPlace > -1 && _currentPlace != _values.Count)
         {
@@ -155,7 +176,14 @@ public class GameEnding : MonoBehaviour
             _valueStr.Add(currentValue.ToString());
 
         }
-
+        if (leaderboard.Equals("Time"))
+        {
+            _currentPlaceT = _currentPlace;
+        }
+        else
+        {
+            _currentPlaceS = _currentPlace;
+        }
 
         _top = new GameObject[_values.Count];
     }
@@ -257,19 +285,26 @@ public class GameEnding : MonoBehaviour
         {
             if (!_nameError.text.Length.Equals("")) { _nameError.SetText(""); }
             _playerNameStr = _PlayerName.text;
-            if (_currentPlace > -1){
-                _namesS[_currentPlace] = _playerNameStr;
-                _namesT[_currentPlace] = _playerNameStr;
-                if (_isTime)
+            if (_currentPlaceT > -1 && _isTime)
+            {
+                _namesT[_currentPlaceT] = _playerNameStr;
+                DeleteTop("Time");
+                ShowTop("Time");
+                if(_currentPlaceS > -1)
                 {
-                    DeleteTop("Time");
-                    ShowTop("Time");
-                } else
-                {
-                    DeleteTop("Score");
-                    ShowTop("Score");
+                    _namesS[_currentPlaceS] = _playerNameStr;
                 }
-                
+            }
+            else if(_currentPlaceS >= -1 && !_isTime)
+            {
+                _namesS[_currentPlaceS] = _playerNameStr;
+                DeleteTop("Score");
+                ShowTop("Score");
+                if (_currentPlaceT > -1)
+                {
+                    _namesT[_currentPlaceT] = _playerNameStr;
+                }
+
             }
         } 
         else
