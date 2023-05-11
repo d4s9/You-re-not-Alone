@@ -20,7 +20,7 @@ public class spawner : MonoBehaviour
     {
         if(id == 0)
             waveInfo.gameObject.SetActive(true);
-        UpdateWave(0, 31);
+        UpdateWave(0, 4);
         for (int i = 0; i < nb_to_spawn; i++)
         {
             spawn();
@@ -57,10 +57,10 @@ public class spawner : MonoBehaviour
                 nbrSpawnedKilled++;
                 if (deadZomb.transform.childCount > 2)
                 {
-                    Destroy(deadZomb.transform.GetChild(0));
+                    Destroy(deadZomb.transform.GetChild(0).gameObject);
                 }
                 if (id == 0)
-                    UpdateWave(nbrSpawnedKilled, 31);
+                    UpdateWave(nbrSpawnedKilled, 4);
                 spawn();
             }
         }       

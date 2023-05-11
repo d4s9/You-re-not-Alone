@@ -13248,6 +13248,7 @@ MonoBehaviour:
   deadZomb: {fileID: 1432690507}
   waveInfo: {fileID: 1155030328}
   escapeCar: {fileID: 528321660}
+  id: 0
   active: 0
   nb_to_spawn: 4
   nb_spawned: 0
