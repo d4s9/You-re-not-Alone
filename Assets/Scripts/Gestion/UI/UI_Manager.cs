@@ -20,6 +20,7 @@ public class UI_Manager : MonoBehaviour
 
     void Start()
     {
+
         _score = PlayerPrefs.GetInt("PlayerScore");       
         _mort = false;
 
@@ -30,7 +31,7 @@ public class UI_Manager : MonoBehaviour
     {
         if (!_mort)
         {
-            time = TimeSpan.FromSeconds(Time.time);
+            time = TimeSpan.FromSeconds(Time.timeSinceLevelLoad);
             _timeTxt.SetText("Time: " + time.ToString("mm':'ss':'ff"));
             PauseGame();           
         }       
@@ -79,6 +80,7 @@ public class UI_Manager : MonoBehaviour
         _mort = true;        
         StartCoroutine("GameEnding");
     }
+    
 
     IEnumerator GameEnding()
     {
@@ -90,7 +92,7 @@ public class UI_Manager : MonoBehaviour
     public void FinishedLvl()
     {
         PlayerPrefs.SetInt("PlayerScore", _score);
-        PlayerPrefs.SetString("PlayerTime", Time.time.ToString() + float.Parse(PlayerPrefs.GetString("PlayerTime")));
+        PlayerPrefs.SetString("PlayerTime", (Time.timeSinceLevelLoad + PlayerPrefs.GetString("PlayerTime", "0")).ToString());
     }
 
     public void AjouterScore(int scoreAAjouter)

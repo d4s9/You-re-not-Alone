@@ -8,6 +8,7 @@ public class Niveau1End : MonoBehaviour
 {
     [SerializeField] private CharacterController playerCC;
     [SerializeField] private TextMeshProUGUI escapeTxt;
+    [SerializeField] private UI_Manager uimanager;
     [SerializeField] private Image FadeImage;
 
     private void Update()
@@ -16,6 +17,7 @@ public class Niveau1End : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.F))
             {
+                uimanager.FinishedLvl();
                 FadeImage.gameObject.SetActive(true);
             }
         }

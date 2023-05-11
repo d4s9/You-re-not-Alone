@@ -20,6 +20,7 @@ public class Puzzle : MonoBehaviour
     [SerializeField] GameObject posRadeau;
     [SerializeField] GameObject txtActivePuzzle;
     [SerializeField] private Image FadeOutImage;
+    [SerializeField] private UI_Manager uimanager;
 
     private List<ItemData> contenu = new List<ItemData>();
 
@@ -94,6 +95,7 @@ public class Puzzle : MonoBehaviour
                     GameObject rad;
                     rad = Instantiate(radeau);
                     radeau.transform.position = posRadeau.transform.position;
+                    uimanager.FinishedLvl();
                     FadeOutImage.gameObject.SetActive(true);
                 }
             }

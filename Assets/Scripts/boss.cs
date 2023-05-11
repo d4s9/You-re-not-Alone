@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.XR;
+using UnityEngine.UI;
 
 public class boss : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class boss : MonoBehaviour
         float push_angle;
         public CharacterController con;
         public GameObject parent;
+        [SerializeField] private Image fade;
+        [SerializeField] private UI_Manager uimanager;
         
         private float phase1;
         private float phase2;
@@ -74,10 +77,12 @@ public class boss : MonoBehaviour
             {
                 rotate();
             }
-            else
+            else if(gameObject.GetComponent<Unit>().isDead)
             {
-
+                uimanager.FinishedLvl();
+                fade.gameObject.SetActive(true);
             }
+         
         }
     
   }

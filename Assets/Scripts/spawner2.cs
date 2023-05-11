@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 
 public class spawner2 : MonoBehaviour
 {
-    [SerializeField] GameObject ennemi;
+    [SerializeField] GameObject ennemiPrefab;
     [SerializeField] GameObject player;
     [SerializeField] Transform deadCell;
     public bool active = false;
@@ -17,7 +17,7 @@ public class spawner2 : MonoBehaviour
 
     void spawn()
     {
-        Instantiate(ennemi, this.transform);
+        GameObject ennemi = Instantiate(ennemiPrefab, this.transform);
         ennemi.transform.localPosition = new Vector3(0, 0, 0);
         ennemi.GetComponent<Unit>().SetTarget(player);
         ennemi.GetComponent<Unit>().SetEnnemyDetection(100f);

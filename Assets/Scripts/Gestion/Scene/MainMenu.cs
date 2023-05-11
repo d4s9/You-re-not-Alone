@@ -10,7 +10,7 @@ public class MainMenu : MonoBehaviour
 
 
     private void Start()
-    {
+    {      
         PlayerPrefs.SetInt("PlayerScore", 0);
         PlayerPrefs.SetFloat("PlayerTime", 0f);
     }

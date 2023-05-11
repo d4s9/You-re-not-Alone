@@ -33,9 +33,8 @@ public class GameEnding : MonoBehaviour
     private int _currentPlaceT, _currentPlaceS;
     void Start()
     {
-        PlayerPrefs.DeleteAll();
         _currentScore = PlayerPrefs.GetInt("PlayerScore", 0);
-        _currentTime = float.Parse(PlayerPrefs.GetString("PlayerTime", 100f.ToString()));
+        _currentTime = float.Parse(PlayerPrefs.GetString("PlayerTime", 0f.ToString()));
         _startContentSize = _GridContent.GetComponent<RectTransform>().sizeDelta;
         _nameError.SetText("");
       
